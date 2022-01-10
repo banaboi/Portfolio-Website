@@ -2,12 +2,12 @@ const options: any = {
     autoPlay: true,
     background: {
         color: {
-            value: "#232741",
+            value: "#000000",
         },
-        // image: "url('http://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/1237px-NASA_logo.svg.png')",
-        position: "50% 50%",
-        repeat: "no-repeat",
-        size: "20%",
+        image: "",
+        position: "",
+        repeat: "",
+        size: "",
         opacity: 1,
     },
     backgroundMask: {
@@ -32,7 +32,7 @@ const options: any = {
         events: {
             onClick: {
                 enable: true,
-                mode: "repulse",
+                mode: "push",
             },
             onDiv: {
                 selectors: [],
@@ -42,7 +42,7 @@ const options: any = {
             },
             onHover: {
                 enable: true,
-                mode: "bubble",
+                mode: "repulse",
                 parallax: {
                     enable: false,
                     force: 2,
@@ -64,11 +64,9 @@ const options: any = {
                 distance: 200,
             },
             bubble: {
-                distance: 250,
-                duration: 2,
+                distance: 200,
+                duration: 0.4,
                 mix: false,
-                opacity: 0,
-                size: 0,
             },
             connect: {
                 distance: 80,
@@ -78,7 +76,7 @@ const options: any = {
                 radius: 60,
             },
             grab: {
-                distance: 400,
+                distance: 100,
                 links: {
                     blink: false,
                     consent: false,
@@ -113,7 +111,7 @@ const options: any = {
                 quantity: 2,
             },
             repulse: {
-                distance: 400,
+                distance: 200,
                 duration: 0.4,
                 factor: 100,
                 speed: 1,
@@ -181,13 +179,13 @@ const options: any = {
             },
         },
         color: {
-            value: "#ffffff",
+            value: "#ff0000",
             animation: {
                 h: {
                     count: 0,
-                    enable: false,
+                    enable: true,
                     offset: 0,
-                    speed: 1,
+                    speed: 20,
                     sync: true,
                 },
                 s: {
@@ -257,8 +255,8 @@ const options: any = {
                 value: "#ffffff",
             },
             consent: false,
-            distance: 150,
-            enable: false,
+            distance: 100,
+            enable: true,
             frequency: 1,
             opacity: 0.4,
             shadow: {
@@ -284,8 +282,8 @@ const options: any = {
                 distance: 200,
                 enable: false,
                 rotate: {
-                    x: 600,
-                    y: 600,
+                    x: 3000,
+                    y: 3000,
                 },
             },
             decay: 0,
@@ -318,9 +316,9 @@ const options: any = {
                 right: "out",
                 top: "out",
             },
-            random: true,
+            random: false,
             size: false,
-            speed: 1,
+            speed: 6,
             spin: {
                 acceleration: 0,
                 enable: false,
@@ -343,25 +341,21 @@ const options: any = {
                 factor: 1000,
             },
             limit: 0,
-            value: 160,
+            value: 80,
         },
         opacity: {
             random: {
-                enable: true,
+                enable: false,
                 minimumValue: 0.1,
             },
-            value: {
-                min: 0,
-                max: 1,
-            },
+            value: 0.5,
             animation: {
                 count: 0,
-                enable: true,
-                speed: 1,
+                enable: false,
+                speed: 2,
                 sync: false,
                 destroy: "none",
                 startValue: "random",
-                minimumValue: 0,
             },
         },
         orbit: {
@@ -439,21 +433,20 @@ const options: any = {
         },
         size: {
             random: {
-                enable: true,
+                enable: false,
                 minimumValue: 1,
             },
             value: {
-                min: 1,
+                min: 0.1,
                 max: 3,
             },
             animation: {
                 count: 0,
                 enable: false,
-                speed: 4,
+                speed: 5,
                 sync: false,
                 destroy: "none",
                 startValue: "random",
-                minimumValue: 0.3,
             },
         },
         stroke: {

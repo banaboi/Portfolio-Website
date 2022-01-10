@@ -1,5 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Nova+Mono&display=swap");
+
 .App {
     text-align: center;
+    font-family: "JetBrains Mono", monospace;
+    font-family: "Nova Mono", monospace;
+    font-size: calc(1em + 1vw);
 }
 
 .App-logo {
@@ -37,10 +42,20 @@
     }
 }
 
+.particles {
+    position: relative;
+    z-index: -1;
+    width: 100%;
+}
+
 .headline {
-    height: 20rem;
-    width: 20rem;
-    color: red;
-    z-index: 10;
-    background-color: white;
+    position: absolute;
+}
+
+.socials {
+    position: relative;
+}
+
+.link {
+    color: white;
 }
