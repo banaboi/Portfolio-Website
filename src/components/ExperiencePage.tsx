@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import "../App.scss";
 import "bootstrap/dist/css/bootstrap.css";
 import useWindowDimensions from "../utilities/useWindowDimensions";
+import { Container } from "react-bootstrap";
 
 const ExperiencePage = () => {
     const { height, width } = useWindowDimensions();
 
-    const experiencePageStyle = {
-        width: width,
-        color: "red",
-    };
-
     return (
-        <div className="experiencePage" style={experiencePageStyle}>
-            Hello
+        <div className="experiencePage">
+            <Container>
+                <div>hello</div>
+            </Container>
         </div>
     );
 };
