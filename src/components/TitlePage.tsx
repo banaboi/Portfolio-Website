@@ -13,47 +13,22 @@ import { Container } from "react-bootstrap";
 const TitlePage = () => {
     const { height, width } = useWindowDimensions();
 
-    const professionStyle = {
-        fontStyle: "bold",
-        fontWeight: 10,
-        fontSize: "4vw",
-    };
-
-    const nameStyle = {
-        fontSize: "10vw",
-        fontStyle: "bold",
-    };
-
-    const socialsStyle = {
-        height: height * 0.2,
-        color: "white",
-    };
-
-    const fontAwesomeIconStyles = {
-        height: "10vw",
-        width: "10vw",
-        padding: "1vw",
-    };
-
     return (
         <div className="titlePage">
             <Container>
                 <Particles className="particles" options={options}></Particles>
                 <div className="headline">
-                    <h1 className="name" style={nameStyle}>
-                        Luke Banicevic
-                    </h1>
-                    <h2 className="profession" style={professionStyle}>
+                    <h1 className="name">Luke Banicevic</h1>
+                    <h2 className="profession">
                         Undergraduate Software Engineer
                     </h2>
-                    <div className="socials" style={socialsStyle}>
+                    <div className="socials">
                         <a
                             className="link"
                             target="_blank"
                             href="https://www.linkedin.com/in/luke-banicevic-30860115b/"
                         >
                             <FontAwesomeIcon
-                                style={fontAwesomeIconStyles}
                                 className="favicon"
                                 icon={faLinkedin}
                             />
@@ -64,24 +39,25 @@ const TitlePage = () => {
                             href="https://github.com/banaboi"
                         >
                             <FontAwesomeIcon
-                                style={fontAwesomeIconStyles}
                                 className="favicon"
                                 icon={faGithub}
                             />
                         </a>
 
-                        <FontAwesomeIcon
-                            style={fontAwesomeIconStyles}
-                            className="favicon"
-                            icon={faEnvelope}
-                        />
+                        <a className="link">
+                            <FontAwesomeIcon
+                                className="favicon"
+                                icon={faEnvelope}
+                            />
+                        </a>
+
                         <a
                             className="link"
                             target="_blank"
                             href="https://github.com/banaboi/banaboi/blob/main/Luke%20Banicevic%20Resume2021.pdf"
                         >
                             <FontAwesomeIcon
-                                style={fontAwesomeIconStyles}
+                                className="favicon"
                                 icon={faFilePdf}
                             />
                         </a>
