@@ -16,19 +16,19 @@
     }
 
     .display-pic {
-        width: 2.5vw;
-        height: 5vh;
+        width: 5rem;
+        height: 5rem;
         border-radius: 1rem;
     }
 
     .sub-heading {
         margin-top: 5rem;
         text-align: left;
-        font-size: 1.5vh;
+        font-size: 1.5rem;
     }
 
     .list-item {
-        font-size: 1vh;
+        font-size: 1rem;
     }
 
     .socials {
@@ -40,8 +40,8 @@
             color: black;
 
             .favicon {
-                height: 5rem;
-                width: 5rem;
+                height: 4rem;
+                width: 4rem;
                 padding: 0.5vw;
                 transition: transform 0.5s ease;
             }
@@ -67,14 +67,14 @@
     }
 
     .display-pic {
-        width: 100rem;
-        height: 5vh;
+        width: 5rem;
+        height: 5rem;
         border-radius: 1rem;
     }
 
     .favicon {
-        height: 2.5vh;
-        width: 2.5vw;
+        width: 5rem;
+        height: 5rem;
         padding: 0.5vw;
         transition: transform 0.5s ease;
     }
@@ -82,10 +82,10 @@
     .sub-heading {
         margin-top: 1rem;
         text-align: left;
-        font-size: 4vh;
+        font-size: 4rem;
     }
 
     .list-item {
-        font-size: 2vh;
+        font-size: 2vw;
     }
 }

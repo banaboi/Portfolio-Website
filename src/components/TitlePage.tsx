@@ -33,15 +33,36 @@ const TitlePage = () => {
                 <li className="list-item">
                     {" "}
                     Wrote some code that makes a car move -- Sunswift Racing
+                    <a
+                        className="link"
+                        target="_blank"
+                        href="https://www.sunswift.com/"
+                    >
+                        🔗
+                    </a>
                 </li>
                 <li className="list-item">
                     {" "}
                     Writing code to help people breath -- ResMed
+                    <a
+                        className="link"
+                        target="_blank"
+                        href="https://www.resmed.com.au/"
+                    >
+                        🔗
+                    </a>
                 </li>
                 <li className="list-item">
                     {" "}
                     Co-founded a small venture called Hyope which specializes in
                     mobile app development
+                    <a
+                        className="link"
+                        target="_blank"
+                        href="https://hyope.com/"
+                    >
+                        🔗
+                    </a>
                 </li>
             </ul>
             <h3 className="sub-heading">Here are my socials</h3>
