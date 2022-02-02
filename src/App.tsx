@@ -1,17 +1,15 @@
 import React from "react";
-import "./App.scss";
+import "../src/styles/App.scss";
 import "bootstrap/dist/css/bootstrap.css";
 
 import TitlePage from "../src/components/TitlePage";
-import ExperiencePage from "../src/components/ExperiencePage";
-import ContactMePage from "./components/ContactMePage";
+import ContactMe from "./components/ContactMe";
 
 const App = () => {
     return (
         <div className="App">
             <TitlePage />
-            <ExperiencePage />
-            <ContactMePage />
+            <ContactMe />
         </div>
     );
 };

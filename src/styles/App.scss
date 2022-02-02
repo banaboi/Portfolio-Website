@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Nova+Mono&display=swap");
+
+.App {
+    text-align: center;
+    font-family: "JetBrains Mono", monospace;
+    font-size: calc(1em + 1vw);
+    margin: 0;
+    margin-top: 5rem;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+
+    .name {
+        margin-top: 1rem;
+    }
+
+    .display-pic {
+        width: 2.5vw;
+        height: 5vh;
+        border-radius: 1rem;
+    }
+
+    .sub-heading {
+        margin-top: 5rem;
+        text-align: left;
+        font-size: 1.5vh;
+    }
+
+    .list-item {
+        font-size: 1vh;
+    }
+
+    .socials {
+        margin-top: 2rem;
+        position: relative;
+        text-align: left;
+
+        .link {
+            color: black;
+
+            .favicon {
+                height: 5rem;
+                width: 5rem;
+                padding: 0.5vw;
+                transition: transform 0.5s ease;
+            }
+
+            .favicon:hover {
+                text-decoration: none;
+                transform: scale(1.3);
+            }
+        }
+    }
+}
+.contactContainer {
+    margin-top: 0rem;
+    text-align: left;
+    font-family: "JetBrains Mono", monospace;
+}
+
+@media (max-height: 900px) {
+    .contactContainer {
+        margin-top: 3rem;
+        text-align: left;
+        font-family: "JetBrains Mono", monospace;
+    }
+
+    .display-pic {
+        width: 100rem;
+        height: 5vh;
+        border-radius: 1rem;
+    }
+
+    .favicon {
+        height: 2.5vh;
+        width: 2.5vw;
+        padding: 0.5vw;
+        transition: transform 0.5s ease;
+    }
+
+    .sub-heading {
+        margin-top: 1rem;
+        text-align: left;
+        font-size: 4vh;
+    }
+
+    .list-item {
+        font-size: 2vh;
+    }
+}
