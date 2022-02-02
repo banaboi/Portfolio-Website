@@ -5,7 +5,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import "../styles/App.scss";
 
@@ -65,7 +64,7 @@ const ContactMe = () => {
                         alignItems: "left",
                     }}
                 >
-                    <h2 className="sub-heading">Send me a message</h2>
+                    <h2 className="sub-heading">Send me a message </h2>
                     <Box sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>

@@ -1,5 +1,4 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.css";
 import useWindowDimensions from "../utilities/useWindowDimensions";
 import Particles from "react-tsparticles";
 import options from "../tsparticlesconfig";
@@ -34,6 +33,7 @@ const TitlePage = () => {
                     {" "}
                     Wrote some code that makes a car move -- Sunswift Racing
                     <a
+                        id="small-link"
                         className="link"
                         target="_blank"
                         href="https://www.sunswift.com/"
@@ -45,6 +45,7 @@ const TitlePage = () => {
                     {" "}
                     Writing code to help people breath -- ResMed
                     <a
+                        id="small-link"
                         className="link"
                         target="_blank"
                         href="https://www.resmed.com.au/"
@@ -57,6 +58,7 @@ const TitlePage = () => {
                     Co-founded a small venture called Hyope which specializes in
                     mobile app development
                     <a
+                        id="small-link"
                         className="link"
                         target="_blank"
                         href="https://hyope.com/"
@@ -82,7 +84,7 @@ const TitlePage = () => {
                     <FontAwesomeIcon className="favicon" icon={faGithub} />
                 </a>
 
-                <a className="link">
+                <a className="link" href="mailto:lukebanicevic@gmail.com">
                     <FontAwesomeIcon className="favicon" icon={faEnvelope} />
                 </a>
 
