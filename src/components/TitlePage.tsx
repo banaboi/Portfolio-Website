@@ -20,7 +20,7 @@ const TitlePage = () => {
             ></img>
             <h1 className="name">Hey, I'm Luke</h1>
             <h3 className="sub-heading">
-                Im a software engineer who loves creating things which bring joy
+                I'm a software engineer who loves creating things which bring joy
                 to people
             </h3>
             <h3 className="sub-heading">A bit about me</h3>
