@@ -14,8 +14,8 @@ const TitlePage = () => {
     return (
         <Container component="main" maxWidth="sm" className="contactContainer">
             <img
-                src="https://avatars.githubusercontent.com/u/60857954?s=400&u=eb5fdf8c01c257fb5c57d01a5979eea27bd69630&v=4"
-                alt="githubdp"
+                src="https://pbs.twimg.com/profile_images/1459843489097609218/uU_QIrdt_400x400.jpg"
+                alt="displayPicture"
                 className="display-pic"
             ></img>
             <h1 className="name">Hey, I'm Luke</h1>
