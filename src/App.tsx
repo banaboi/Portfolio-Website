@@ -3,6 +3,7 @@ import "../src/styles/App.scss";
 
 import TitlePage from "../src/components/TitlePage";
 import ContactMe from "./components/ContactMe";
+import Footer from "./components/Footer";
 
 const App = () => {
     // Start at the top of the page
@@ -14,6 +15,7 @@ const App = () => {
         <div className="App">
             <TitlePage />
             <ContactMe />
+            <Footer />
         </div>
     );
 };
