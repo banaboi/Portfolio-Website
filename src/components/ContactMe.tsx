@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import "../styles/App.scss";
+import emailjs from "@emailjs/browser";
 
 const sendMail = (
     firstName: string,
@@ -21,6 +22,20 @@ const sendMail = (
         message: message,
         email: email,
     };
+
+    emailjs
+        .send(
+            "service_51pblxq",
+            "template_uu34azu",
+            mailToSend,
+            "user_AKWYNeLidVUnlrq6JImtl"
+        )
+        .then((res) => {
+            console.log("success", res.status, res.text);
+        })
+        .catch((error) => {
+            console.log("failed...", error);
+        });
 };
 
 const ContactMe = () => {
