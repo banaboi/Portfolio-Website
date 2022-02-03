@@ -91,7 +91,7 @@ const TitlePage = () => {
                 <a
                     className="link"
                     target="_blank"
-                    href="https://github.com/banaboi/banaboi/blob/main/Luke%20Banicevic%20Resume2021.pdf"
+                    href="https://github.com/banaboi/banaboi/blob/main/Luke%20Banicevic%20Resume%202022.pdf"
                 >
                     <FontAwesomeIcon className="favicon" icon={faFilePdf} />
                 </a>
