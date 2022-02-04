@@ -12,19 +12,36 @@
     width: 100%;
 
     .name {
+        text-align: center;
         margin-top: 1rem;
+        font-size: 1em;
+    }
+
+    .special {
+        color: rgb(27, 226, 27);
+    }
+
+    .closing-symbol {
+        margin: 0 auto;
+        font-size: 1.2em;
     }
 
     .display-pic {
-        width: 5rem;
-        height: 5rem;
+        width: 20rem;
+        height: 20rem;
         border-radius: 1rem;
     }
 
+    .headline {
+        margin-top: 1rem;
+        text-align: center;
+        font-size: 0.9em;
+    }
+
     .sub-heading {
-        margin-top: 5rem;
+        margin-top: 1rem;
         text-align: left;
-        font-size: 1.5rem;
+        font-size: 0.75em;
     }
 
     .list-item {
@@ -36,17 +53,18 @@
     }
 
     .socials {
-        margin-top: 2rem;
+        margin-top: 1rem;
         position: relative;
-        text-align: left;
+        text-align: center;
+        height: 1rem;
 
         .link {
             color: black;
 
             .favicon {
-                height: 4rem;
-                width: 4rem;
-                padding: 0.5vw;
+                height: 1.5em;
+                width: 1.5em;
+                padding: 0.45rem;
                 transition: transform 0.5s ease;
             }
 
@@ -59,13 +77,13 @@
 }
 
 .contactContainer {
-    margin-top: 0rem;
+    margin-top: 10rem;
     text-align: left;
     font-family: "JetBrains Mono", monospace;
 }
 
 .footer-container {
-    font-size: 0.5rem;
+    font-size: 1rem;
     display: flex;
     flex: 1;
     padding: 1rem 0;
@@ -73,15 +91,98 @@
     align-items: center;
     width: 100vw;
     background-color: rgb(246, 246, 246);
+
+    .footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer-socials {
+        padding: 0.5rem;
+        height: 1rem;
+        margin-bottom: 1rem;
+
+        .link {
+            color: grey;
+            padding: 0.5rem;
+
+            .favicon {
+                transition: transform 0.5s ease;
+                height: 1.5rem;
+                width: 1.5rem;
+            }
+
+            .favicon:hover {
+                text-decoration: none;
+                color: darkgray;
+            }
+        }
+    }
 }
 
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+hr {
+    border-top: 4px solid rgb(27, 226, 27);
 }
 
-@media (max-height: 900px) {
+.hidden {
+    display: none;
+}
+.cursorBlink {
+    font-weight: 100;
+    font-size: 1em; //follow the content font-size
+    color: rgb(27, 226, 27);
+    width: 5px;
+    overflow: hidden;
+    animation: blink 0.8s steps(5, start) infinite;
+}
+@keyframes blink {
+    from,
+    to {
+        color: transparent;
+    }
+    50% {
+        color: rgb(27, 226, 27);
+    }
+}
+@-moz-keyframes blink {
+    from,
+    to {
+        color: transparent;
+    }
+    50% {
+        color: rgb(27, 226, 27);
+    }
+}
+@-webkit-keyframes blink {
+    from,
+    to {
+        color: transparent;
+    }
+    50% {
+        color: rgb(27, 226, 27);
+    }
+}
+@-ms-keyframes blink {
+    from,
+    to {
+        color: transparent;
+    }
+    50% {
+        color: rgb(27, 226, 27);
+    }
+}
+@-o-keyframes blink {
+    from,
+    to {
+        color: transparent;
+    }
+    50% {
+        color: rgb(27, 226, 27);
+    }
+}
+
+@media screen and (max-height: 1000px) and (max-width: 900px) {
     .contactContainer {
         margin-top: 0rem;
         text-align: left;
@@ -89,9 +190,10 @@
     }
 
     .display-pic {
-        width: 5rem;
-        height: 5rem;
+        width: 10rem;
+        height: 10rem;
         border-radius: 1rem;
+        margin-top: 0rem;
     }
 
     .favicon {

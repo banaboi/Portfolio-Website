@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import "../src/styles/App.scss";
+import Container from "@mui/material/Container";
 
-import TitlePage from "../src/components/TitlePage";
+import Introduction from "./components/Introduction";
 import ContactMe from "./components/ContactMe";
 import Footer from "./components/Footer";
+import AboutMe from "./components/AboutMe";
+import ProjectsSection from "./components/ProjectsSection";
 
 const App = () => {
     // Start at the top of the page
@@ -13,8 +16,12 @@ const App = () => {
 
     return (
         <div className="App">
-            <TitlePage />
-            <ContactMe />
+            <Container component="main" className="contactContainer">
+                <Introduction />
+                <AboutMe />
+                {/* <ProjectsSection /> */}
+                <ContactMe />
+            </Container>
             <Footer />
         </div>
     );
