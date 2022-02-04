@@ -22,10 +22,6 @@ const Socials = () => {
                 <FontAwesomeIcon className="favicon" icon={faGithub} />
             </a>
 
-            <a className="link" href="mailto:lukebanicevic@gmail.com">
-                <FontAwesomeIcon className="favicon" icon={faEnvelope} />
-            </a>
-
             <a
                 className="link"
                 target="_blank"

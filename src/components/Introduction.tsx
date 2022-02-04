@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
-import Socials from "../components/Socials";
+import Typed from "react-typed";
 
 const Introduction = () => {
     const { height, width } = useWindowDimensions();
@@ -16,19 +16,10 @@ const Introduction = () => {
                     textAlign: "left",
                 }}
             >
-                <Grid container xs={12}>
-                    <Grid item xs={12} md={6}>
-                        <h1 className="name">
-                            <span className="special">{"<"}</span>Hey, I'm{" "}
-                            <span className="special">Luke{"/>"}</span>
-                        </h1>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                        <Box className="socials" sx={{ mt: 3 }}>
-                            <Socials />
-                        </Box>
-                    </Grid>
-                </Grid>
+                <h1 className="name">
+                    Hey, I'm <span className="special">{"<"}</span>Luke
+                    <span className="special">{"/>"}</span>
+                </h1>
             </Box>
             <br />
             <h3 className="headline">

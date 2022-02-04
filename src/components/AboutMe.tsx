@@ -3,12 +3,15 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
+import Socials from "../components/Socials";
+
 const AboutMe = () => {
     return (
         <>
             <Box
                 sx={{
                     mt: 10,
+                    mb: 10,
                 }}
             >
                 <Container>
@@ -80,6 +83,12 @@ const AboutMe = () => {
                                 alt="displayPicture"
                                 className="display-pic"
                             ></img>
+                            <Box
+                                className="socials"
+                                sx={{ mt: 3, textAlign: "left" }}
+                            >
+                                <Socials />
+                            </Box>
                         </Grid>
                     </Grid>
                 </Container>

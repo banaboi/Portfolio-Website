@@ -12,9 +12,9 @@
     width: 100%;
 
     .name {
-        text-align: center;
+        text-align: left;
         margin-top: 1rem;
-        font-size: 1em;
+        font-size: 1.5em;
     }
 
     .special {
@@ -34,18 +34,18 @@
 
     .headline {
         margin-top: 1rem;
-        text-align: center;
-        font-size: 0.9em;
+        text-align: left;
+        font-size: 1.2em;
     }
 
     .sub-heading {
         margin-top: 1rem;
         text-align: left;
-        font-size: 0.75em;
+        font-size: 1em;
     }
 
     .list-item {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     #small-link {
@@ -62,9 +62,9 @@
             color: black;
 
             .favicon {
-                height: 1.5em;
-                width: 1.5em;
-                padding: 0.45rem;
+                margin: 0.5rem;
+                height: 2rem;
+                width: 1.3em;
                 transition: transform 0.5s ease;
             }
 
@@ -77,14 +77,13 @@
 }
 
 .contactContainer {
-    margin-top: 10rem;
+    margin-top: 1rem;
     text-align: left;
     font-family: "JetBrains Mono", monospace;
 }
 
 .footer-container {
     font-size: 1rem;
-    display: flex;
     flex: 1;
     padding: 1rem 0;
     justify-content: center;
