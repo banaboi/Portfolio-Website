@@ -15,58 +15,56 @@ const AboutMe = () => {
                 }}
             >
                 <Container>
-                    <h3 className="sub-heading">
-                        A bit about me{" "}
-                        <span className="special">
-                            <hr />
-                        </span>
-                    </h3>
+                    <span className="sub-heading">A bit about me </span>
                     <Grid container item xs={12} spacing={1}>
                         <Grid item xs={12} md={6}>
                             <ul>
                                 <li className="list-item">
-                                    {" "}
-                                    An undergraduate in Computer Science and
-                                    Engineering @ UNSW
+                                    <p>
+                                        Currently studying{" "}
+                                        <b>Computer Science </b> and{" "}
+                                        <b>Engineering </b>@{" "}
+                                        <b>University of New South Wales</b>
+                                    </p>
                                 </li>
                                 <li className="list-item">
-                                    {" "}
-                                    Wrote code that powers a solar car @
-                                    Sunswift Racing
-                                    <a
-                                        id="small-link"
-                                        className="link"
-                                        target="_blank"
-                                        href="https://www.sunswift.com/"
-                                    >
-                                        🔗
-                                    </a>
+                                    <p>
+                                        Wrote code that powers a solar car @
+                                        <a
+                                            target="_blank"
+                                            href="https://www.sunswift.com/"
+                                        >
+                                            {" "}
+                                            <b>Sunswift Racing</b>
+                                        </a>
+                                    </p>
                                 </li>
                                 <li className="list-item">
-                                    {" "}
-                                    Writing code that helps people breath @
-                                    ResMed
-                                    <a
-                                        id="small-link"
-                                        className="link"
-                                        target="_blank"
-                                        href="https://www.resmed.com.au/"
-                                    >
-                                        🔗
-                                    </a>
+                                    <p>
+                                        Currently writing code that helps people
+                                        breath @
+                                        <a
+                                            target="_blank"
+                                            href="https://www.resmed.com.au/"
+                                        >
+                                            {" "}
+                                            <b>Resmed</b>
+                                        </a>
+                                    </p>
                                 </li>
                                 <li className="list-item">
-                                    {" "}
-                                    Co-founded a small venture called Hyope
-                                    which specializes in mobile app development
-                                    <a
-                                        id="small-link"
-                                        className="link"
-                                        target="_blank"
-                                        href="https://hyope.com/"
-                                    >
-                                        🔗
-                                    </a>
+                                    <p>
+                                        Co-founded a small venture called{" "}
+                                        <a
+                                            target="_blank"
+                                            href="https://www.resmed.com.au/"
+                                        >
+                                            {" "}
+                                            <b>Hyope </b>
+                                        </a>
+                                        which specializes in{" "}
+                                        <b>mobile app development</b>
+                                    </p>
                                 </li>
                             </ul>
                         </Grid>

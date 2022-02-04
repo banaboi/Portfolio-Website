@@ -19,7 +19,7 @@ const App = () => {
             <Container component="main" className="contactContainer">
                 <Introduction />
                 <AboutMe />
-                {/* <ProjectsSection /> */}
+                <ProjectsSection />
             </Container>
             <Footer />
         </div>

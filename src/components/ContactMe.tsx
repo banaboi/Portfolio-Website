@@ -17,6 +17,9 @@ const sendMail = (
 ): void => {
     console.log("sending email");
 
+    if (firstName === "" || lastName === "" || email === "" || message === "")
+        return;
+
     const mailToSend: any = {
         from_name: firstName + " " + lastName,
         message: message,
@@ -131,6 +134,10 @@ const ContactMe = () => {
                                 fullWidth
                                 variant="outlined"
                                 sx={{ mt: 3, mb: 2 }}
+                                style={{
+                                    color: "black",
+                                    borderColor: "lime",
+                                }}
                                 onClick={() => {
                                     sendMail(
                                         firstName,

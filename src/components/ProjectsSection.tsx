@@ -3,22 +3,31 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
+import ProjectCard from "../components/ProjectCard";
+
+import projectData from "../constants/projectData";
+
 const ProjectsSection = () => {
     return (
         <>
-            <Container>
-                <h3 className="sub-heading"> Projects</h3>
-                <hr />
-                <Grid container item xs={12} spacing={1}>
-                    <Grid item xs={12} md={4}>
-                        <Box> Project 1</Box>
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                        <Box> Project 2</Box>
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                        <Box> Project 3</Box>
-                    </Grid>
+            <Container className="projectSection">
+                <span className="sub-heading"> Projects</span>
+                <Grid
+                    className="projectGrid"
+                    container
+                    spacing={{ xs: 1, md: 1, sm: 1 }}
+                >
+                    {projectData.map((project) => {
+                        return (
+                            <div className="project" key={1}>
+                                <Grid item>
+                                    <Box>
+                                        <ProjectCard data={project} />
+                                    </Box>
+                                </Grid>
+                            </div>
+                        );
+                    })}
                 </Grid>
             </Container>
         </>

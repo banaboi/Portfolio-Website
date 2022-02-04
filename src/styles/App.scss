@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Nova+Mono&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code&family=JetBrains+Mono:wght@500&family=Nova+Mono&display=swap");
 .App {
     text-align: center;
     font-family: "JetBrains Mono", monospace;
@@ -10,6 +9,15 @@
     box-sizing: border-box;
     height: 100%;
     width: 100%;
+
+    a {
+        text-decoration: none;
+        color: rgb(27, 226, 27);
+    }
+
+    a:hover {
+        color: black;
+    }
 
     .name {
         text-align: left;
@@ -27,6 +35,7 @@
     }
 
     .display-pic {
+        margin-top: 1.5rem;
         width: 20rem;
         height: 20rem;
         border-radius: 1rem;
@@ -39,17 +48,24 @@
     }
 
     .sub-heading {
+        font-family: "Fira Mono", monospace;
         margin-top: 1rem;
+        margin-bottom: 1rem;
         text-align: left;
         font-size: 1em;
     }
 
-    .list-item {
-        font-size: 1.2rem;
+    .sub-heading::after {
+        display: inline-block;
+        height: 2px;
+        width: 300px;
+        margin-left: 1rem;
+        background-color: rgb(27, 226, 27);
+        content: "";
     }
 
-    #small-link {
-        text-decoration: none;
+    .list-item {
+        font-size: 1.2rem;
     }
 
     .socials {
@@ -58,20 +74,43 @@
         text-align: center;
         height: 1rem;
 
-        .link {
+        .favicon {
             color: black;
+            margin: 0.5rem;
+            height: 2rem;
+            width: 1.3em;
+            transition: transform 0.5s ease;
+        }
 
-            .favicon {
-                margin: 0.5rem;
-                height: 2rem;
-                width: 1.3em;
-                transition: transform 0.5s ease;
-            }
+        .favicon:hover {
+            text-decoration: none;
+            transform: scale(1.3);
+        }
+    }
 
-            .favicon:hover {
-                text-decoration: none;
-                transform: scale(1.3);
-            }
+    .projectSection {
+        margin-bottom: 5rem;
+    }
+
+    .projectGrid {
+        margin-top: 1rem;
+    }
+
+    .project {
+        margin: 0.2rem;
+    }
+
+    .project-card {
+        width: 22.75rem;
+        height: 15rem;
+
+        h1 {
+            font-family: "Fira Mono", monospace;
+        }
+
+        p {
+            font-size: 0.8rem;
+            font-family: "JetBrains Mono", monospace;
         }
     }
 }
@@ -90,6 +129,10 @@
     align-items: center;
     width: 100vw;
     background-color: rgb(246, 246, 246);
+
+    .sub-heading::after {
+        height: 0px;
+    }
 
     .footer {
         display: flex;
