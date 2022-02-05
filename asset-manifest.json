@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/lukebanicevic.com/static/css/main.a0f2db68.css",
-    "main.js": "/lukebanicevic.com/static/js/main.37a2d387.js",
-    "static/js/787.c09d15d4.chunk.js": "/lukebanicevic.com/static/js/787.c09d15d4.chunk.js",
-    "index.html": "/lukebanicevic.com/index.html",
-    "main.a0f2db68.css.map": "/lukebanicevic.com/static/css/main.a0f2db68.css.map",
-    "main.37a2d387.js.map": "/lukebanicevic.com/static/js/main.37a2d387.js.map",
-    "787.c09d15d4.chunk.js.map": "/lukebanicevic.com/static/js/787.c09d15d4.chunk.js.map"
+    "main.css": "/static/css/main.a0f2db68.css",
+    "main.js": "/static/js/main.fd04346c.js",
+    "static/js/787.c09d15d4.chunk.js": "/static/js/787.c09d15d4.chunk.js",
+    "index.html": "/index.html",
+    "main.a0f2db68.css.map": "/static/css/main.a0f2db68.css.map",
+    "main.fd04346c.js.map": "/static/js/main.fd04346c.js.map",
+    "787.c09d15d4.chunk.js.map": "/static/js/787.c09d15d4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a0f2db68.css",
-    "static/js/main.37a2d387.js"
+    "static/js/main.fd04346c.js"
   ]
 }
