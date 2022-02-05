@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/lukebanievic.com/static/css/main.a0f2db68.css",
-    "main.js": "/lukebanievic.com/static/js/main.eace1b68.js",
-    "static/js/787.c09d15d4.chunk.js": "/lukebanievic.com/static/js/787.c09d15d4.chunk.js",
-    "index.html": "/lukebanievic.com/index.html",
-    "main.a0f2db68.css.map": "/lukebanievic.com/static/css/main.a0f2db68.css.map",
-    "main.eace1b68.js.map": "/lukebanievic.com/static/js/main.eace1b68.js.map",
-    "787.c09d15d4.chunk.js.map": "/lukebanievic.com/static/js/787.c09d15d4.chunk.js.map"
+    "main.css": "/static/css/main.a0f2db68.css",
+    "main.js": "/static/js/main.fd04346c.js",
+    "static/js/787.c09d15d4.chunk.js": "/static/js/787.c09d15d4.chunk.js",
+    "index.html": "/index.html",
+    "main.a0f2db68.css.map": "/static/css/main.a0f2db68.css.map",
+    "main.fd04346c.js.map": "/static/js/main.fd04346c.js.map",
+    "787.c09d15d4.chunk.js.map": "/static/js/787.c09d15d4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a0f2db68.css",
-    "static/js/main.eace1b68.js"
+    "static/js/main.fd04346c.js"
   ]
 }
