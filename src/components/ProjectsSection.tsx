@@ -14,13 +14,13 @@ const ProjectsSection = () => {
                 <span className="sub-heading"> Projects</span>
                 <Grid
                     className="projectGrid"
-                    container
-                    spacing={{ xs: 1, md: 1, sm: 1 }}
+                    spacing={{ xs: 2, md: 3 }}
+                    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                 >
                     {projectData.map((project) => {
                         return (
                             <div className="project" key={1}>
-                                <Grid item>
+                                <Grid xs>
                                     <Box>
                                         <ProjectCard data={project} />
                                     </Box>

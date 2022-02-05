@@ -1,9 +1,12 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 
 import Socials from "../components/Socials";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faFilePdf } from "@fortawesome/free-solid-svg-icons";
 
 const AboutMe = () => {
     return (
@@ -48,7 +51,7 @@ const AboutMe = () => {
                                             href="https://www.resmed.com.au/"
                                         >
                                             {" "}
-                                            <b>Resmed</b>
+                                            <b>ResMed</b>
                                         </a>
                                     </p>
                                 </li>
@@ -57,7 +60,7 @@ const AboutMe = () => {
                                         Co-founded a small venture called{" "}
                                         <a
                                             target="_blank"
-                                            href="https://www.resmed.com.au/"
+                                            href="https://hyope.com/"
                                         >
                                             {" "}
                                             <b>Hyope </b>
@@ -66,6 +69,20 @@ const AboutMe = () => {
                                         <b>mobile app development</b>
                                     </p>
                                 </li>
+                                <Button
+                                    className="resume-button"
+                                    target="_blank"
+                                    href="https://github.com/banaboi/banaboi/blob/main/Luke%20Banicevic%20Resume%202022.pdf"
+                                    variant="outlined"
+                                >
+                                    View my resume{" "}
+                                    <FontAwesomeIcon
+                                        style={{
+                                            marginLeft: 5,
+                                        }}
+                                        icon={faFilePdf}
+                                    />
+                                </Button>
                             </ul>
                         </Grid>
                         <Grid
@@ -81,12 +98,12 @@ const AboutMe = () => {
                                 alt="displayPicture"
                                 className="display-pic"
                             ></img>
-                            <Box
+                            {/* <Box
                                 className="socials"
                                 sx={{ mt: 3, textAlign: "left" }}
                             >
                                 <Socials />
-                            </Box>
+                            </Box> */}
                         </Grid>
                     </Grid>
                 </Container>

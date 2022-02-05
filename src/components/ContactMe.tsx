@@ -8,17 +8,18 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import "../styles/App.scss";
 import emailjs from "@emailjs/browser";
+import { Alert, Snackbar } from "@mui/material";
 
 const sendMail = (
     firstName: string,
     lastName: string,
     email: string,
     message: string
-): void => {
+): string => {
     console.log("sending email");
 
     if (firstName === "" || lastName === "" || email === "" || message === "")
-        return;
+        return "warning";
 
     const mailToSend: any = {
         from_name: firstName + " " + lastName,
@@ -38,7 +39,10 @@ const sendMail = (
         })
         .catch((error) => {
             console.log("failed...", error);
+            return "error";
         });
+
+    return "success";
 };
 
 const ContactMe = () => {
@@ -48,6 +52,33 @@ const ContactMe = () => {
     const [lastName, setLastName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [message, setMessage] = useState<string>("");
+    const [openSuccess, setOpenSuccess] = useState<boolean>(false);
+    const [openWarning, setOpenWarning] = useState<boolean>(false);
+    const [openError, setOpenError] = useState<boolean>(false);
+
+    const handleClick = () => {
+        let result = sendMail(firstName, lastName, email, message);
+        switch (result) {
+            case "success":
+                setOpenSuccess(true);
+                break;
+            case "error":
+                setOpenError(true);
+                break;
+            case "warning":
+                setOpenWarning(true);
+                break;
+            default:
+                break;
+        }
+    };
+
+    const handleClose = () => {
+        setOpenSuccess(false);
+        setOpenError(false);
+        setOpenWarning(false);
+    };
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         switch (e.target.id) {
             case "#firstName":
@@ -138,17 +169,40 @@ const ContactMe = () => {
                                     color: "black",
                                     borderColor: "lime",
                                 }}
-                                onClick={() => {
-                                    sendMail(
-                                        firstName,
-                                        lastName,
-                                        email,
-                                        message
-                                    );
-                                }}
+                                onClick={handleClick}
                             >
-                                Submit
+                                Send
                             </Button>
+                            <Snackbar
+                                id="success-snackbar"
+                                open={openSuccess}
+                                autoHideDuration={3000}
+                                onClose={handleClose}
+                            >
+                                <Alert severity="success">
+                                    Message sent successfully
+                                </Alert>
+                            </Snackbar>
+                            <Snackbar
+                                id="error-snackbar"
+                                open={openError}
+                                autoHideDuration={3000}
+                                onClose={handleClose}
+                            >
+                                <Alert severity="error">
+                                    Something went wrong, contact administrator
+                                </Alert>
+                            </Snackbar>
+                            <Snackbar
+                                id="warning-snackbar"
+                                open={openWarning}
+                                autoHideDuration={3000}
+                                onClose={handleClose}
+                            >
+                                <Alert severity="warning">
+                                    Please fill in all fields before sending
+                                </Alert>
+                            </Snackbar>
                         </Box>
                     </Box>
                 </Container>

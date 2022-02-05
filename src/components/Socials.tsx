@@ -2,7 +2,12 @@ import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faFilePdf } from "@fortawesome/free-solid-svg-icons";
-import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+import {
+    faLinkedin,
+    faGithub,
+    faTwitter,
+    faTwitterSquare,
+} from "@fortawesome/free-brands-svg-icons";
 
 const Socials = () => {
     return (
@@ -25,9 +30,9 @@ const Socials = () => {
             <a
                 className="link"
                 target="_blank"
-                href="https://github.com/banaboi/banaboi/blob/main/Luke%20Banicevic%20Resume%202022.pdf"
+                href="https://twitter.com/banaboi_io"
             >
-                <FontAwesomeIcon className="favicon" icon={faFilePdf} />
+                <FontAwesomeIcon className="favicon" icon={faTwitterSquare} />
             </a>
         </>
     );

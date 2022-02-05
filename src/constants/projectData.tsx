@@ -16,6 +16,14 @@ const projectData: ProjectData[] = [
     },
 
     {
+        title: "Hyope Web Page",
+        tech: ["typescript ", "reactjs ", "sass ", "nextjs"],
+        desc: "Co-built the main webpage for the small venture Hyope",
+        src: "",
+        demo: "https://hyope.com/",
+    },
+
+    {
         title: "Bliv",
         tech: ["typescript ", "react-native ", "redux"],
         desc: "A medieval Pixel Battle Game which I co-built as part of Hyope",
@@ -27,8 +35,16 @@ const projectData: ProjectData[] = [
         title: "Invoice Automator",
         tech: ["python"],
         desc: "Python utility using Google API to automatically generate invoices",
-        src: "https://github.com/banaboi/Chess",
+        src: "https://github.com/banaboi/InvoiceAutomator",
         demo: "",
+    },
+
+    {
+        title: "Minesweeper Clone",
+        tech: ["javascript ", "html ", "css"],
+        desc: "Minesweeper built as a web application inspired by a university assignment",
+        src: "https://github.com/banaboi/Minesweeper",
+        demo: "https://banaboi.github.io/Minesweeper/",
     },
 ];
 

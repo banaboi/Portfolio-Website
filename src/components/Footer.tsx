@@ -13,6 +13,14 @@ const Footer = () => {
                     <Box className="footer">
                         <p> Made with 🤖 by Luke Banicevic</p>
                     </Box>
+                    <p
+                        style={{
+                            fontSize: 11,
+                            marginTop: 0,
+                        }}
+                    >
+                        All rights reserved.©
+                    </p>
                     <Box className="footer-socials">
                         <Socials />
                     </Box>

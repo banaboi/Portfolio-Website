@@ -5,7 +5,11 @@ import CardContent from "@mui/material/CardContent";
 import { CardActionArea, CardActions, IconButton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faDesktop } from "@fortawesome/free-solid-svg-icons";
+import {
+    faDesktop,
+    faUserSecret,
+    faBan,
+} from "@fortawesome/free-solid-svg-icons";
 
 interface ProjectData {
     title: string;
@@ -35,34 +39,40 @@ const ProjectCard = ({ data }: { data: ProjectData }) => {
                         </Box>
 
                         <CardActions disableSpacing>
-                            {data.demo !== "" ? (
-                                <p>
-                                    View demo{" "}
-                                    <a target="_blank" href={data.demo}>
-                                        <FontAwesomeIcon icon={faDesktop} />
-                                    </a>
-                                </p>
-                            ) : (
-                                <></>
-                            )}
-                            <IconButton
-                                aria-label="view demo"
-                                disabled
-                            ></IconButton>
-                            {data.src !== "" ? (
-                                <p>
-                                    View source{" "}
-                                    <a target="_blank" href={data.src}>
-                                        <FontAwesomeIcon icon={faGithub} />
-                                    </a>
-                                </p>
-                            ) : (
-                                <></>
-                            )}
-                            <IconButton
-                                aria-label="view src"
-                                disabled
-                            ></IconButton>
+                            <Box
+                                sx={{
+                                    mr: 2,
+                                }}
+                            >
+                                {data.demo !== "" ? (
+                                    <p>
+                                        View demo{" "}
+                                        <a target="_blank" href={data.demo}>
+                                            <FontAwesomeIcon icon={faDesktop} />
+                                        </a>
+                                    </p>
+                                ) : (
+                                    <p>
+                                        Demo limited{" "}
+                                        <FontAwesomeIcon icon={faBan} />
+                                    </p>
+                                )}
+                            </Box>
+                            <Box>
+                                {data.src !== "" ? (
+                                    <p>
+                                        View source{" "}
+                                        <a target="_blank" href={data.src}>
+                                            <FontAwesomeIcon icon={faGithub} />
+                                        </a>
+                                    </p>
+                                ) : (
+                                    <p>
+                                        Source private{" "}
+                                        <FontAwesomeIcon icon={faUserSecret} />
+                                    </p>
+                                )}
+                            </Box>
                         </CardActions>
                     </CardContent>
                     {data.tech.map((technology) => {
