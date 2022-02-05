@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Portfolio-Website/static/css/main.a0f2db68.css",
-    "main.js": "/Portfolio-Website/static/js/main.9f6ce02f.js",
-    "static/js/787.c09d15d4.chunk.js": "/Portfolio-Website/static/js/787.c09d15d4.chunk.js",
-    "index.html": "/Portfolio-Website/index.html",
-    "main.a0f2db68.css.map": "/Portfolio-Website/static/css/main.a0f2db68.css.map",
-    "main.9f6ce02f.js.map": "/Portfolio-Website/static/js/main.9f6ce02f.js.map",
-    "787.c09d15d4.chunk.js.map": "/Portfolio-Website/static/js/787.c09d15d4.chunk.js.map"
+    "main.css": "/lukebanicevic.com/static/css/main.a0f2db68.css",
+    "main.js": "/lukebanicevic.com/static/js/main.37a2d387.js",
+    "static/js/787.c09d15d4.chunk.js": "/lukebanicevic.com/static/js/787.c09d15d4.chunk.js",
+    "index.html": "/lukebanicevic.com/index.html",
+    "main.a0f2db68.css.map": "/lukebanicevic.com/static/css/main.a0f2db68.css.map",
+    "main.37a2d387.js.map": "/lukebanicevic.com/static/js/main.37a2d387.js.map",
+    "787.c09d15d4.chunk.js.map": "/lukebanicevic.com/static/js/787.c09d15d4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a0f2db68.css",
-    "static/js/main.9f6ce02f.js"
+    "static/js/main.37a2d387.js"
   ]
 }
