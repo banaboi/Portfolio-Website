@@ -3,13 +3,13 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import FadeInSection from "./FadeInSection";
 import Typist from "react-typist";
-import Button from "@mui/material/Button";
 
 const Introduction = () => {
     const isMobile = window.innerWidth < 900;
+    const isIpad = window.innerWidth < 1050 && window.innerHeight < 1400;
 
     return (
-        <Container className={isMobile ? "intro-mobile" : "intro"}>
+        <Container className={isMobile || isIpad ? "intro-mobile" : "intro"}>
             <Box
                 sx={{
                     mb: 1,

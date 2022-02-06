@@ -124,18 +124,24 @@
     }
 
     .intro {
-        margin-top: 22rem;
-        margin-bottom: 26rem;
+        margin-top: 20vh;
+        margin-bottom: 50vh;
+        width: 60vw;
+        margin-left: 0;
     }
 
     .intro-mobile {
-        margin-top: 15rem;
-        margin-bottom: 22rem;
+        margin-top: 0;
     }
 
     .section {
-        margin-top: 15rem;
-        margin-bottom: 15rem;
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+    }
+
+    .section-mobile {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
     }
 
     .projectGrid {

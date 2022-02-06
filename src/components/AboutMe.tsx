@@ -63,9 +63,15 @@ const listItems = [
 ];
 
 const AboutMe = () => {
+    const isMobile = window.innerWidth < 900;
+    const isIpad = window.innerWidth < 1050 && window.innerHeight < 1400;
+
     return (
         <>
-            <Container id="guideBegin" className="section">
+            <Container
+                id="guideBegin"
+                className={isMobile || isIpad ? "section-mobile" : "section"}
+            >
                 <FadeInSection props={{ children: undefined, delay: "1000ms" }}>
                     <span className="sub-heading">A bit about me </span>
                     <Grid container item xs={12} spacing={1}>

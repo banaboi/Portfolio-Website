@@ -9,9 +9,13 @@ import projectData from "../constants/projectData";
 import FadeInSection from "./FadeInSection";
 
 const ProjectsSection = () => {
+    const isMobile = window.innerWidth < 900;
+    const isIpad = window.innerWidth < 1050 && window.innerHeight < 1400;
     return (
         <>
-            <Container className="section">
+            <Container
+                className={isMobile || isIpad ? "section-mobile" : "section"}
+            >
                 <FadeInSection props={{ children: undefined, delay: "1000ms" }}>
                     <span className="sub-heading"> Projects</span>
                     <Grid className="projectGrid" container xs={12} spacing={1}>
