@@ -14,6 +14,7 @@ const ProjectsSection = () => {
     return (
         <>
             <Container
+                id="projectsSection"
                 className={isMobile || isIpad ? "section-mobile" : "section"}
             >
                 <FadeInSection props={{ children: undefined, delay: "1000ms" }}>

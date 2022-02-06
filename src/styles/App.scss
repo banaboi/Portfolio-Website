@@ -11,6 +11,26 @@
     height: 100%;
     width: 100%;
 
+    .nav {
+        display: grid;
+        margin-bottom: 1vh;
+    }
+
+    .nav-wrapper {
+        position: fixed;
+        top: 0;
+        right: 0;
+        text-align: right;
+        font-size: 1rem;
+        z-index: 1;
+        margin-right: 5vw;
+        margin-top: 5vh;
+
+        a {
+            margin: 4px;
+        }
+    }
+
     .fade-in-section {
         opacity: 0;
         transform: translateY(10vh);
@@ -207,7 +227,7 @@
 
         .link {
             color: grey;
-            padding: 0.5rem;
+            padding: 0.2rem;
 
             .favicon {
                 transition: transform 0.5s ease;
@@ -236,7 +256,7 @@ hr {
     color: rgb(27, 226, 27);
     width: 5px;
     overflow: hidden;
-    animation: blink 0.8s steps(5, start) infinite;
+    animation: blink 0.7s steps(5, start) infinite;
 }
 @keyframes blink {
     from,

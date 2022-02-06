@@ -46,8 +46,6 @@ const sendMail = (
 };
 
 const ContactMe = () => {
-    const { height, width } = useWindowDimensions();
-
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [email, setEmail] = useState<string>("");

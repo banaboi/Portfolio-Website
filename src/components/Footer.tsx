@@ -9,9 +9,9 @@ const Footer = () => {
     return (
         <>
             <FadeInSection props={{ children: undefined, delay: "1000ms" }}>
-                <footer className="footer-container">
+                <footer id="footer" className="footer-container">
                     <ContactMe />
-                    <Box ml={1}>
+                    <Box sx={{ ml: 1 }}>
                         <Box className="footer">
                             <p> Made with 🤖 by Luke Banicevic</p>
                         </Box>

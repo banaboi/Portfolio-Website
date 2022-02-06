@@ -5,6 +5,7 @@ import Introduction from "./components/Introduction";
 import Footer from "./components/Footer";
 import AboutMe from "./components/AboutMe";
 import ProjectsSection from "./components/ProjectsSection";
+import Nav from "./components/Nav";
 
 const App = () => {
     // Start at the top of the page
@@ -12,8 +13,11 @@ const App = () => {
         window.scrollTo(0, 0);
     }, []);
 
+    const isMobile = window.innerWidth < 900;
+
     return (
         <div className="App">
+            {!isMobile ? <Nav /> : <></>}
             <Container component="main" className="contactContainer">
                 <Introduction />
                 <AboutMe />

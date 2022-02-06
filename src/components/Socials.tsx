@@ -1,4 +1,5 @@
 import React from "react";
+import Box from "@mui/material/Box";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,7 +10,7 @@ import {
 
 const Socials = () => {
     return (
-        <>
+        <Box>
             <a
                 className="link"
                 target="_blank"
@@ -32,7 +33,7 @@ const Socials = () => {
             >
                 <FontAwesomeIcon className="favicon" icon={faTwitterSquare} />
             </a>
-        </>
+        </Box>
     );
 };
 
