@@ -100,113 +100,107 @@ const ContactMe = () => {
 
     return (
         <>
-            <Box
-                sx={{
-                    mt: 5,
-                }}
-            >
-                <Container className="contactContainer">
-                    <CssBaseline />
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "left",
-                        }}
-                    >
-                        <h2 className="sub-heading">Send me a message </h2>
-                        <Box sx={{ mt: 3 }}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        id="#firstName"
-                                        required
-                                        fullWidth
-                                        label="First Name"
-                                        autoFocus
-                                        value={firstName}
-                                        onChange={handleChange}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        id="#lastName"
-                                        required
-                                        fullWidth
-                                        label="Last Name"
-                                        value={lastName}
-                                        onChange={handleChange}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        id="#email"
-                                        required
-                                        fullWidth
-                                        label="Email Address"
-                                        value={email}
-                                        onChange={handleChange}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        id="#message"
-                                        required
-                                        multiline
-                                        fullWidth
-                                        rows={8}
-                                        label="Message"
-                                        value={message}
-                                        onChange={handleChange}
-                                    />
-                                </Grid>
+            <Container className="section">
+                <CssBaseline />
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "left",
+                    }}
+                >
+                    <h2 className="sub-heading">Send me a message </h2>
+                    <Box sx={{ mt: 3 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    id="#firstName"
+                                    required
+                                    fullWidth
+                                    label="First Name"
+                                    autoFocus
+                                    value={firstName}
+                                    onChange={handleChange}
+                                />
                             </Grid>
-                            <Button
-                                fullWidth
-                                variant="outlined"
-                                sx={{ mt: 3, mb: 2 }}
-                                style={{
-                                    color: "black",
-                                    borderColor: "lime",
-                                }}
-                                onClick={handleClick}
-                            >
-                                Send
-                            </Button>
-                            <Snackbar
-                                id="success-snackbar"
-                                open={openSuccess}
-                                autoHideDuration={3000}
-                                onClose={handleClose}
-                            >
-                                <Alert severity="success">
-                                    Message sent successfully
-                                </Alert>
-                            </Snackbar>
-                            <Snackbar
-                                id="error-snackbar"
-                                open={openError}
-                                autoHideDuration={3000}
-                                onClose={handleClose}
-                            >
-                                <Alert severity="error">
-                                    Something went wrong, contact administrator
-                                </Alert>
-                            </Snackbar>
-                            <Snackbar
-                                id="warning-snackbar"
-                                open={openWarning}
-                                autoHideDuration={3000}
-                                onClose={handleClose}
-                            >
-                                <Alert severity="warning">
-                                    Please fill in all fields before sending
-                                </Alert>
-                            </Snackbar>
-                        </Box>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    id="#lastName"
+                                    required
+                                    fullWidth
+                                    label="Last Name"
+                                    value={lastName}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="#email"
+                                    required
+                                    fullWidth
+                                    label="Email Address"
+                                    value={email}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="#message"
+                                    required
+                                    multiline
+                                    fullWidth
+                                    rows={8}
+                                    label="Message"
+                                    value={message}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Button
+                            fullWidth
+                            variant="outlined"
+                            sx={{ mt: 3, mb: 2 }}
+                            style={{
+                                color: "black",
+                                borderColor: "lime",
+                            }}
+                            onClick={handleClick}
+                        >
+                            Send
+                        </Button>
+                        <Snackbar
+                            id="success-snackbar"
+                            open={openSuccess}
+                            autoHideDuration={3000}
+                            onClose={handleClose}
+                        >
+                            <Alert severity="success">
+                                Message sent successfully
+                            </Alert>
+                        </Snackbar>
+                        <Snackbar
+                            id="error-snackbar"
+                            open={openError}
+                            autoHideDuration={3000}
+                            onClose={handleClose}
+                        >
+                            <Alert severity="error">
+                                Something went wrong, contact administrator
+                            </Alert>
+                        </Snackbar>
+                        <Snackbar
+                            id="warning-snackbar"
+                            open={openWarning}
+                            autoHideDuration={3000}
+                            onClose={handleClose}
+                        >
+                            <Alert severity="warning">
+                                Please fill in all fields before sending
+                            </Alert>
+                        </Snackbar>
                     </Box>
-                </Container>
-            </Box>
+                </Box>
+            </Container>
         </>
     );
 };

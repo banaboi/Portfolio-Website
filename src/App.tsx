@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import "../src/styles/App.scss";
 import Container from "@mui/material/Container";
-
 import Introduction from "./components/Introduction";
-import ContactMe from "./components/ContactMe";
 import Footer from "./components/Footer";
 import AboutMe from "./components/AboutMe";
 import ProjectsSection from "./components/ProjectsSection";

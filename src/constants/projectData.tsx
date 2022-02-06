@@ -42,7 +42,7 @@ const projectData: ProjectData[] = [
     {
         title: "Minesweeper Clone",
         tech: ["javascript ", "html ", "css"],
-        desc: "Minesweeper built as a web application inspired by a university assignment",
+        desc: "Minesweeper built as a web application",
         src: "https://github.com/banaboi/Minesweeper",
         demo: "https://banaboi.github.io/Minesweeper/",
     },

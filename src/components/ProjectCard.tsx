@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
-import { CardActionArea, CardActions, IconButton } from "@mui/material";
+import { CardActionArea, CardActions } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -20,10 +20,6 @@ interface ProjectData {
 }
 
 const ProjectCard = ({ data }: { data: ProjectData }) => {
-    useEffect(() => {
-        console.log(data);
-    }, []);
-
     return (
         <>
             <Card className="project-card">

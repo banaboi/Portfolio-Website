@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code&family=JetBrains+Mono:wght@500&family=Nova+Mono&display=swap");
+
 .App {
     text-align: center;
     font-family: "JetBrains Mono", monospace;
@@ -9,6 +10,19 @@
     box-sizing: border-box;
     height: 100%;
     width: 100%;
+
+    .fade-in-section {
+        opacity: 0;
+        transform: translateY(10vh);
+        visibility: hidden;
+        transition: opacity 0.6s ease-out, transform 1s ease-out;
+        will-change: opacity, visibility;
+    }
+    .fade-in-section.is-visible {
+        opacity: 1;
+        transform: none;
+        visibility: visible;
+    }
 
     a {
         text-decoration: none;
@@ -22,7 +36,8 @@
     .name {
         text-align: left;
         margin-top: 1rem;
-        font-size: 1.5em;
+        font-size: clamp(2rem, 3em, 6rem);
+        margin-bottom: 0;
     }
 
     .special {
@@ -34,6 +49,15 @@
         font-size: 1.2em;
     }
 
+    .guideArrow {
+        font-size: 3rem;
+        display: block;
+        border-radius: 1rem !important;
+        color: rgb(27, 226, 27);
+        top: 50%;
+        left: 40%;
+    }
+
     .display-pic {
         margin-top: 1.5rem;
         width: 20rem;
@@ -42,9 +66,9 @@
     }
 
     .headline {
-        margin-top: 1rem;
+        margin-top: 0;
         text-align: left;
-        font-size: 1.2em;
+        font-size: clamp(0.5rem, 1.3em, 3.5rem);
     }
 
     .sub-heading {
@@ -52,7 +76,7 @@
         margin-top: 1rem;
         margin-bottom: 1rem;
         text-align: left;
-        font-size: 1em;
+        font-size: clamp(0.7rem, 1.05em, 3rem);
     }
 
     .sub-heading::after {
@@ -65,7 +89,7 @@
     }
 
     .list-item {
-        font-size: 1.2rem;
+        font-size: clamp(0.5rem, 1.1rem, 1.5rem);
     }
 
     .resume-button {
@@ -99,12 +123,24 @@
         }
     }
 
-    .projectSection {
-        margin-bottom: 5rem;
+    .intro {
+        margin-top: 22rem;
+        margin-bottom: 26rem;
+    }
+
+    .intro-mobile {
+        margin-top: 15rem;
+        margin-bottom: 22rem;
+    }
+
+    .section {
+        margin-top: 15rem;
+        margin-bottom: 15rem;
     }
 
     .projectGrid {
         margin-top: 1rem;
+        margin-left: 0.4rem;
     }
 
     .project {
@@ -112,8 +148,9 @@
     }
 
     .project-card {
-        height: 15rem;
+        height: 17rem;
         border-radius: 1rem;
+        width: 19rem;
 
         h1 {
             font-family: "Fira Mono", monospace;
@@ -146,6 +183,11 @@
         height: 0px;
     }
 
+    .section {
+        margin-top: 5rem;
+        margin-bottom: 0;
+    }
+
     .footer {
         display: flex;
         justify-content: center;
@@ -169,7 +211,7 @@
 
             .favicon:hover {
                 text-decoration: none;
-                color: darkgray;
+                transform: scale(1.3);
             }
         }
     }
@@ -237,6 +279,9 @@ hr {
 }
 
 @media screen and (max-height: 1000px) and (max-width: 900px) {
+    .intro {
+        margin-bottom: 22rem;
+    }
     .contactContainer {
         margin-top: 0rem;
         text-align: left;

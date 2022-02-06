@@ -1,11 +1,9 @@
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faFilePdf } from "@fortawesome/free-solid-svg-icons";
 import {
     faLinkedin,
     faGithub,
-    faTwitter,
     faTwitterSquare,
 } from "@fortawesome/free-brands-svg-icons";
 
