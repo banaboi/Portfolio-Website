@@ -31,6 +31,26 @@
         }
     }
 
+    .nav-wrapper-mobile {
+        padding-left: 3vw;
+        text-align: right;
+        top: 0;
+        right: 0;
+        margin-bottom: 1em;
+        font-size: 1em;
+
+        a {
+            margin: 4px;
+        }
+
+        hr {
+            height: 0.05em;
+            width: 60vw;
+            background-color: rgb(27, 226, 27);
+            margin-top: 10vw;
+        }
+    }
+
     .fade-in-section {
         opacity: 0;
         transform: translateY(10vh);
@@ -58,6 +78,10 @@
         margin-top: 1rem;
         font-size: clamp(2rem, 3em, 6rem);
         margin-bottom: 0;
+
+        b {
+            color: dodgerblue;
+        }
     }
 
     .special {

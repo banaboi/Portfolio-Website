@@ -13,12 +13,10 @@ const App = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    const isMobile = window.innerWidth < 900;
-
     return (
         <div className="App">
-            {!isMobile ? <Nav /> : <></>}
             <Container component="main" className="contactContainer">
+                <Nav />
                 <Introduction />
                 <AboutMe />
                 <ProjectsSection />

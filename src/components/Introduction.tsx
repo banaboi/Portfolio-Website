@@ -32,9 +32,9 @@ const Introduction = () => {
                 <h1 className="name">
                     <span className="special">
                         <Typist avgTypingDelay={150}>
-                            <b>
-                                {"<"}Luke{"/>"}
-                            </b>
+                            {"<"}
+                            <b>Luke</b>
+                            {"/>"}
                         </Typist>
                     </span>
                 </h1>
