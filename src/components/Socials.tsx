@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faLinkedin,
@@ -32,6 +32,9 @@ const Socials = () => {
                 href="https://twitter.com/banaboi_io"
             >
                 <FontAwesomeIcon className="favicon" icon={faTwitterSquare} />
+            </a>
+            <a className="link" target="_blank" href="mailto:luke@gmail.com">
+                <FontAwesomeIcon className="favicon" icon={faEnvelope} />
             </a>
         </Box>
     );

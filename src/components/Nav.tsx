@@ -59,10 +59,10 @@ const Nav = () => {
                         {" "}
                         <a href="#projectsSection">/projects</a>{" "}
                     </span>
-                    <span className="special">
+                    {/* <span className="special">
                         {" "}
                         <a href="#footer">/contact me</a>{" "}
-                    </span>
+                    </span> */}
                 </Box>
                 <Socials />
             </Box>

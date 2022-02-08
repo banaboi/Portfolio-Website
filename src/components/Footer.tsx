@@ -8,27 +8,25 @@ import FadeInSection from "./FadeInSection";
 const Footer = () => {
     return (
         <>
-            <FadeInSection props={{ children: undefined, delay: "1000ms" }}>
-                <footer id="footer" className="footer-container">
-                    <ContactMe />
-                    <Box sx={{ ml: 1 }}>
-                        <Box className="footer">
-                            <p> Made with 🤖 by Luke Banicevic</p>
-                        </Box>
-                        <p
-                            style={{
-                                fontSize: 11,
-                                marginTop: 0,
-                            }}
-                        >
-                            All rights reserved.©
-                        </p>
-                        <Box className="footer-socials">
-                            <Socials />
-                        </Box>
+            <footer id="footer" className="footer-container">
+                <Box sx={{ ml: 1 }}>
+                    <Box className="footer">
+                        <p> Made with 🤖 by Luke Banicevic</p>
                     </Box>
-                </footer>
-            </FadeInSection>
+                    <p
+                        style={{
+                            fontSize: 11,
+                            marginTop: 0,
+                            color: "grey",
+                        }}
+                    >
+                        All rights reserved.©
+                    </p>
+                    <Box className="footer-socials">
+                        <Socials />
+                    </Box>
+                </Box>
+            </footer>
         </>
     );
 };

@@ -4,6 +4,10 @@ import Container from "@mui/material/Container";
 import FadeInSection from "./FadeInSection";
 import Typist from "react-typist";
 import "react-typist/dist/Typist.css";
+import Button from "@mui/material/Button";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const debounce = (fn: () => void, ms: number) => {
     let timer: any;

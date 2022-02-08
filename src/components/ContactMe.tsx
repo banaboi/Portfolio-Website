@@ -1,5 +1,4 @@
 import React, { useState, ChangeEvent } from "react";
-import useWindowDimensions from "../utilities/useWindowDimensions";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -9,6 +8,7 @@ import Container from "@mui/material/Container";
 import "../styles/App.scss";
 import emailjs from "@emailjs/browser";
 import { Alert, Snackbar } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 const sendMail = (
     firstName: string,
@@ -45,7 +45,15 @@ const sendMail = (
     return "success";
 };
 
+const useStyles: any = makeStyles({
+    input: {
+        color: "white",
+        backgroundColor: "white",
+    },
+});
+
 const ContactMe = () => {
+    const classes = useStyles;
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
@@ -119,6 +127,7 @@ const ContactMe = () => {
                                     autoFocus
                                     value={firstName}
                                     onChange={handleChange}
+                                    InputProps={{ className: classes.input }}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -129,6 +138,7 @@ const ContactMe = () => {
                                     label="Last Name"
                                     value={lastName}
                                     onChange={handleChange}
+                                    InputProps={{ className: classes.input }}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -139,6 +149,7 @@ const ContactMe = () => {
                                     label="Email Address"
                                     value={email}
                                     onChange={handleChange}
+                                    InputProps={{ className: classes.input }}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -151,6 +162,7 @@ const ContactMe = () => {
                                     label="Message"
                                     value={message}
                                     onChange={handleChange}
+                                    InputProps={{ className: classes.input }}
                                 />
                             </Grid>
                         </Grid>
@@ -159,7 +171,7 @@ const ContactMe = () => {
                             variant="outlined"
                             sx={{ mt: 3, mb: 2 }}
                             style={{
-                                color: "black",
+                                color: "lime",
                                 borderColor: "lime",
                             }}
                             onClick={handleClick}
