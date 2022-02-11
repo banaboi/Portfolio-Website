@@ -33,9 +33,6 @@ const Socials = () => {
             >
                 <FontAwesomeIcon className="favicon" icon={faTwitterSquare} />
             </a>
-            <a className="link" target="_blank" href="mailto:luke@gmail.com">
-                <FontAwesomeIcon className="favicon" icon={faEnvelope} />
-            </a>
         </Box>
     );
 };

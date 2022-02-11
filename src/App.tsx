@@ -5,7 +5,9 @@ import Introduction from "./components/Introduction";
 import Footer from "./components/Footer";
 import AboutMe from "./components/AboutMe";
 import ProjectsSection from "./components/ProjectsSection";
+import ContactMe from "./components/ContactMe";
 import Nav from "./components/Nav";
+import Skills from "./components/Skills";
 
 const App = () => {
     // Start at the top of the page
@@ -19,7 +21,9 @@ const App = () => {
                 <Nav />
                 <Introduction />
                 <AboutMe />
+                <Skills />
                 <ProjectsSection />
+                <ContactMe />
             </Container>
             <Footer />
         </div>

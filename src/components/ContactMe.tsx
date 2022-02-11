@@ -10,19 +10,11 @@ import emailjs from "@emailjs/browser";
 import { Alert, Snackbar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
-const sendMail = (
-    firstName: string,
-    lastName: string,
-    email: string,
-    message: string
-): string => {
-    console.log("sending email");
-
-    if (firstName === "" || lastName === "" || email === "" || message === "")
-        return "warning";
+const sendMail = (name: string, email: string, message: string): string => {
+    if (name === "" || email === "" || message === "") return "warning";
 
     const mailToSend: any = {
-        from_name: firstName + " " + lastName,
+        from_name: name,
         message: message,
         email: email,
     };
@@ -45,28 +37,26 @@ const sendMail = (
     return "success";
 };
 
-const useStyles: any = makeStyles({
-    input: {
-        color: "white",
-        backgroundColor: "white",
-    },
-});
-
 const ContactMe = () => {
-    const classes = useStyles;
-    const [firstName, setFirstName] = useState<string>("");
-    const [lastName, setLastName] = useState<string>("");
+    const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [message, setMessage] = useState<string>("");
     const [openSuccess, setOpenSuccess] = useState<boolean>(false);
     const [openWarning, setOpenWarning] = useState<boolean>(false);
     const [openError, setOpenError] = useState<boolean>(false);
 
+    const clearInputFields = (): void => {
+        setName("");
+        setEmail("");
+        setMessage("");
+    };
+
     const handleClick = () => {
-        let result = sendMail(firstName, lastName, email, message);
+        let result = sendMail(name, email, message);
         switch (result) {
             case "success":
                 setOpenSuccess(true);
+                clearInputFields();
                 break;
             case "error":
                 setOpenError(true);
@@ -87,11 +77,8 @@ const ContactMe = () => {
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         switch (e.target.id) {
-            case "#firstName":
-                setFirstName(e.target.value);
-                break;
-            case "#lastName":
-                setLastName(e.target.value);
+            case "#name":
+                setName(e.target.value);
                 break;
             case "#email":
                 setEmail(e.target.value);
@@ -106,7 +93,7 @@ const ContactMe = () => {
 
     return (
         <>
-            <Container className="section">
+            <Container id="contact" className="section contact-section">
                 <CssBaseline />
                 <Box
                     sx={{
@@ -115,45 +102,35 @@ const ContactMe = () => {
                         alignItems: "left",
                     }}
                 >
-                    <h2 className="sub-heading">Send me a message </h2>
+                    <span className="sub-heading">Send me a message </span>
                     <Box sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12}>
                                 <TextField
-                                    id="#firstName"
+                                    className="text-field"
+                                    id="#name"
                                     required
                                     fullWidth
-                                    label="First Name"
+                                    label="Name"
                                     autoFocus
-                                    value={firstName}
+                                    value={name}
                                     onChange={handleChange}
-                                    InputProps={{ className: classes.input }}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    id="#lastName"
-                                    required
-                                    fullWidth
-                                    label="Last Name"
-                                    value={lastName}
-                                    onChange={handleChange}
-                                    InputProps={{ className: classes.input }}
                                 />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    className="text-field"
                                     id="#email"
                                     required
                                     fullWidth
                                     label="Email Address"
                                     value={email}
                                     onChange={handleChange}
-                                    InputProps={{ className: classes.input }}
                                 />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    className="text-field"
                                     id="#message"
                                     required
                                     multiline
@@ -162,11 +139,11 @@ const ContactMe = () => {
                                     label="Message"
                                     value={message}
                                     onChange={handleChange}
-                                    InputProps={{ className: classes.input }}
                                 />
                             </Grid>
                         </Grid>
                         <Button
+                            className="contact-button"
                             fullWidth
                             variant="outlined"
                             sx={{ mt: 3, mb: 2 }}

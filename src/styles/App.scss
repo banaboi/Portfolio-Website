@@ -135,7 +135,7 @@
         display: inline-block;
         height: 2px;
         width: 300px;
-        margin-left: 1rem;
+        margin-left: 1vw;
         // background-color: rgb(27, 226, 27);
         background-color: #aba7a7;
         content: "";
@@ -198,30 +198,55 @@
         margin-bottom: 5vh;
     }
 
-    .projectGrid {
-        margin-top: 1rem;
-        margin-left: 0.4rem;
-    }
+    .skillsGrid {
+        margin: 0 auto;
+        width: 100%;
 
-    .project {
-        margin-top: 0.5rem;
-    }
-
-    .project-card {
-        height: 17rem;
-        border-radius: 1rem;
-        width: 19rem;
-        background-color: #474747;
-        color: whitesmoke;
-
-        h1 {
-            font-family: "Fira Mono", monospace;
+        .skill {
+            height: 2.5rem;
+            width: 2.5rem;
+            fill: white;
+            margin: 1em;
+            transition: transform 0.5s ease;
         }
 
-        p {
-            font-size: 0.8rem;
-            font-family: "JetBrains Mono", monospace;
-            color: white;
+        .skill:hover {
+            transform: scale(1.3);
+        }
+    }
+
+    .projectGrid {
+        margin: 0 auto;
+
+        .project {
+            margin-top: 0.5rem;
+
+            .project-card {
+                height: 17rem;
+                border-radius: 1rem;
+                width: 20rem;
+                background-color: #474747;
+                color: whitesmoke;
+
+                button {
+                    width: 100%;
+                    height: 100%;
+
+                    span {
+                        height: 0px !important;
+                    }
+                }
+
+                h1 {
+                    font-family: "Fira Mono", monospace;
+                }
+
+                p {
+                    font-size: 0.8rem;
+                    font-family: "JetBrains Mono", monospace;
+                    color: white;
+                }
+            }
         }
     }
 }
@@ -289,91 +314,44 @@ hr {
 .hidden {
     display: none;
 }
-.cursorBlink {
-    font-weight: 100;
-    font-size: 1em; //follow the content font-size
-    color: rgb(27, 226, 27);
-    width: 5px;
-    overflow: hidden;
-    animation: blink 0.7s steps(5, start) infinite;
-}
-@keyframes blink {
-    from,
-    to {
-        color: transparent;
-    }
-    50% {
-        color: rgb(27, 226, 27);
-    }
-}
-@-moz-keyframes blink {
-    from,
-    to {
-        color: transparent;
-    }
-    50% {
-        color: rgb(27, 226, 27);
-    }
-}
-@-webkit-keyframes blink {
-    from,
-    to {
-        color: transparent;
-    }
-    50% {
-        color: rgb(27, 226, 27);
-    }
-}
-@-ms-keyframes blink {
-    from,
-    to {
-        color: transparent;
-    }
-    50% {
-        color: rgb(27, 226, 27);
-    }
-}
-@-o-keyframes blink {
-    from,
-    to {
-        color: transparent;
-    }
-    50% {
-        color: rgb(27, 226, 27);
-    }
-}
 
-@media screen and (max-height: 1000px) and (max-width: 900px) {
-    .intro {
-        margin-bottom: 22rem;
-    }
-    .contactContainer {
-        margin-top: 0rem;
-        text-align: left;
-        font-family: "JetBrains Mono", monospace;
-    }
+// Contact Section Styles //
 
-    .display-pic {
-        width: 10rem;
-        height: 10rem;
+.contact-section {
+    div {
         border-radius: 1rem;
-        margin-top: 0rem;
     }
 
-    .favicon {
-        width: 5rem;
-        height: 5rem;
-        padding: 0.5vw;
-        transition: transform 0.5s ease;
+    fieldset {
+        border-color: grey !important;
+        border: 1px;
     }
 
-    .sub-heading {
-        margin-top: 1rem;
-        text-align: left;
-        font-size: 4rem;
+    .Mui-focused {
+        color: lime !important;
     }
 
-    .list-item {
-        font-size: 2vw;
+    .text-field {
+        background-color: #474747;
+        border-radius: 1rem;
+    }
+
+    .textarea {
+        border-radius: 1rem !important;
+    }
+
+    .contact-button {
+        color: "lime";
+        border-color: "lime";
+        font-family: "JetBrains Mono", monospace !important;
+    }
+
+    .contact-button:hover {
+        background-color: #474747 !important;
+    }
+
+    label {
+        color: grey !important;
+        font-family: "JetBrains Mono", monospace !important;
     }
 }

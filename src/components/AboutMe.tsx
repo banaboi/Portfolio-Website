@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faFilePdf } from "@fortawesome/free-solid-svg-icons";
+import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 
 // @ts-ignore
 import resume from "../documents/resume.pdf";
