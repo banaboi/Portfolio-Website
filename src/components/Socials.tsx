@@ -4,13 +4,13 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faLinkedin,
-    faGithub,
+    faGithubSquare,
     faTwitterSquare,
 } from "@fortawesome/free-brands-svg-icons";
 
 const Socials = () => {
     return (
-        <Box>
+        <Box className="bar">
             <a
                 className="link"
                 target="_blank"
@@ -23,7 +23,7 @@ const Socials = () => {
                 target="_blank"
                 href="https://github.com/banaboi"
             >
-                <FontAwesomeIcon className="favicon" icon={faGithub} />
+                <FontAwesomeIcon className="favicon" icon={faGithubSquare} />
             </a>
 
             <a

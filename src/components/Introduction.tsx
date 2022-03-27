@@ -4,10 +4,8 @@ import Container from "@mui/material/Container";
 import FadeInSection from "./FadeInSection";
 import Typist from "react-typist";
 import "react-typist/dist/Typist.css";
-import Button from "@mui/material/Button";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+// @ts-ignore
+import lightsaber from "../assets/lightsaber.png";
 
 const debounce = (fn: () => void, ms: number) => {
     let timer: any;
@@ -75,6 +73,13 @@ const Introduction = () => {
                     A software engineer who loves using technology to bring joy
                     to people
                 </h3>
+                {/* <Button
+                    className="call-to-action-button"
+                    href="#contact"
+                    variant="outlined"
+                >
+                    Let's connect
+                </Button> */}
             </FadeInSection>
         </Container>
     );

@@ -8,12 +8,15 @@ import ProjectsSection from "./components/ProjectsSection";
 import ContactMe from "./components/ContactMe";
 import Nav from "./components/Nav";
 import Skills from "./components/Skills";
+import Socials from "./components/Socials";
 
 const App = () => {
     // Start at the top of the page
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    console.log("These aren't the bits you're looking for");
 
     return (
         <div className="App">

@@ -43,7 +43,7 @@ const Skills = () => {
             >
                 <FadeInSection props={{ children: undefined, delay: "1000ms" }}>
                     <span className="sub-heading">My Skills </span>
-                    <Grid className="skillsGrid" container xs={12} spacing={1}>
+                    <Grid className="skillsGrid" container spacing={1}>
                         {skillsElements.map((skillElement, index) => {
                             return <Skill data={skillElement} key={index} />;
                         })}

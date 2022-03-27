@@ -11,7 +11,17 @@ const Footer = () => {
             <footer id="footer" className="footer-container">
                 <Box sx={{ ml: 1 }}>
                     <Box className="footer">
-                        <p> Made with 🤖 by Luke Banicevic</p>
+                        <p>
+                            {" "}
+                            Made with 🤖 by Luke Banicevic, sprite made by{" "}
+                            <a
+                                target="_blank"
+                                href="https://www.instagram.com/re_entry.design/"
+                            >
+                                {" "}
+                                Re-Entry Design
+                            </a>
+                        </p>
                     </Box>
                     <p
                         style={{

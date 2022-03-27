@@ -102,7 +102,7 @@ const AboutMe = () => {
                     <Grid container item xs={12} spacing={1}>
                         <Grid item xs={12} md={6}>
                             <ul>
-                                {listItems.map((item) => {
+                                {listItems.map((item, index) => {
                                     return (
                                         <FadeInSection
                                             props={{
@@ -111,6 +111,7 @@ const AboutMe = () => {
                                                     listItems.indexOf(item) + 1
                                                 }000ms`,
                                             }}
+                                            key={index}
                                         >
                                             {item}
                                         </FadeInSection>
