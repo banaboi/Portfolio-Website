@@ -19,7 +19,7 @@ const projectData: ProjectData[] = [
         tech: ["typescript ", "reactjs ", "sass ", "nextjs"],
         desc: "Co-built the main webpage for the small venture Hyope",
         src: "",
-        demo: "https://hyope.com/",
+        demo: "",
     },
 
     {
@@ -27,7 +27,7 @@ const projectData: ProjectData[] = [
         tech: ["typescript ", "react-native ", "redux"],
         desc: "A medieval Pixel Battle Game which I co-built as part of Hyope",
         src: "",
-        demo: "https://hyope.com/app/bliv",
+        demo: "",
     },
     {
         title: "Chess Clone",
