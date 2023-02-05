@@ -9,6 +9,7 @@ import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 // @ts-ignore
 import resume from "../documents/resume.pdf";
 import FadeInSection from "./FadeInSection";
+import profilePicture from "../assets/profilePicture.png";
 
 const debounce = (fn: () => void, ms: number) => {
     let timer: any;
@@ -24,14 +25,17 @@ const debounce = (fn: () => void, ms: number) => {
 const listItems = [
     <li className="list-item">
         <p>
-            Currently studying <b>Computer Science </b> and <b>Engineering </b>@{" "}
-            <b>University of New South Wales</b>
+            Completed a Bachelor of <b>Computer Science </b> and <b>Engineering </b>@{" "}
+            <a target="_blank" href="https://www.unsw.edu.au/" rel="noreferrer">
+                {" "}
+                <b>University of New South Wales </b>
+            </a>
         </p>
     </li>,
     <li className="list-item">
         <p>
             Wrote code that powers a solar car @
-            <a target="_blank" href="https://www.sunswift.com/">
+            <a target="_blank" href="https://www.sunswift.com/" rel="noreferrer">
                 {" "}
                 <b>Sunswift Racing</b>
             </a>
@@ -40,7 +44,7 @@ const listItems = [
     <li className="list-item">
         <p>
             Currently writing code that helps people breath @
-            <a target="_blank" href="https://www.resmed.com.au/">
+            <a target="_blank" href="https://www.resmed.com.au/" rel="noreferrer">
                 {" "}
                 <b>ResMed</b>
             </a>
@@ -48,12 +52,11 @@ const listItems = [
     </li>,
     <li className="list-item">
         <p>
-            Co-founded a small venture called{" "}
-            <a target="_blank" href="https://hyope.com/">
+            Vacationed in the Cloud Managed Services team @{" "}
+            <a target="_blank" href="https://deloitte.com/" rel="noreferrer">
                 {" "}
-                <b>Hyope </b>
+                <b>Deloitte </b>
             </a>
-            which specializes in <b>mobile app development</b>
         </p>
     </li>,
     <Button
@@ -129,7 +132,7 @@ const AboutMe = () => {
                         >
                             <FadeInSection>
                                 <img
-                                    src="https://pbs.twimg.com/profile_images/1459843489097609218/uU_QIrdt_400x400.jpg"
+                                    src={profilePicture}
                                     alt="displayPicture"
                                     className="display-pic"
                                 ></img>

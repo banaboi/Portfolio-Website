@@ -14,24 +14,16 @@ const Socials = () => {
             <a
                 className="link"
                 target="_blank"
-                href="https://www.linkedin.com/in/luke-banicevic-30860115b/"
+                href="https://www.linkedin.com/in/luke-banicevic-30860115b/" rel="noreferrer"
             >
                 <FontAwesomeIcon className="favicon" icon={faLinkedin} />
             </a>
             <a
                 className="link"
                 target="_blank"
-                href="https://github.com/banaboi"
+                href="https://github.com/banaboi" rel="noreferrer"
             >
                 <FontAwesomeIcon className="favicon" icon={faGithubSquare} />
-            </a>
-
-            <a
-                className="link"
-                target="_blank"
-                href="https://twitter.com/banaboi_io"
-            >
-                <FontAwesomeIcon className="favicon" icon={faTwitterSquare} />
             </a>
         </Box>
     );
