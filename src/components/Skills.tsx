@@ -1,4 +1,4 @@
-import { Grid, Container, Typography, Box } from "@mui/material";
+import { Grid, Container } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import FadeInSection from "./FadeInSection";
 

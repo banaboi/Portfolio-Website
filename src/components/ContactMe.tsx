@@ -8,7 +8,6 @@ import Container from "@mui/material/Container";
 import "../styles/App.scss";
 import emailjs from "@emailjs/browser";
 import { Alert, Snackbar } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import FadeInSection from "./FadeInSection";
 
 const sendMail = (name: string, email: string, message: string): string => {

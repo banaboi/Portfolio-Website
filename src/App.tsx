@@ -8,7 +8,6 @@ import ProjectsSection from "./components/ProjectsSection";
 import ContactMe from "./components/ContactMe";
 import Nav from "./components/Nav";
 import Skills from "./components/Skills";
-import Socials from "./components/Socials";
 
 const App = () => {
     // Start at the top of the page

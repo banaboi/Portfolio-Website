@@ -1,21 +1,13 @@
-import { Box, Grid } from "@mui/material";
-import React, { useState } from "react";
+import { Grid }  from "@mui/material";
+import React from "react";
 import FadeInSection from "./FadeInSection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faLinkedin,
-    faGithub,
-    faTwitterSquare,
 } from "@fortawesome/free-brands-svg-icons";
 
 import toolSkillElements from "../constants/toolSkillElements";
 import Skill from "./Skill";
-
-interface SkillsElement {
-    svg: React.SVGProps<SVGSVGElement>;
-    title: string;
-    popoverMsg: string;
-}
 
 const ToolsSkillGrid = () => {
     return (

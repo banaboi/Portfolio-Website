@@ -4,8 +4,6 @@ import Container from "@mui/material/Container";
 import FadeInSection from "./FadeInSection";
 import Typist from "react-typist";
 import "react-typist/dist/Typist.css";
-// @ts-ignore
-import lightsaber from "../assets/lightsaber.png";
 
 const debounce = (fn: () => void, ms: number) => {
     let timer: any;

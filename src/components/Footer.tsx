@@ -2,8 +2,6 @@ import { Box } from "@mui/material";
 import React from "react";
 
 import Socials from "../components/Socials";
-import ContactMe from "../components/ContactMe";
-import FadeInSection from "./FadeInSection";
 
 const Footer = () => {
     return (
@@ -16,7 +14,7 @@ const Footer = () => {
                             Made with 🤖 by Luke Banicevic, sprite made by{" "}
                             <a
                                 target="_blank"
-                                href="https://www.instagram.com/re_entry.design/"
+                                href="https://www.instagram.com/re_entry.design/" rel="noreferrer"
                             >
                                 {" "}
                                 Re-Entry Design
