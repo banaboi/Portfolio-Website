@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
@@ -43,7 +43,7 @@ const ProjectCard = ({ data }: { data: ProjectData }) => {
                                 {data.demo !== "" ? (
                                     <p>
                                         View demo{" "}
-                                        <a target="_blank" href={data.demo}>
+                                        <a target="_blank" href={data.demo} rel="noreferrer">
                                             <FontAwesomeIcon icon={faDesktop} />
                                         </a>
                                     </p>
@@ -58,7 +58,7 @@ const ProjectCard = ({ data }: { data: ProjectData }) => {
                                 {data.src !== "" ? (
                                     <p>
                                         View source{" "}
-                                        <a target="_blank" href={data.src}>
+                                        <a target="_blank" href={data.src} rel="noreferrer">
                                             <FontAwesomeIcon icon={faGithub} />
                                         </a>
                                     </p>

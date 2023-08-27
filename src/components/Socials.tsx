@@ -1,11 +1,9 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faLinkedin,
     faGithubSquare,
-    faTwitterSquare,
 } from "@fortawesome/free-brands-svg-icons";
 
 const Socials = () => {
