@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/lukebanicevic.com/static/css/main.bf4f5503.css",
-    "main.js": "/lukebanicevic.com/static/js/main.7142082f.js",
-    "static/js/787.c09d15d4.chunk.js": "/lukebanicevic.com/static/js/787.c09d15d4.chunk.js",
-    "static/media/resume.pdf": "/lukebanicevic.com/static/media/resume.2f4bc1fbd3be7234845a.pdf",
-    "static/media/profilePicture.png": "/lukebanicevic.com/static/media/profilePicture.55f88ec4dff0688fd5bf.png",
-    "static/media/profile.png": "/lukebanicevic.com/static/media/profile.9bd353ddcaf385b013d5.png",
-    "index.html": "/lukebanicevic.com/index.html",
-    "main.bf4f5503.css.map": "/lukebanicevic.com/static/css/main.bf4f5503.css.map",
-    "main.7142082f.js.map": "/lukebanicevic.com/static/js/main.7142082f.js.map",
-    "787.c09d15d4.chunk.js.map": "/lukebanicevic.com/static/js/787.c09d15d4.chunk.js.map"
+    "main.css": "/static/css/main.bf4f5503.css",
+    "main.js": "/static/js/main.30cec1dd.js",
+    "static/js/787.c09d15d4.chunk.js": "/static/js/787.c09d15d4.chunk.js",
+    "static/media/resume.pdf": "/static/media/resume.2f4bc1fbd3be7234845a.pdf",
+    "static/media/profilePicture.png": "/static/media/profilePicture.55f88ec4dff0688fd5bf.png",
+    "static/media/profile.png": "/static/media/profile.9bd353ddcaf385b013d5.png",
+    "index.html": "/index.html",
+    "main.bf4f5503.css.map": "/static/css/main.bf4f5503.css.map",
+    "main.30cec1dd.js.map": "/static/js/main.30cec1dd.js.map",
+    "787.c09d15d4.chunk.js.map": "/static/js/787.c09d15d4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bf4f5503.css",
-    "static/js/main.7142082f.js"
+    "static/js/main.30cec1dd.js"
   ]
 }
