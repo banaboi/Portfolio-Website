@@ -8,6 +8,7 @@ import ProjectsSection from "./components/ProjectsSection";
 import ContactMe from "./components/ContactMe";
 import Nav from "./components/Nav";
 import Skills from "./components/Skills";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 const App = () => {
     // Start at the top of the page
@@ -15,20 +16,22 @@ const App = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    console.log("These aren't the bits you're looking for");
+    console.log("These aren't the droids you're looking for... but this portfolio might be what you seek!");
 
     return (
-        <div className="App">
-            <Container component="main" className="contactContainer">
-                <Nav />
-                <Introduction />
-                <AboutMe />
-                <Skills />
-                <ProjectsSection />
-                <ContactMe />
-            </Container>
-            <Footer />
-        </div>
+        <ThemeProvider>
+            <div className="App">
+                <Container component="main" className="contactContainer">
+                    <Nav />
+                    <Introduction />
+                    <AboutMe />
+                    <Skills />
+                    <ProjectsSection />
+                    <ContactMe />
+                </Container>
+                <Footer />
+            </div>
+        </ThemeProvider>
     );
 };
 

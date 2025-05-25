@@ -10,6 +10,7 @@ import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 import resume from "../documents/resume.pdf";
 import FadeInSection from "./FadeInSection";
 import profilePicture from "../assets/profilePicture.png";
+// Theme context no longer needed since we always use the same image
 
 const debounce = (fn: () => void, ms: number) => {
     let timer: any;
@@ -25,7 +26,7 @@ const debounce = (fn: () => void, ms: number) => {
 const listItems = [
     <li className="list-item">
         <p>
-            Completed a Bachelor of <b>Computer Science </b> and <b>Engineering </b>@{" "}
+            🎓 Mastered the ancient arts of <b>Computer Science </b> and <b>Engineering </b>at the Jedi Academy of{" "}
             <a target="_blank" href="https://www.unsw.edu.au/" rel="noreferrer">
                 {" "}
                 <b>University of New South Wales </b>
@@ -34,7 +35,7 @@ const listItems = [
     </li>,
     <li className="list-item">
         <p>
-            Wrote code that powers a solar car @
+            ☀️ Harnessed the power of the sun, writing code for a solar-powered speeder @
             <a target="_blank" href="https://www.sunswift.com/" rel="noreferrer">
                 {" "}
                 <b>Sunswift Racing</b>
@@ -43,7 +44,7 @@ const listItems = [
     </li>,
     <li className="list-item">
         <p>
-            Currently writing code that helps people breath @
+            💨 Currently using the Force to help beings across the galaxy breathe better @
             <a target="_blank" href="https://www.resmed.com.au/" rel="noreferrer">
                 {" "}
                 <b>ResMed</b>
@@ -52,7 +53,7 @@ const listItems = [
     </li>,
     <li className="list-item">
         <p>
-            Vacationed in the Cloud Managed Services team @{" "}
+            ☁️ Explored the Cloud City's managed services during my padawan days @{" "}
             <a target="_blank" href="https://deloitte.com/" rel="noreferrer">
                 {" "}
                 <b>Deloitte </b>
@@ -65,7 +66,7 @@ const listItems = [
         href={resume}
         variant="outlined"
     >
-        View my resume{" "}
+        View my Jedi Archives{" "}
         <FontAwesomeIcon
             style={{
                 marginLeft: 5,
@@ -101,7 +102,7 @@ const AboutMe = () => {
                 className={isMobile || isIpad ? "section-mobile" : "section"}
             >
                 <FadeInSection props={{ children: undefined, delay: "1000ms" }}>
-                    <span className="sub-heading">A bit about me </span>
+                    <span className="sub-heading">My Jedi Training </span>
                     <Grid container item xs={12} spacing={1}>
                         <Grid item xs={12} md={6}>
                             <ul>
@@ -133,9 +134,15 @@ const AboutMe = () => {
                             <FadeInSection>
                                 <img
                                     src={profilePicture}
-                                    alt="displayPicture"
+                                    alt="Luke Banicevic - Software Engineer"
                                     className="display-pic"
-                                ></img>
+                                    style={{
+                                        border: `3px solid var(--accent-primary)`,
+                                        borderRadius: '8px',
+                                        boxShadow: `0 0 20px var(--shadow-color)`,
+                                        transition: 'all 0.3s ease',
+                                    }}
+                                />
                             </FadeInSection>
                         </Grid>
                     </Grid>

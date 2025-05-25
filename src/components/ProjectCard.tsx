@@ -42,14 +42,14 @@ const ProjectCard = ({ data }: { data: ProjectData }) => {
                             >
                                 {data.demo !== "" ? (
                                     <p>
-                                        View demo{" "}
+                                        🚀 Launch mission{" "}
                                         <a target="_blank" href={data.demo} rel="noreferrer">
                                             <FontAwesomeIcon icon={faDesktop} />
                                         </a>
                                     </p>
                                 ) : (
                                     <p>
-                                        Demo limited{" "}
+                                        🔒 Mission classified{" "}
                                         <FontAwesomeIcon icon={faBan} />
                                     </p>
                                 )}
@@ -57,30 +57,33 @@ const ProjectCard = ({ data }: { data: ProjectData }) => {
                             <Box>
                                 {data.src !== "" ? (
                                     <p>
-                                        View source{" "}
+                                        📡 Access databank{" "}
                                         <a target="_blank" href={data.src} rel="noreferrer">
                                             <FontAwesomeIcon icon={faGithub} />
                                         </a>
                                     </p>
                                 ) : (
                                     <p>
-                                        Source private{" "}
+                                        🛡️ Imperial secrets{" "}
                                         <FontAwesomeIcon icon={faUserSecret} />
                                     </p>
                                 )}
                             </Box>
                         </CardActions>
                     </CardContent>
-                    {data.tech.map((technology) => {
+                    {data.tech.map((technology, index) => {
                         return (
                             <p
+                                key={index}
                                 style={{
                                     display: "inline",
                                     marginLeft: 25,
-                                    color: "grey",
+                                    color: "#e0e0e0",
+                                    fontSize: "0.8rem",
+                                    textShadow: "0 0 5px rgba(224, 224, 224, 0.3)",
                                 }}
                             >
-                                {technology}
+                                ⚡ {technology}
                             </p>
                         );
                     })}

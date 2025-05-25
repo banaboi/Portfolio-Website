@@ -12,28 +12,37 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 // @ts-ignore
 import luke from "../assets/profile.png";
+// @ts-ignore
+import lukeLightMode from "../assets/profile_lightmode.png";
 import { createTheme, ThemeProvider, useScrollTrigger } from "@mui/material";
+import { useTheme } from "../contexts/ThemeContext";
 
 const theme = createTheme({
   components: {
     MuiPaper: {
       styleOverrides: {
-        // Name of the slot
         root: {
-          // Some CSS
-          backgroundColor: "#363636",
+          background: "var(--bg-secondary)",
+          backdropFilter: "blur(10px)",
+          border: "1px solid var(--border-color)",
+          transition: "background 0.3s ease, border-color 0.3s ease",
         },
       },
     },
 
     MuiButton: {
       styleOverrides: {
-        // Name of the slot
         root: {
-          // Some CSS
           fontSize: "1rem",
-          fontFamily: "JetBrains Mono",
-          color: "lime",
+          fontFamily: "Orbitron, Space Mono, JetBrains Mono",
+          color: "var(--accent-primary)",
+          textShadow: "0 0 10px var(--shadow-color)",
+          transition: "all 0.3s ease",
+          "&:hover": {
+            color: "var(--accent-secondary)",
+            textShadow: "0 0 15px var(--shadow-color)",
+            transform: "scale(1.05)",
+          },
         },
       },
     },
@@ -57,6 +66,7 @@ interface Props {
 }
 
 const Nav = () => {
+  const { theme: currentTheme, toggleTheme } = useTheme();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -97,33 +107,52 @@ const Nav = () => {
           <AppBar
             position="fixed"
             style={{
-              color: "white",
-              backgroundColor: "#363636",
-              opacity: "99%",
+              color: "var(--text-primary)",
+              background: "var(--bg-secondary)",
+              backdropFilter: "blur(15px)",
+              border: "1px solid var(--border-color)",
+              boxShadow: "0 0 20px var(--shadow-color)",
+              transition: "all 0.3s ease",
             }}
           >
             <Container id="nav" maxWidth="xl">
               <Toolbar disableGutters>
+                {/* Logo - Left side */}
                 <Box sx={{ flexGrow: 0 }}>
-                  <Tooltip title="Use the force">
+                  <Tooltip title="Luke Banicevic - Software Engineer">
                     <IconButton
                       onClick={handleLukeClick}
                       sx={{
                         pl: 2,
                       }}
                     >
-                      <Avatar alt="Luke" src={luke} />
+                      <Avatar
+                        alt="Luke"
+                        src={currentTheme === 'light' ? lukeLightMode : luke}
+                        sx={{
+                          border: 'none',
+                          boxShadow: 'none',
+                          backgroundColor: 'transparent',
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            transform: 'scale(1.05)',
+                          }
+                        }}
+                      />
                     </IconButton>
                   </Tooltip>
                 </Box>
 
+                {/* Spacer to push items to the right */}
+                <Box sx={{ flexGrow: 1 }} />
+
+                {/* Desktop Navigation - Right side */}
                 <Box
                   sx={{
                     flexGrow: 0,
                     display: { xs: "none", md: "flex" },
-                    position: "absolute",
-                    right: 0,
-                    top: 0,
+                    alignItems: "center",
+                    gap: 1,
                   }}
                 >
                   {pages.map((page, index) => (
@@ -140,16 +169,83 @@ const Nav = () => {
                       {page.name}
                     </Button>
                   ))}
+
+                  {/* Theme Toggle for Desktop */}
+                  <Tooltip
+                    title={currentTheme === 'light' ? 'Switch to Dark Side' : 'Join the Light Side'}
+                    arrow
+                  >
+                    <IconButton
+                      onClick={toggleTheme}
+                      aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
+                      sx={{
+                        ml: 1,
+                        width: '48px',
+                        height: '48px',
+                        background: 'transparent',
+                        border: 'none',
+                        boxShadow: 'none',
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          transform: 'scale(1.1)',
+                          background: 'transparent',
+                        }
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: '20px',
+                          transition: 'all 0.3s ease',
+                        }}
+                      >
+                        {currentTheme === 'light' ? '🌙' : '☀️'}
+                      </div>
+                    </IconButton>
+                  </Tooltip>
                 </Box>
 
+                {/* Mobile Navigation - Right side */}
                 <Box
                   sx={{
-                    flexGrow: 1,
+                    flexGrow: 0,
                     display: { xs: "flex", md: "none" },
-                    position: "absolute",
-                    right: 0,
+                    alignItems: "center",
+                    gap: 1,
                   }}
                 >
+                  {/* Theme Toggle for Mobile */}
+                  <Tooltip
+                    title={currentTheme === 'light' ? 'Switch to Dark Side' : 'Join the Light Side'}
+                    arrow
+                  >
+                    <IconButton
+                      onClick={toggleTheme}
+                      aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
+                      sx={{
+                        width: '40px',
+                        height: '40px',
+                        background: 'transparent',
+                        border: 'none',
+                        boxShadow: 'none',
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          transform: 'scale(1.1)',
+                          background: 'transparent',
+                        }
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: '16px',
+                          transition: 'all 0.3s ease',
+                        }}
+                      >
+                        {currentTheme === 'light' ? '🌙' : '☀️'}
+                      </div>
+                    </IconButton>
+                  </Tooltip>
+
+                  {/* Hamburger Menu */}
                   <IconButton
                     size="large"
                     aria-label="account of current user"

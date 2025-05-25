@@ -11,7 +11,7 @@ const Footer = () => {
                     <Box className="footer">
                         <p>
                             {" "}
-                            Made with 🤖 by Luke Banicevic, sprite made by{" "}
+                            Crafted with the Force ⚡ by Jedi Master Luke Banicevic, holographic designs by{" "}
                             <a
                                 target="_blank"
                                 href="https://www.instagram.com/re_entry.design/" rel="noreferrer"
@@ -25,10 +25,11 @@ const Footer = () => {
                         style={{
                             fontSize: 11,
                             marginTop: 0,
-                            color: "grey",
+                            color: "#e0e0e0",
+                            textShadow: "0 0 5px rgba(224, 224, 224, 0.3)",
                         }}
                     >
-                        All rights reserved.©
+                        May the Force be with you. All rights reserved across the galaxy.© {new Date().getFullYear()}
                     </p>
                     <Box className="footer-socials">
                         <Socials />

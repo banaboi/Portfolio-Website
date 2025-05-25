@@ -11,7 +11,9 @@ body {
 
 html {
     scroll-behavior: smooth;
-    background-color: #363636;
+    background: var(--bg-primary);
+    min-height: 100vh;
+    transition: background 0.3s ease;
 }
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

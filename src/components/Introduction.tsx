@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import FadeInSection from "./FadeInSection";
-import Typist from "react-typist";
-import "react-typist/dist/Typist.css";
+import React, { useEffect, useState } from 'react'
+import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
+import FadeInSection from './FadeInSection'
+import TypeWriter from './TypeWriter'
 
 const debounce = (fn: () => void, ms: number) => {
-    let timer: any;
+    let timer: NodeJS.Timeout | null = null;
     return () => {
-        clearTimeout(timer);
-        timer = setTimeout((_) => {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => {
             timer = null;
-            fn.apply(this);
+            fn();
         }, ms);
     };
 };
@@ -48,35 +47,55 @@ const Introduction = () => {
             >
                 <span
                     style={{
-                        color: "grey",
+                        color: "var(--text-primary)",
                         fontSize: 20,
+                        fontFamily: "Space Mono, monospace",
+                        textShadow: "0 0 10px var(--shadow-color)",
+                        transition: "color 0.3s ease, text-shadow 0.3s ease",
                     }}
                 >
                     {" "}
-                    <b>Hey, my name is </b>
+                    <b>A long time ago, in a galaxy far, far away... my name is </b>
                 </span>
                 <h1 className="name">
                     <span className="special">
-                        <Typist avgTypingDelay={150}>
-                            {"<"}
-                            <b>Luke</b>
-                            {"/>"}
-                        </Typist>
+                        <TypeWriter
+                            text="&lt;<b>Luke</b>/&gt;"
+                            delay={150}
+                            className="typewriter-wrapper"
+                        />
                     </span>
                 </h1>
             </Box>
-            <FadeInSection props={{ children: undefined, delay: "5000ms" }}>
+            <FadeInSection delay="5000ms">
                 <br />
                 <h3 className="headline">
-                    A software engineer who loves using technology to bring joy
-                    to people
+                    A Jedi software engineer who uses the Force of technology to bring balance and joy
+                    to the galaxy... and people's lives
                 </h3>
+                <div style={{
+                    marginTop: '2rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem',
+                    flexWrap: 'wrap'
+                }}>
+                    <span style={{
+                        color: 'var(--accent-secondary)',
+                        fontSize: '1.2rem',
+                        textShadow: '0 0 10px var(--shadow-color)',
+                        fontFamily: 'Orbitron, monospace',
+                        transition: 'color 0.3s ease, text-shadow 0.3s ease'
+                    }}>
+                        ✨ "Do or do not, there is no try" - Master Yoda
+                    </span>
+                </div>
                 {/* <Button
-                    className="call-to-action-button"
+                    className="call-to-action-button enhanced-button"
                     href="#contact"
                     variant="outlined"
                 >
-                    Let's connect
+                    Join the Rebellion
                 </Button> */}
             </FadeInSection>
         </Container>

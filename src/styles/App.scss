@@ -1,8 +1,70 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=JetBrains+Mono:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=JetBrains+Mono:wght@600&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap");
+
+// CSS Variables for theming
+:root {
+    // Dark theme (Return of the Jedi Luke) - Default
+    --bg-primary: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    --bg-secondary: rgba(26, 26, 46, 0.8);
+    --text-primary: #e0e0e0;
+    --text-secondary: #e0e0e0;
+    --accent-primary: #00ff41;
+    --accent-secondary: #FFD700;
+    --border-color: rgba(0, 255, 65, 0.3);
+    --shadow-color: rgba(0, 255, 65, 0.2);
+    --starfield-opacity: 0.2;
+}
+
+[data-theme="light"] {
+    // Light theme (A New Hope Luke) - White robes and blue lightsaber
+    --bg-primary: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+    --bg-secondary: rgba(255, 255, 255, 0.95);
+    --text-primary: #2c3e50; // Dark blue-gray for readability
+    --text-secondary: #34495e; // Slightly lighter blue-gray
+    --accent-primary: #3498db; // Luke's blue lightsaber color
+    --accent-secondary: #f39c12; // Tatooine sunset orange
+    --border-color: rgba(52, 152, 219, 0.3); // Blue lightsaber glow
+    --shadow-color: rgba(52, 152, 219, 0.4); // Blue glow effect
+    --starfield-opacity: 0.03; // Very subtle stars
+
+    // Light mode specific overrides
+    --light-card-bg: rgba(255, 255, 255, 0.95);
+    --light-card-border: rgba(52, 152, 219, 0.2);
+    --light-text-glow: rgba(44, 62, 80, 0.1);
+    --light-accent-glow: rgba(52, 152, 219, 0.5);
+    --light-input-bg: rgba(255, 255, 255, 0.9);
+    --light-input-border: rgba(52, 152, 219, 0.3);
+}
+
+// Light mode specific improvements
+[data-theme="light"] {
+    .App {
+        // Improve starfield visibility in light mode
+        &::before {
+            background-image:
+                radial-gradient(1px 1px at 20px 30px, var(--accent-primary), transparent),
+                radial-gradient(1px 1px at 40px 70px, var(--text-secondary), transparent),
+                radial-gradient(1px 1px at 90px 40px, var(--accent-primary), transparent),
+                radial-gradient(1px 1px at 130px 80px, var(--text-secondary), transparent),
+                radial-gradient(1px 1px at 160px 30px, var(--accent-primary), transparent);
+            opacity: 0.05; // Very subtle in light mode
+        }
+    }
+
+    // Improve text readability in light mode
+    .name b {
+        color: var(--text-primary);
+        text-shadow: 0 0 5px var(--light-text-glow);
+    }
+
+    .special {
+        color: var(--accent-primary);
+        text-shadow: 0 0 8px var(--light-accent-glow);
+    }
+}
 
 .App {
     text-align: center;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Space Mono", "JetBrains Mono", monospace;
     font-size: calc(1em + 1vw);
     margin: 0;
     margin-top: 0px;
@@ -10,14 +72,41 @@
     box-sizing: border-box;
     height: 100%;
     width: 100%;
-    background-color: #363636;
+    background: var(--bg-primary);
+    position: relative;
+    overflow-x: hidden;
+    transition: background 0.3s ease;
+
+    // Optimized starfield background (static for better performance)
+    &::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+            radial-gradient(1px 1px at 20px 30px, var(--accent-primary), transparent),
+            radial-gradient(1px 1px at 40px 70px, var(--text-primary), transparent),
+            radial-gradient(1px 1px at 90px 40px, var(--accent-primary), transparent),
+            radial-gradient(1px 1px at 130px 80px, var(--text-primary), transparent),
+            radial-gradient(1px 1px at 160px 30px, var(--accent-primary), transparent);
+        background-repeat: repeat;
+        background-size: 300px 200px;
+        z-index: -1;
+        opacity: var(--starfield-opacity);
+        transition: opacity 0.3s ease;
+        will-change: auto; // Remove will-change for better performance
+    }
 
     header {
         padding: 0 !important;
     }
 
     p {
-        color: #aba7a7;
+        color: var(--text-primary);
+        text-shadow: 0 0 5px var(--shadow-color);
+        transition: color 0.3s ease;
     }
 
     .nav {
@@ -98,11 +187,14 @@
 
     a {
         text-decoration: none;
-        color: lime;
+        color: var(--accent-primary);
+        text-shadow: 0 0 5px var(--shadow-color);
+        transition: color 0.2s ease, text-shadow 0.2s ease;
     }
 
     a:hover {
-        color: white;
+        color: var(--accent-secondary);
+        text-shadow: 0 0 8px var(--shadow-color);
     }
 
     .name {
@@ -110,14 +202,45 @@
         margin-top: 1rem;
         font-size: clamp(2rem, 3em, 6rem);
         margin-bottom: 0;
+        font-family: "Orbitron", "Space Mono", monospace;
+        font-weight: 700;
 
         b {
-            color: #aba7a7;
+            color: var(--text-primary);
+            text-shadow: 0 0 10px var(--shadow-color);
         }
     }
 
     .special {
-        color: lime;
+        color: var(--accent-primary);
+        text-shadow: 0 0 10px var(--shadow-color);
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+
+        // Typewriter effect styling
+        .typewriter {
+            display: inline-block;
+            font-family: "Orbitron", "Space Mono", monospace;
+            font-weight: 700;
+        }
+
+        .typewriter-wrapper {
+            display: inline-block;
+            font-family: "Orbitron", "Space Mono", monospace;
+            font-weight: 700;
+        }
+
+        .typewriter-cursor {
+            color: var(--accent-primary);
+            animation: blink 1s infinite;
+
+            &.visible {
+                opacity: 1;
+            }
+
+            &.hidden {
+                opacity: 0;
+            }
+        }
     }
 
     .closing-symbol {
@@ -129,9 +252,10 @@
         font-size: 3rem;
         display: block;
         border-radius: 1rem !important;
-        color: rgb(27, 226, 27);
+        color: var(--accent-primary);
         top: 50%;
         left: 40%;
+        transition: color 0.3s ease;
     }
 
     .display-pic {
@@ -145,32 +269,44 @@
         margin-top: 0;
         text-align: left;
         font-size: clamp(0.5rem, 1.3em, 3.5rem);
-        color: white;
+        color: var(--text-primary);
+        font-family: "Space Mono", monospace;
+        text-shadow: 0 0 10px var(--shadow-color);
+        line-height: 1.4;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
     }
 
     .call-to-action-button {
         height: 3em;
         width: 10em;
         font-size: 1em;
-        border-color: lime;
-        font-family: "JetBrains Mono", monospace;
-        color: lime;
+        border: 2px solid var(--accent-primary);
+        font-family: "Orbitron", "JetBrains Mono", monospace;
+        color: var(--accent-primary);
         text-transform: none;
         position: relative;
+        background: var(--bg-secondary);
+        border-radius: 8px;
+        box-shadow: 0 0 10px var(--shadow-color);
+        transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     }
 
     .call-to-action-button:hover {
-        color: lime;
-        border-color: lime;
+        color: var(--bg-primary);
+        background: var(--accent-primary);
+        box-shadow: 0 0 15px var(--shadow-color);
     }
 
     .sub-heading {
-        font-family: "Fira Mono", monospace;
+        font-family: "Orbitron", "Fira Mono", monospace;
         margin-top: 1rem;
         margin-bottom: 1rem;
         text-align: left;
         font-size: clamp(0.7rem, 1.05em, 3rem);
-        color: white;
+        color: var(--text-primary);
+        font-weight: 700;
+        text-shadow: 0 0 10px var(--shadow-color);
+        transition: color 0.3s ease, text-shadow 0.3s ease;
     }
 
     .sub-heading::after {
@@ -178,25 +314,33 @@
         height: 2px;
         width: 300px;
         margin-left: 1vw;
-        // background-color: rgb(27, 226, 27);
-        background-color: #aba7a7;
+        background: linear-gradient(90deg, var(--accent-primary), transparent);
+        box-shadow: 0 0 10px var(--shadow-color);
         content: "";
+        transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
     .list-item {
         font-size: clamp(0.5rem, 1.1rem, 1.5rem);
-        color: #aba7a7;
+        color: var(--text-primary);
+        text-shadow: 0 0 5px var(--shadow-color);
+        transition: color 0.3s ease, text-shadow 0.3s ease;
     }
 
     .resume-button {
-        color: rgb(27, 226, 27);
-        border-color: rgb(27, 226, 27);
+        color: var(--accent-primary);
+        border: 2px solid var(--accent-primary);
+        background: var(--bg-secondary);
+        font-family: "Orbitron", monospace;
+        box-shadow: 0 0 15px var(--shadow-color);
+        transition: all 0.3s ease;
     }
 
     .resume-button:hover {
-        color: black;
-        border-color: black;
-        background-color: whitesmoke;
+        color: var(--bg-primary);
+        background: var(--accent-primary);
+        box-shadow: 0 0 25px var(--shadow-color);
+        transform: translateY(-2px);
     }
 
     .socials {
@@ -206,16 +350,19 @@
         height: 1rem;
 
         .favicon {
-            color: black;
+            color: var(--accent-primary);
             margin: 0.5rem;
             height: 2rem;
             width: 1.3em;
-            transition: transform 0.5s ease;
+            transition: all 0.5s ease;
+            filter: drop-shadow(0 0 10px var(--shadow-color));
         }
 
         .favicon:hover {
             text-decoration: none;
             transform: scale(1.3);
+            color: var(--accent-secondary);
+            filter: drop-shadow(0 0 15px var(--shadow-color));
         }
     }
 
@@ -248,28 +395,67 @@
         .skill {
             height: 2.5rem;
             width: 2.5rem;
-            fill: white;
+            fill: var(--accent-primary);
             margin: 1em;
-            transition: transform 0.5s ease;
+            transition: transform 0.3s ease, fill 0.3s ease;
+            filter: drop-shadow(0 0 5px var(--shadow-color));
         }
 
         .skill:hover {
-            transform: scale(1.3);
+            transform: scale(1.2);
+            fill: var(--accent-secondary);
+            filter: drop-shadow(0 0 8px var(--shadow-color));
         }
     }
 
     .projectGrid {
         margin: 0 auto;
+        gap: 2rem !important; // Increase spacing between cards
 
         .project {
-            margin-top: 0.5rem;
+            margin: 1rem; // Add proper margin around each project
+            display: flex;
+            justify-content: center;
 
             .project-card {
                 height: 17rem;
                 border-radius: 1rem;
                 width: 20rem;
-                background-color: #474747;
-                color: whitesmoke;
+                background: var(--bg-secondary);
+                backdrop-filter: blur(5px);
+                border: 1px solid var(--border-color);
+                color: var(--text-primary);
+                box-shadow: 0 0 15px var(--shadow-color);
+                transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+                position: relative;
+                z-index: 1;
+                will-change: transform;
+
+                &:hover {
+                    border-color: var(--accent-primary);
+                    box-shadow: 0 0 20px var(--shadow-color);
+                    transform: translateY(-3px);
+                    z-index: 2;
+                }
+
+                // Light mode specific styling
+                [data-theme="light"] & {
+                    background: var(--light-card-bg);
+                    border: 1px solid var(--light-card-border);
+                    box-shadow: 0 0 15px var(--light-accent-glow);
+
+                    &:hover {
+                        box-shadow: 0 0 20px var(--light-accent-glow);
+                    }
+                }
+
+                // Ensure clickable areas work properly
+                .MuiCardActionArea-root {
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                }
 
                 button {
                     width: 100%;
@@ -281,13 +467,34 @@
                 }
 
                 h1 {
-                    font-family: "Fira Mono", monospace;
+                    font-family: "Orbitron", "Fira Mono", monospace;
+                    color: var(--accent-primary);
+                    text-shadow: 0 0 10px var(--shadow-color);
+                    margin-bottom: 0.5rem;
+                    transition: color 0.3s ease, text-shadow 0.3s ease;
                 }
 
                 p {
                     font-size: 0.8rem;
-                    font-family: "JetBrains Mono", monospace;
-                    color: white;
+                    font-family: "Space Mono", "JetBrains Mono", monospace;
+                    color: var(--text-primary);
+                    text-shadow: 0 0 5px var(--shadow-color);
+                    transition: color 0.3s ease, text-shadow 0.3s ease;
+                }
+
+                // Ensure links are clickable and styled properly
+                a {
+                    color: var(--accent-primary) !important;
+                    text-shadow: 0 0 5px var(--shadow-color) !important;
+                    transition: color 0.2s ease, text-shadow 0.2s ease !important;
+                    pointer-events: auto !important;
+                    z-index: 10 !important;
+                    position: relative !important;
+
+                    &:hover {
+                        color: var(--accent-secondary) !important;
+                        text-shadow: 0 0 8px var(--shadow-color) !important;
+                    }
                 }
             }
         }
@@ -296,7 +503,7 @@
 
 .contactContainer {
     text-align: left;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Space Mono", "JetBrains Mono", monospace;
 }
 
 .footer-container {
@@ -360,14 +567,17 @@
             .favicon:hover {
                 text-decoration: none;
                 transform: scale(1.3);
-                color: lime;
+                color: var(--accent-primary);
+                filter: drop-shadow(0 0 15px var(--shadow-color));
             }
         }
     }
 }
 
 hr {
-    border-top: 4px solid rgb(27, 226, 27);
+    border-top: 4px solid var(--accent-primary);
+    box-shadow: 0 0 10px var(--shadow-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hidden {
@@ -382,17 +592,57 @@ hr {
     }
 
     fieldset {
-        border-color: grey !important;
+        border-color: var(--border-color) !important;
         border: 1px;
+        transition: border-color 0.3s ease;
     }
 
     .Mui-focused {
-        color: lime !important;
+        color: var(--accent-primary) !important;
     }
 
     .text-field {
-        background-color: #474747;
+        background: var(--bg-secondary);
         border-radius: 1rem;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 0 10px var(--shadow-color);
+        transition: all 0.3s ease;
+
+        // Light mode specific styling
+        [data-theme="light"] & {
+            background: var(--light-input-bg);
+            border: 1px solid var(--light-input-border);
+
+            .MuiInputBase-input {
+                color: var(--text-primary) !important;
+                background: transparent;
+            }
+
+            .MuiInputLabel-root {
+                color: var(--text-secondary) !important;
+
+                &.Mui-focused {
+                    color: var(--accent-primary) !important;
+                }
+            }
+
+            .MuiOutlinedInput-root {
+                background: var(--light-input-bg);
+
+                .MuiOutlinedInput-notchedOutline {
+                    border-color: var(--light-input-border) !important;
+                }
+
+                &:hover .MuiOutlinedInput-notchedOutline {
+                    border-color: var(--accent-primary) !important;
+                }
+
+                &.Mui-focused .MuiOutlinedInput-notchedOutline {
+                    border-color: var(--accent-primary) !important;
+                    border-width: 2px !important;
+                }
+            }
+        }
     }
 
     .textarea {
@@ -400,17 +650,191 @@ hr {
     }
 
     .contact-button {
-        color: "lime";
-        border-color: "lime";
-        font-family: "JetBrains Mono", monospace !important;
-    }
+        color: var(--accent-primary) !important;
+        border: 2px solid var(--accent-primary) !important;
+        font-family: "Orbitron", "JetBrains Mono", monospace !important;
+        background: var(--bg-secondary) !important;
+        box-shadow: 0 0 15px var(--shadow-color);
+        transition: all 0.3s ease;
 
-    .contact-button:hover {
-        background-color: #474747 !important;
+        &:hover {
+            background: var(--accent-primary) !important;
+            color: var(--bg-primary) !important;
+            box-shadow: 0 0 25px var(--shadow-color);
+        }
     }
 
     label {
-        color: grey !important;
-        font-family: "JetBrains Mono", monospace !important;
+        color: var(--text-primary) !important;
+        font-family: "Space Mono", "JetBrains Mono", monospace !important;
+        text-shadow: 0 0 5px var(--shadow-color);
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+}
+
+// Optimized Keyframe Animations (removed heavy animations)
+// Removed starfield, lightsaber-glow, and force-pulse animations for better performance
+
+// Responsive Design Improvements
+@media (max-width: 768px) {
+    .App {
+        &::before {
+            background-size: 400px 300px; // Larger pattern for fewer elements
+            opacity: 0.1; // Reduced opacity on mobile
+        }
+
+        .name {
+            font-size: clamp(1.5rem, 8vw, 4rem) !important;
+        }
+
+        .headline {
+            font-size: clamp(0.8rem, 4vw, 1.5rem) !important;
+            line-height: 1.3;
+        }
+
+        .sub-heading {
+            font-size: clamp(0.8rem, 4vw, 1.2rem) !important;
+
+            &::after {
+                width: 150px;
+            }
+        }
+
+        .projectGrid {
+            gap: 1.5rem !important;
+
+            .project {
+                margin: 0.5rem;
+
+                .project-card {
+                    width: 90vw;
+                    max-width: 350px;
+                    margin: 0 auto;
+                }
+            }
+        }
+
+        .skillsGrid .skill {
+            height: 2rem;
+            width: 2rem;
+            margin: 0.5em;
+        }
+
+        .lightsaber-cursor-trail {
+            display: none; // Hide on mobile for performance
+        }
+
+        .intro, .intro-mobile {
+            width: 95vw !important;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .App {
+        .name {
+            font-size: clamp(1.2rem, 10vw, 3rem) !important;
+        }
+
+        .headline {
+            font-size: clamp(0.7rem, 5vw, 1.2rem) !important;
+        }
+
+        .projectGrid {
+            gap: 1rem !important;
+
+            .project {
+                margin: 0.25rem;
+
+                .project-card {
+                    width: 95vw;
+                    max-width: 320px;
+                }
+            }
+        }
+    }
+}
+
+// Additional Star Wars themed elements
+.jedi-glow {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #00ff41, #FFD700, #00ff41);
+        border-radius: inherit;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    &:hover::before {
+        opacity: 0.7;
+    }
+}
+
+// Lightsaber cursor effect (optional)
+.lightsaber-cursor {
+    cursor: none;
+
+    &::after {
+        content: '';
+        position: fixed;
+        width: 4px;
+        height: 20px;
+        background: linear-gradient(to bottom, #00ff41, transparent);
+        border-radius: 2px;
+        pointer-events: none;
+        z-index: 9999;
+        box-shadow: 0 0 10px #00ff41;
+    }
+}
+
+// Simplified animations for better performance
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+// Death Star Loader Animations
+@keyframes death-star-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes superlaser-pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 10px var(--accent-primary);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+        box-shadow: 0 0 20px var(--accent-primary);
+    }
+}
+
+@keyframes orbital-ring {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+// Simple hover effect for enhanced buttons
+.enhanced-button {
+    transition: background 0.2s ease, color 0.2s ease;
+
+    &:hover {
+        background: rgba(0, 255, 65, 0.1);
     }
 }

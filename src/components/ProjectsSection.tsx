@@ -44,7 +44,7 @@ const ProjectsSection = () => {
                 className={isMobile || isIpad ? "section-mobile" : "section"}
             >
                 <FadeInSection props={{ children: undefined, delay: "1000ms" }}>
-                    <span className="sub-heading"> Projects </span>
+                    <span className="sub-heading"> Galactic Missions </span>
                     <Grid className="projectGrid" container xs={12} spacing={1}>
                         {projectData.map((project) => {
                             return (
