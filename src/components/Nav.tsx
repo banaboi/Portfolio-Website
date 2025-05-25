@@ -10,12 +10,10 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-// @ts-ignore
 import luke from "../assets/profile.png";
-// @ts-ignore
 import lukeLightMode from "../assets/profile_lightmode.png";
 import { createTheme, ThemeProvider, useScrollTrigger } from "@mui/material";
-import { useTheme } from "../contexts/ThemeContext";
+import { useTheme } from "../hooks/useTheme";
 
 const theme = createTheme({
   components: {
@@ -75,8 +73,7 @@ const Nav = () => {
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleLukeClick = (event: React.MouseEvent<HTMLElement>) => {
+  };  const handleLukeClick = (_event: React.MouseEvent<HTMLElement>) => {
     window.scrollTo(0, 0);
   };
 

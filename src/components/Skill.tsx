@@ -20,22 +20,15 @@ const Skill = ({ data, key }: { data: SkillsElement; key: number }) => {
         setAnchorEl(null);
     };
 
-    const open = Boolean(anchorEl);
-
-    return (
-        <FadeInSection
-            props={{
-                children: undefined,
-                delay: `${key + 2}000ms`,
-            }}
-        >
-            <Grid className="skill" item xs={12} key={key}>
+    const open = Boolean(anchorEl);    return (        <FadeInSection
+            delay={Math.min((key + 1) * 200, 800)} // Much faster: 200ms increments, max 800ms
+        ><Grid className="skill" item xs={12} key={key}>
                 <Box
                     onClick={handlePopoverOpen}
                     onMouseEnter={handlePopoverOpen}
                     onMouseLeave={handlePopoverClose}
                 >
-                    {data.svg}
+                    {React.cloneElement(data.svg as React.ReactElement)}
                 </Box>
 
                 <Popover

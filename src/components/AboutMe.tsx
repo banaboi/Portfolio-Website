@@ -6,17 +6,16 @@ import Container from "@mui/material/Container";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 
-// @ts-ignore
 import resume from "../documents/resume.pdf";
 import FadeInSection from "./FadeInSection";
 import profilePicture from "../assets/profilePicture.png";
 // Theme context no longer needed since we always use the same image
 
 const debounce = (fn: () => void, ms: number) => {
-    let timer: any;
+    let timer: NodeJS.Timeout | null = null;
     return () => {
-        clearTimeout(timer);
-        timer = setTimeout((_) => {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => {
             timer = null;
             fn.apply(this);
         }, ms);
@@ -24,10 +23,9 @@ const debounce = (fn: () => void, ms: number) => {
 };
 
 const listItems = [
-    <li className="list-item">
-        <p>
+    <li className="list-item">        <p>
             🎓 Mastered the ancient arts of <b>Computer Science </b> and <b>Engineering </b>at the Jedi Academy of{" "}
-            <a target="_blank" href="https://www.unsw.edu.au/" rel="noreferrer">
+            <a target="_blank" href="https://www.unsw.edu.au/" rel="noopener noreferrer">
                 {" "}
                 <b>University of New South Wales </b>
             </a>
@@ -36,7 +34,7 @@ const listItems = [
     <li className="list-item">
         <p>
             ☀️ Harnessed the power of the sun, writing code for a solar-powered speeder @
-            <a target="_blank" href="https://www.sunswift.com/" rel="noreferrer">
+            <a target="_blank" href="https://www.sunswift.com/" rel="noopener noreferrer">
                 {" "}
                 <b>Sunswift Racing</b>
             </a>
@@ -45,7 +43,7 @@ const listItems = [
     <li className="list-item">
         <p>
             💨 Currently using the Force to help beings across the galaxy breathe better @
-            <a target="_blank" href="https://www.resmed.com.au/" rel="noreferrer">
+            <a target="_blank" href="https://www.resmed.com.au/" rel="noopener noreferrer">
                 {" "}
                 <b>ResMed</b>
             </a>
@@ -54,7 +52,7 @@ const listItems = [
     <li className="list-item">
         <p>
             ☁️ Explored the Cloud City's managed services during my padawan days @{" "}
-            <a target="_blank" href="https://deloitte.com/" rel="noreferrer">
+            <a target="_blank" href="https://deloitte.com/" rel="noopener noreferrer">
                 {" "}
                 <b>Deloitte </b>
             </a>
@@ -100,21 +98,14 @@ const AboutMe = () => {
             <Container
                 id="aboutMe"
                 className={isMobile || isIpad ? "section-mobile" : "section"}
-            >
-                <FadeInSection props={{ children: undefined, delay: "1000ms" }}>
+            >                <FadeInSection delay={400}> {/* Reduced from 1000ms to 400ms */}
                     <span className="sub-heading">My Jedi Training </span>
-                    <Grid container item xs={12} spacing={1}>
-                        <Grid item xs={12} md={6}>
+                    <Grid container item xs={12} spacing={1}>                        <Grid item xs={12} md={6}>
                             <ul>
                                 {listItems.map((item, index) => {
                                     return (
                                         <FadeInSection
-                                            props={{
-                                                children: undefined,
-                                                delay: `${
-                                                    listItems.indexOf(item) + 1
-                                                }000ms`,
-                                            }}
+                                            delay={200 + (listItems.indexOf(item) * 150)} // Much faster: 200ms base + 150ms per item
                                             key={index}
                                         >
                                             {item}

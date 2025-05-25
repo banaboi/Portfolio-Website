@@ -8,18 +8,19 @@ import {
 
 const Socials = () => {
     return (
-        <Box className="bar">
-            <a
+        <Box className="bar">            <a
                 className="link"
                 target="_blank"
-                href="https://www.linkedin.com/in/luke-banicevic-30860115b/" rel="noreferrer"
+                href="https://www.linkedin.com/in/luke-banicevic-30860115b/" 
+                rel="noopener noreferrer"
             >
                 <FontAwesomeIcon className="favicon" icon={faLinkedin} />
             </a>
             <a
                 className="link"
                 target="_blank"
-                href="https://github.com/banaboi" rel="noreferrer"
+                href="https://github.com/banaboi" 
+                rel="noopener noreferrer"
             >
                 <FontAwesomeIcon className="favicon" icon={faGithubSquare} />
             </a>

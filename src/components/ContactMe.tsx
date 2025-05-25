@@ -12,23 +12,34 @@ import FadeInSection from './FadeInSection'
 import DeathStarLoader from './DeathStarLoader'
 import { STAR_WARS_MESSAGES } from '../constants/index'
 
-const sendMail = async (name: string, email: string, message: string): Promise<string> => {
-    if (name === '' || email === '' || message === '') return 'warning'
+// Input validation helper
+const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+};
 
+const sanitizeInput = (input: string): string => {
+    return input.trim().replace(/[<>]/g, '');
+};
+
+const sendMail = async (name: string, email: string, message: string): Promise<string> => {    // Enhanced validation
+    if (!name.trim() || !email.trim() || !message.trim()) return 'warning'
+    if (!validateEmail(email)) return 'warning'
+    if (name.length > 100 || message.length > 1000) return 'warning'
+    
     const mailToSend = {
-        from_name: name,
-        message: message,
-        email: email,
+        from_name: sanitizeInput(name),
+        message: sanitizeInput(message),
+        email: sanitizeInput(email),
     }
-
+    
     try {
-        const res = await emailjs.send(
-            'service_51pblxq',
-            'template_uu34azu',
+        const _res = await emailjs.send(
+            import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_51pblxq',
+            import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_uu34azu',
             mailToSend,
-            'user_AKWYNeLidVUnlrq6JImtl'
+            import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'user_AKWYNeLidVUnlrq6JImtl'
         )
-        console.log('Message sent successfully:', res.status, res.text)
         return 'success'
     } catch (error) {
         console.error('Failed to send message:', error)
@@ -103,7 +114,7 @@ const ContactMe = () => {
 
     return (
         <>
-            <FadeInSection delay="1000ms">
+            <FadeInSection delay={400}> {/* Reduced from 1000ms to 400ms */}
                 <Container id="contact" className="section contact-section">
                     <CssBaseline />
                     <Box
@@ -122,8 +133,7 @@ const ContactMe = () => {
                             />
                         ) : (
                             <Box sx={{ mt: 3 }}>
-                                <Grid container spacing={2}>
-                                <Grid item xs={12}>
+                                <Grid container spacing={2}>                                <Grid item xs={12}>
                                     <TextField
                                         className="text-field"
                                         id="#name"
@@ -133,6 +143,8 @@ const ContactMe = () => {
                                         autoFocus
                                         value={name}
                                         onChange={handleChange}
+                                        inputProps={{ maxLength: 100 }}
+                                        helperText={`${name.length}/100 characters`}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -142,8 +154,16 @@ const ContactMe = () => {
                                         required
                                         fullWidth
                                         label="Email Address"
+                                        type="email"
                                         value={email}
                                         onChange={handleChange}
+                                        inputProps={{ maxLength: 100 }}
+                                        error={email.length > 0 && !validateEmail(email)}
+                                        helperText={
+                                            email.length > 0 && !validateEmail(email) 
+                                                ? "Please enter a valid email address" 
+                                                : `${email.length}/100 characters`
+                                        }
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -157,6 +177,8 @@ const ContactMe = () => {
                                         label="Message"
                                         value={message}
                                         onChange={handleChange}
+                                        inputProps={{ maxLength: 1000 }}
+                                        helperText={`${message.length}/1000 characters`}
                                     />
                                 </Grid>
                             </Grid>

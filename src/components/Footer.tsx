@@ -11,10 +11,10 @@ const Footer = () => {
                     <Box className="footer">
                         <p>
                             {" "}
-                            Crafted with the Force ⚡ by Jedi Master Luke Banicevic, holographic designs by{" "}
-                            <a
+                            Crafted with the Force ⚡ by Jedi Master Luke Banicevic, holographic designs by{" "}                            <a
                                 target="_blank"
-                                href="https://www.instagram.com/re_entry.design/" rel="noreferrer"
+                                href="https://www.instagram.com/re_entry.design/" 
+                                rel="noopener noreferrer"
                             >
                                 {" "}
                                 Re-Entry Design

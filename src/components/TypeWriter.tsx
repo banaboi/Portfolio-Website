@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo, useMemo, useCallback } from 'react'
 
 interface TypeWriterProps {
   text: string
@@ -7,7 +7,7 @@ interface TypeWriterProps {
   onComplete?: () => void
 }
 
-const TypeWriter: React.FC<TypeWriterProps> = ({ 
+const TypeWriter: React.FC<TypeWriterProps> = memo(({ 
   text, 
   delay = 150, 
   className = '', 
@@ -17,27 +17,45 @@ const TypeWriter: React.FC<TypeWriterProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0)
   const [showCursor, setShowCursor] = useState(true)
 
-  useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText(prev => prev + text[currentIndex])
-        setCurrentIndex(prev => prev + 1)
-      }, delay)
+  // Memoize the clean text to prevent recalculation
+  const cleanText = useMemo(() => {
+    return text.replace(/<(?!\/?b\b)[^>]*>/gi, '');
+  }, [text]);
 
-      return () => clearTimeout(timeout)
+  const updateDisplayText = useCallback(() => {
+    if (currentIndex < cleanText.length) {
+      setDisplayText(prev => prev + cleanText[currentIndex])
+      setCurrentIndex(prev => prev + 1)
     } else if (onComplete) {
       onComplete()
     }
-  }, [currentIndex, text, delay, onComplete])
+  }, [currentIndex, cleanText, onComplete]);
 
-  // Cursor blinking effect
   useEffect(() => {
-    const cursorInterval = setInterval(() => {
-      setShowCursor(prev => !prev)
-    }, 530)
+    if (currentIndex < cleanText.length) {
+      const timeout = setTimeout(updateDisplayText, delay)
+      return () => clearTimeout(timeout)
+    }
+  }, [currentIndex, cleanText.length, delay, updateDisplayText])
 
-    return () => clearInterval(cursorInterval)
-  }, [])
+  // Optimized cursor blinking with requestAnimationFrame
+  useEffect(() => {
+    let animationId: number;
+    let lastTime = 0;
+    const blinkInterval = 530;
+
+    const animate = (time: number) => {
+      if (time - lastTime >= blinkInterval) {
+        setShowCursor(prev => !prev);
+        lastTime = time;
+      }
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+    
+    return () => cancelAnimationFrame(animationId);
+  }, []);
 
   return (
     <span className={`typewriter ${className}`}>
@@ -55,6 +73,8 @@ const TypeWriter: React.FC<TypeWriterProps> = ({
       </span>
     </span>
   )
-}
+});
+
+TypeWriter.displayName = 'TypeWriter';
 
 export default TypeWriter

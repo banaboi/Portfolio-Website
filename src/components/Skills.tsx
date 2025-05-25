@@ -1,57 +1,42 @@
 import { Grid2 as Grid, Container } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import FadeInSection from './FadeInSection'
+import React, { useEffect, useState, memo, useMemo } from 'react'
+import FadeInSection from './FadeInSectionOptimized'
 import DeathStarLoader from './DeathStarLoader'
 import skillsElements from '../constants/skillsElements'
 import Skill from './Skill'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 
-const debounce = (fn: () => void, ms: number) => {
-    let timer: NodeJS.Timeout | null = null
-    return () => {
-        if (timer) clearTimeout(timer)
-        timer = setTimeout(() => {
-            timer = null
-            fn()
-        }, ms)
-    }
+// Import the type
+interface SkillsElement {
+    svg: React.SVGProps<SVGSVGElement>;
+    title: string;
+    popoverMsg: string;
 }
 
-const Skills = () => {
-    const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 900)
-    const [isIpad, setIsIpad] = useState<boolean>(
-        window.innerWidth < 1050 && window.innerHeight < 1400
-    )
-    const [isLoading, setIsLoading] = useState<boolean>(true)
+const Skills = memo(() => {
+    const { isMobile, isTablet } = useMediaQuery();
+    const [isLoading, setIsLoading] = useState<boolean>(true);    // Memoize skills grid to prevent unnecessary re-renders
+    const skillsGrid = useMemo(() => {
+        return skillsElements.map((skillElement: SkillsElement, index: number) => (
+            <Skill data={skillElement} key={index} />
+        ));
+    }, []);
 
-    useEffect(() => {
-        const debouncedHandleResize = debounce(function handleResize() {
-            setIsMobile(window.innerWidth < 900)
-            setIsIpad(window.innerWidth < 1050 && window.innerHeight < 1400)
-        }, 1000)
-
-        window.addEventListener('resize', debouncedHandleResize)
-
-        return () => {
-            window.removeEventListener('resize', debouncedHandleResize)
-        }
-    }, [])
-
-    // Simulate loading skills (in a real app, this might be an API call)
+    // Reduce loading time for better UX
     useEffect(() => {
         const timer = setTimeout(() => {
-            setIsLoading(false)
-        }, 1500) // Show loader for 1.5 seconds
+            setIsLoading(false);
+        }, 800); // Reduced from 1500ms
 
-        return () => clearTimeout(timer)
-    }, [])
+        return () => clearTimeout(timer);
+    }, []);
 
-    return (
-        <>
+    return (        <>
             <Container
                 id="skills"
-                className={isMobile || isIpad ? 'section-mobile' : 'section'}
+                className={isMobile || isTablet ? 'section-mobile' : 'section'}
             >
-                <FadeInSection delay="1000ms">
+                <FadeInSection delay={300}> {/* Reduced from 500ms to 300ms */}
                     <span className="sub-heading">Force Powers & Abilities </span>
 
                     {isLoading ? (
@@ -61,15 +46,15 @@ const Skills = () => {
                         />
                     ) : (
                         <Grid className="skillsGrid" container spacing={1}>
-                            {skillsElements.map((skillElement: any, index: number) => {
-                                return <Skill data={skillElement} key={index} />
-                            })}
+                            {skillsGrid}
                         </Grid>
                     )}
                 </FadeInSection>
             </Container>
         </>
     )
-};
+});
+
+Skills.displayName = 'Skills';
 
 export default Skills;

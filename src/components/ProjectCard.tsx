@@ -39,11 +39,10 @@ const ProjectCard = ({ data }: { data: ProjectData }) => {
                                 sx={{
                                     mr: 2,
                                 }}
-                            >
-                                {data.demo !== "" ? (
+                            >                                {data.demo !== "" ? (
                                     <p>
                                         🚀 Launch mission{" "}
-                                        <a target="_blank" href={data.demo} rel="noreferrer">
+                                        <a target="_blank" href={data.demo} rel="noopener noreferrer">
                                             <FontAwesomeIcon icon={faDesktop} />
                                         </a>
                                     </p>
@@ -58,7 +57,7 @@ const ProjectCard = ({ data }: { data: ProjectData }) => {
                                 {data.src !== "" ? (
                                     <p>
                                         📡 Access databank{" "}
-                                        <a target="_blank" href={data.src} rel="noreferrer">
+                                        <a target="_blank" href={data.src} rel="noopener noreferrer">
                                             <FontAwesomeIcon icon={faGithub} />
                                         </a>
                                     </p>
