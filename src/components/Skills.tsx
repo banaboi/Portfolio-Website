@@ -18,15 +18,15 @@ const Skills = memo(() => {
     const [isLoading, setIsLoading] = useState<boolean>(true);    // Memoize skills grid to prevent unnecessary re-renders
     const skillsGrid = useMemo(() => {
         return skillsElements.map((skillElement: SkillsElement, index: number) => (
-            <Skill data={skillElement} key={index} />
+            <Skill data={skillElement} key={index} index={index} />
         ));
     }, []);
 
-    // Reduce loading time for better UX
+    // Brief loading to allow lazy chunk to settle
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsLoading(false);
-        }, 800); // Reduced from 1500ms
+        }, 300);
 
         return () => clearTimeout(timer);
     }, []);

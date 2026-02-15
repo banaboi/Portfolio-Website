@@ -1,14 +1,12 @@
 import React, { useState, ChangeEvent } from 'react'
 import Button from '@mui/material/Button'
-import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
-import '../styles/App.scss'
 import emailjs from '@emailjs/browser'
 import { Alert, Snackbar } from '@mui/material'
-import FadeInSection from './FadeInSection'
+import FadeInSection from './FadeInSectionOptimized'
 import DeathStarLoader from './DeathStarLoader'
 import { STAR_WARS_MESSAGES } from '../constants/index'
 
@@ -33,19 +31,25 @@ const sendMail = async (name: string, email: string, message: string): Promise<s
         email: sanitizeInput(email),
     }
     
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    
+    if (!serviceId || !templateId || !publicKey) {
+        console.error('EmailJS configuration missing. Set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY environment variables.')
+        return 'error'
+    }
+    
     try {
-        const _res = await emailjs.send(
-            import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_51pblxq',
-            import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_uu34azu',
-            mailToSend,
-            import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'user_AKWYNeLidVUnlrq6JImtl'
-        )
+        await emailjs.send(serviceId, templateId, mailToSend, publicKey)
         return 'success'
     } catch (error) {
         console.error('Failed to send message:', error)
         return 'error'
     }
 }
+
+const RATE_LIMIT_MS = 10000; // 10 seconds between submissions
 
 const ContactMe = () => {
     const [name, setName] = useState<string>('')
@@ -55,6 +59,7 @@ const ContactMe = () => {
     const [openSuccess, setOpenSuccess] = useState<boolean>(false)
     const [openWarning, setOpenWarning] = useState<boolean>(false)
     const [openError, setOpenError] = useState<boolean>(false)
+    const [lastSubmitTime, setLastSubmitTime] = useState<number>(0)
 
     const clearInputFields = (): void => {
         setName('')
@@ -63,7 +68,14 @@ const ContactMe = () => {
     }
 
     const handleClick = async () => {
+        const now = Date.now()
+        if (now - lastSubmitTime < RATE_LIMIT_MS) {
+            setOpenWarning(true)
+            return
+        }
+        
         setIsLoading(true)
+        setLastSubmitTime(now)
 
         try {
             const result = await sendMail(name, email, message)
@@ -116,7 +128,6 @@ const ContactMe = () => {
         <>
             <FadeInSection delay={400}> {/* Reduced from 1000ms to 400ms */}
                 <Container id="contact" className="section contact-section">
-                    <CssBaseline />
                     <Box
                         sx={{
                             display: 'flex',
@@ -140,7 +151,6 @@ const ContactMe = () => {
                                         required
                                         fullWidth
                                         label="Name"
-                                        autoFocus
                                         value={name}
                                         onChange={handleChange}
                                         inputProps={{ maxLength: 100 }}

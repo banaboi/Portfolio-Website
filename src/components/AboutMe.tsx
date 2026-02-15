@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { memo } from "react";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
@@ -7,23 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 
 import resume from "../documents/resume.pdf";
-import FadeInSection from "./FadeInSection";
+import FadeInSection from "./FadeInSectionOptimized";
 import profilePicture from "../assets/profilePicture.png";
-// Theme context no longer needed since we always use the same image
-
-const debounce = (fn: () => void, ms: number) => {
-    let timer: NodeJS.Timeout | null = null;
-    return () => {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(() => {
-            timer = null;
-            fn.apply(this);
-        }, ms);
-    };
-};
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 const listItems = [
-    <li className="list-item">        <p>
+    <li key="education" className="list-item">
+        <p>
             🎓 Mastered the ancient arts of <b>Computer Science </b> and <b>Engineering </b>at the Jedi Academy of{" "}
             <a target="_blank" href="https://www.unsw.edu.au/" rel="noopener noreferrer">
                 {" "}
@@ -31,7 +21,7 @@ const listItems = [
             </a>
         </p>
     </li>,
-    <li className="list-item">
+    <li key="sunswift" className="list-item">
         <p>
             ☀️ Harnessed the power of the sun, writing code for a solar-powered speeder @
             <a target="_blank" href="https://www.sunswift.com/" rel="noopener noreferrer">
@@ -40,7 +30,7 @@ const listItems = [
             </a>
         </p>
     </li>,
-    <li className="list-item">
+    <li key="resmed" className="list-item">
         <p>
             💨 Currently using the Force to help beings across the galaxy breathe better @
             <a target="_blank" href="https://www.resmed.com.au/" rel="noopener noreferrer">
@@ -49,7 +39,7 @@ const listItems = [
             </a>
         </p>
     </li>,
-    <li className="list-item">
+    <li key="deloitte" className="list-item">
         <p>
             ☁️ Explored the Cloud City's managed services during my padawan days @{" "}
             <a target="_blank" href="https://deloitte.com/" rel="noopener noreferrer">
@@ -74,30 +64,14 @@ const listItems = [
     </Button>,
 ];
 
-const AboutMe = () => {
-    const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 900);
-    const [isIpad, setIsIpad] = useState<boolean>(
-        window.innerWidth < 1050 && window.innerHeight < 1400
-    );
-
-    useEffect(() => {
-        const debouncedHandleResize = debounce(function handleResize() {
-            setIsMobile(window.innerWidth < 900);
-            setIsIpad(window.innerWidth < 1050 && window.innerHeight < 1400);
-        }, 1000);
-
-        window.addEventListener("resize", debouncedHandleResize);
-
-        return () => {
-            window.removeEventListener("resize", debouncedHandleResize);
-        };
-    });
+const AboutMe = memo(() => {
+    const { isMobile, isTablet } = useMediaQuery();
 
     return (
         <>
             <Container
                 id="aboutMe"
-                className={isMobile || isIpad ? "section-mobile" : "section"}
+                className={isMobile || isTablet ? "section-mobile" : "section"}
             >                <FadeInSection delay={400}> {/* Reduced from 1000ms to 400ms */}
                     <span className="sub-heading">My Jedi Training </span>
                     <Grid container item xs={12} spacing={1}>                        <Grid item xs={12} md={6}>
@@ -105,7 +79,7 @@ const AboutMe = () => {
                                 {listItems.map((item, index) => {
                                     return (
                                         <FadeInSection
-                                            delay={200 + (listItems.indexOf(item) * 150)} // Much faster: 200ms base + 150ms per item
+                                            delay={200 + (index * 150)}
                                             key={index}
                                         >
                                             {item}
@@ -141,6 +115,8 @@ const AboutMe = () => {
             </Container>
         </>
     );
-};
+});
+
+AboutMe.displayName = 'AboutMe';
 
 export default AboutMe;

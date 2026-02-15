@@ -77,12 +77,12 @@ const ProjectCard = ({ data }: { data: ProjectData }) => {
                                 style={{
                                     display: "inline",
                                     marginLeft: 25,
-                                    color: "#e0e0e0",
+                                    color: "var(--text-secondary)",
                                     fontSize: "0.8rem",
-                                    textShadow: "0 0 5px rgba(224, 224, 224, 0.3)",
+                                    textShadow: "0 0 5px var(--shadow-color)",
                                 }}
                             >
-                                ⚡ {technology}
+                                ⚡ {technology.trim()}
                             </p>
                         );
                     })}

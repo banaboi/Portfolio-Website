@@ -1,6 +1,6 @@
 import { Box, Grid } from "@mui/material";
 import React, { useState } from "react";
-import FadeInSection from "./FadeInSection";
+import FadeInSection from "./FadeInSectionOptimized";
 import Popover from "@mui/material/Popover";
 
 interface SkillsElement {
@@ -9,7 +9,7 @@ interface SkillsElement {
     popoverMsg: string;
 }
 
-const Skill = ({ data, key }: { data: SkillsElement; key: number }) => {
+const Skill = ({ data, index }: { data: SkillsElement; index: number }) => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
     const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -21,8 +21,8 @@ const Skill = ({ data, key }: { data: SkillsElement; key: number }) => {
     };
 
     const open = Boolean(anchorEl);    return (        <FadeInSection
-            delay={Math.min((key + 1) * 200, 800)} // Much faster: 200ms increments, max 800ms
-        ><Grid className="skill" item xs={12} key={key}>
+            delay={Math.min((index + 1) * 200, 800)}
+        ><Grid className="skill" item xs={12}>
                 <Box
                     onClick={handlePopoverOpen}
                     onMouseEnter={handlePopoverOpen}

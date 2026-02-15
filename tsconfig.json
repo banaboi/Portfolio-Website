@@ -17,7 +17,6 @@
         "jsx": "react"
     },
     "include": [
-        "src",
-        "C:/Users/lukeb/Personal Projects/portfolio-website/node_modules/@mui/styles/index"
+        "src"
     ]
 }

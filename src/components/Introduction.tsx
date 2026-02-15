@@ -34,7 +34,7 @@ const Introduction = memo(() => {
                 <h1 className="name">
                     <span className="special">
                         <TypeWriter
-                            text="&lt;<b>Luke</b>/&gt;"
+                            text="&lt;<b>Luke</>/&gt;"
                             delay={150}
                             className="typewriter-wrapper"
                         />

@@ -25,11 +25,11 @@ const Footer = () => {
                         style={{
                             fontSize: 11,
                             marginTop: 0,
-                            color: "#e0e0e0",
-                            textShadow: "0 0 5px rgba(224, 224, 224, 0.3)",
+                            color: "var(--text-secondary)",
+                            textShadow: "0 0 5px var(--shadow-color)",
                         }}
                     >
-                        May the Force be with you. All rights reserved across the galaxy.© {new Date().getFullYear()}
+                        May the Force be with you. All rights reserved across the galaxy. © {new Date().getFullYear()}
                     </p>
                     <Box className="footer-socials">
                         <Socials />

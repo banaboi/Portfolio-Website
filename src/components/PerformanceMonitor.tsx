@@ -47,7 +47,7 @@ const PerformanceMonitor: React.FC = memo(() => {
 
         try {
           observer.observe({ entryTypes: ['paint', 'largest-contentful-paint'] });
-        } catch (e) {
+        } catch {
           console.log('Performance Observer not fully supported');
         }
       }
@@ -67,7 +67,7 @@ const PerformanceMonitor: React.FC = memo(() => {
 
   // Only show in development
   useEffect(() => {
-    setIsVisible(process.env.NODE_ENV === 'development');
+    setIsVisible(import.meta.env.DEV);
   }, []);
 
   if (!isVisible || Object.keys(metrics).length === 0) {

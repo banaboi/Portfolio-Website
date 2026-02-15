@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "../src/styles/App.scss";
+import "./styles/App.scss";
 import Container from "@mui/material/Container";
 import Introduction from "./components/Introduction";
 import Footer from "./components/Footer";
@@ -22,6 +22,7 @@ const App = () => {
     return (
         <ThemeProvider>
             <div className="App">
+                <a href="#intro" className="skip-to-content">Skip to main content</a>
                 <Container component="main" className="contactContainer">
                     <Nav />
                     <Introduction />

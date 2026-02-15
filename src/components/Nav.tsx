@@ -15,6 +15,24 @@ import lukeLightMode from "../assets/profile_lightmode.png";
 import { createTheme, ThemeProvider, useScrollTrigger } from "@mui/material";
 import { useTheme } from "../hooks/useTheme";
 
+// ElevationScroll must be defined outside Nav to avoid remounting on every render
+interface ElevationScrollProps {
+  window?: () => Window;
+  children: React.ReactElement;
+}
+
+function ElevationScroll(props: ElevationScrollProps) {
+  const { children, window } = props;
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
 const theme = createTheme({
   components: {
     MuiPaper: {
@@ -54,22 +72,19 @@ const pages = [
   { name: "Contact me", link: "#contact" },
 ];
 
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
-  children: React.ReactElement;
-}
+const handleSmoothScroll = (e: React.MouseEvent, link: string) => {
+  e.preventDefault();
+  const target = document.querySelector(link);
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
 
 const Nav = () => {
   const { theme: currentTheme, toggleTheme } = useTheme();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
-
-  const anchorRef = React.useRef<HTMLDivElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -80,22 +95,6 @@ const Nav = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  function ElevationScroll(props: Props) {
-    const { children, window } = props;
-    // Note that you normally won't need to set the window ref as useScrollTrigger
-    // will default to window.
-    // This is only being set here because the demo is in an iframe.
-    const trigger = useScrollTrigger({
-      disableHysteresis: true,
-      threshold: 0,
-      target: window ? window() : undefined,
-    });
-
-    return React.cloneElement(children, {
-      elevation: trigger ? 4 : 0,
-    });
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -155,7 +154,7 @@ const Nav = () => {
                   {pages.map((page, index) => (
                     <Button
                       key={index}
-                      onClick={handleCloseNavMenu}
+                      onClick={(e) => { handleCloseNavMenu(); handleSmoothScroll(e, page.link); }}
                       href={page.link}
                       sx={{
                         my: 2,
@@ -245,7 +244,7 @@ const Nav = () => {
                   {/* Hamburger Menu */}
                   <IconButton
                     size="large"
-                    aria-label="account of current user"
+                    aria-label="Open navigation menu"
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
                     onClick={handleOpenNavMenu}
@@ -256,7 +255,7 @@ const Nav = () => {
                   <Menu
                     id="menu-appbar"
                     className="submenu-nav"
-                    anchorEl={anchorRef.current}
+                    anchorEl={anchorElNav}
                     keepMounted
                     open={Boolean(anchorElNav)}
                     onClose={handleCloseNavMenu}
@@ -272,7 +271,7 @@ const Nav = () => {
                     <Box className="sub-menu-nav">
                       {pages.map((page, index) => (
                         <MenuItem key={index} onClick={handleCloseNavMenu}>
-                          <Button href={page.link}>
+                          <Button onClick={(e) => handleSmoothScroll(e, page.link)} href={page.link}>
                             <p
                               style={{
                                 margin: 0,

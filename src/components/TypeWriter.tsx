@@ -38,28 +38,22 @@ const TypeWriter: React.FC<TypeWriterProps> = memo(({
     }
   }, [currentIndex, cleanText.length, delay, updateDisplayText])
 
-  // Optimized cursor blinking with requestAnimationFrame
+  // Cursor blinking with setInterval (more efficient than rAF for infrequent updates)
   useEffect(() => {
-    let animationId: number;
-    let lastTime = 0;
-    const blinkInterval = 530;
-
-    const animate = (time: number) => {
-      if (time - lastTime >= blinkInterval) {
-        setShowCursor(prev => !prev);
-        lastTime = time;
-      }
-      animationId = requestAnimationFrame(animate);
-    };
-
-    animationId = requestAnimationFrame(animate);
+    const intervalId = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 530);
     
-    return () => cancelAnimationFrame(animationId);
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
     <span className={`typewriter ${className}`}>
-      <span dangerouslySetInnerHTML={{ __html: displayText }} />
+      {displayText.includes('<b>') ? (
+        <span dangerouslySetInnerHTML={{ __html: displayText.replace(/<(?!\/?b\b)[^>]*>/gi, '') }} />
+      ) : (
+        <span>{displayText}</span>
+      )}
       <span 
         className={`typewriter-cursor ${showCursor ? 'visible' : 'hidden'}`}
         style={{
