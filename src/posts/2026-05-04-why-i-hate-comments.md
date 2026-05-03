@@ -1,30 +1,27 @@
 ---
 title: Why I hate comments
 date: 2026-05-04
-summary: University trained me to write comments. Industry untrained me. A short rant about why most comments are noise — and the small handful worth keeping.
+summary: University trained me to write comments. Industry untrained me. A short rant about why most comments are noise, and the small handful worth keeping.
 tags: ["opinion", "code-quality", "cpp"]
 ---
 
-Every coding assignment I submitted at university had a portion of the mark
-allocated to "code quality" — and a chunk of that was always comments. Markers
-wanted to see them. So I wrote them.
+At university, every coding assignment had a "code quality" mark, and a fat
+slice of that was always comments. Markers wanted them. So I wrote them.
 
-In first year it felt right. A comment was a free signal that you understood
-your own code. Future-me would be grateful for the line-by-line tour.
-Marker-me would have less work to do. It seemed like the obvious move.
+It felt right at the time. A comment was a free signal you understood your
+own code. Future-me would thank present-me for the tour. Marker-me would have
+less to puzzle out. Easy points.
 
-After a couple of years writing production C++ for a living, I think I was
-almost entirely wrong.
+A couple of years writing C++ for a living and I think I had it backwards.
 
-## Comments that describe code are a smell
+## The "what" comments
 
-The first thing I noticed: in every codebase I respected, well-written
-functions had almost no comments inside them. The code itself read clearly. If
-you found yourself reaching for a comment to explain *what* a block of code
-does, that was usually a sign the code wasn't doing a good enough job
-explaining itself.
+In every codebase I've actually respected at work, the well-written functions
+barely have any comments inside them at all. The code just reads. The first
+time I caught myself reaching for a comment to explain what a loop was doing,
+something clicked: the comment wasn't the problem, the loop was.
 
-Look at this:
+This is the kind of thing I used to write:
 
 ```cpp
 // Loop through all the patients and increment the counter
@@ -37,8 +34,9 @@ for (size_t i = 0; i < patients.size(); ++i) {
 }
 ```
 
-The comment isn't *wrong*. It's just redundant — and worse, it's the only
-clue the reader gets, because the code itself is mute. Compare:
+The comment isn't lying. It's just carrying meaning the code refused to
+carry. Take the comment away and the code goes silent. The honest fix is to
+push the meaning down into the code:
 
 ```cpp
 constexpr auto kActiveWindow = std::chrono::minutes{5};
@@ -49,20 +47,18 @@ const auto active = std::count_if(
 );
 ```
 
-No comment. The names carry the meaning. `is_active_within` is a contract you
-can read once and trust. `kActiveWindow` tells you the threshold and its units
-without needing a sentence above it.
+`is_active_within` is a contract you read once and trust. `kActiveWindow`
+tells you the threshold and the unit in one line. Nothing left for a comment
+to add.
 
-The general rule I try to follow now: **if you want to write a comment, first
-try to rename a variable, extract a function, or pick a better type.** The
-comment is usually the lazy way out.
+These days, when I feel a comment coming on, I make myself try a rename or an
+extract first. Usually that's all it needed.
 
-## Comments rot
+## The bigger problem: comments rot
 
-The second problem is worse. Comments are not type-checked. They are not
-executed. The compiler will happily let them lie to you forever.
-
-Here's a real pattern I've seen:
+Even when a "what" comment starts out true, it doesn't stay that way. The
+compiler doesn't read comments. The tests don't run them. Nothing in your
+toolchain stops a comment from quietly going wrong.
 
 ```cpp
 // Returns the timeout in milliseconds
@@ -71,20 +67,19 @@ int get_keepalive() {
 }
 ```
 
-Someone changed the unit from milliseconds to seconds. They renamed the field.
-They updated every caller. They did *not* update the comment, because the
-comment isn't part of the build. Now the next person to read this function has
-to choose: trust the comment, or trust the code? They'll pick wrong half the
-time.
+Somebody changed the unit. Renamed the field. Updated the callers. The
+comment? Untouched, because nothing made them touch it. The next person
+reading this has to choose between trusting the comment and trusting the
+code, and a non-trivial number of times they'll guess wrong.
 
-A function with no comment is a function that can never lie. A function with a
-stale comment is a trap.
+A function with no comment can't lie. A function with a stale comment is a
+trap.
 
-## Comments mislead
+## The meanest case
 
-The third failure mode is the meanest. Comments often try to describe how a
-piece of code relates to *something else* — and that relationship is exactly
-the kind of thing that quietly drifts out of date.
+The really nasty ones are the comments that point sideways at something else
+in the codebase. Those are the comments most likely to drift, because the
+thing they're describing isn't even on the same page.
 
 ```cpp
 // This must match the order of the columns in `patient_table` in db.sql
@@ -93,18 +88,19 @@ constexpr std::array<const char*, 4> kColumns = {
 };
 ```
 
-Sounds helpful. But there's no enforcement. Six months from now somebody adds
-a column to `patient_table` and forgets this array exists. The comment is still
-true in spirit and a complete lie in fact. The reader sees the comment, trusts
-it, and ships a bug.
+Sounds responsible. Nothing enforces it. Six months from now somebody adds a
+column to `patient_table` and never opens this file. The comment still reads
+fine and is now just wrong. Whoever inherits this trusts the comment and
+ships a bug.
 
-The ones that say "called from X" or "see also Y" are even worse — refactors
-move things around, and the reference points to nothing.
+"Called from X." "See also Y." Same disease. Refactors move stuff, the
+breadcrumbs end up pointing at empty rooms, and the only person hurt is the
+one trying to use them.
 
-## When a comment is actually worth keeping
+## What I'll still write a comment for
 
-I haven't sworn off comments entirely. The ones I leave in look different. They
-explain things the code physically cannot:
+I haven't sworn the things off. The ones I leave in look very different from
+what I used to write. They explain things the code physically can't.
 
 ```cpp
 // HACK: GCC 11.2 mis-optimises this loop with -O3 when the bound is
@@ -114,30 +110,24 @@ for (int i = 0; i < static_cast<int>(samples.size()); ++i) {
 }
 ```
 
-That comment is doing work no code can do: it's telling you *why* the
-otherwise-pointless cast exists, what happens if you remove it, and where to
-look if you want the full story. That's a comment that earns its place.
+That comment is doing work no amount of renaming or refactoring can do. It
+tells you why a weird-looking cast is there, what happens if you tidy it
+away, and where to go if you want the full story. Take it out and you've
+made the code worse.
 
-The shape I try to keep is roughly:
+The other kinds I'll usually keep: a one-liner pinning down an invariant the
+type system isn't enforcing ("this vector stays sorted by `last_seen`"),
+notes on a compiler bug or vendor quirk, and proper doc-comments on public
+APIs (those are describing a contract for callers, not a tour of the
+implementation, which is a different job entirely). Pretty much everything
+else, I'd rather see deleted than maintained.
 
-- **Why, not what.** The code says what. The comment says why.
-- **Invariants the type system can't express.** "This vector must always be
-  sorted by `last_seen`." The code can't tell you that. A comment can.
-- **Workarounds.** Compiler bugs, vendor quirks, deliberate ugliness.
-- **Public-API docs.** A Doxygen/JSDoc block on a public function describes a
-  *contract*, not the code that implements it. Those are useful for the same
-  reason the function signature is useful: they're the interface other people
-  read instead of your internals.
+## Wrapping up
 
-Everything else is a candidate for deletion.
+University treated comments as a deliverable. Work has treated them as
+maintenance debt. They cost about as much to keep current as the code they
+sit next to, except nobody ever notices when they go bad.
 
-## The exam I never sat
-
-University taught me that comments were a deliverable. Industry taught me that
-comments are a liability — they cost as much to maintain as the code they sit
-next to, and they fail silently when neglected. The best code I read at work
-isn't loud about itself. It just sits there, named precisely, doing exactly
-what it says it does.
-
-If I could go back, I'd write fewer comments and better names. The marker
-might've docked me points. The next person to touch the code wouldn't have.
+If I had the degree to do over, I'd write a lot fewer comments and a lot
+better names. The marker might've taken some points. The poor person
+inheriting the code wouldn't have.
