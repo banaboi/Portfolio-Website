@@ -15,6 +15,7 @@
         "@types/node": "^22.15.21",
         "@types/react": "^18.3.17",
         "@types/react-dom": "^18.3.5",
+        "buffer": "^6.0.3",
         "gray-matter": "^4.0.3",
         "highlight.js": "^11.11.1",
         "mermaid": "^11.14.0",
