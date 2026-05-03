@@ -1,3 +1,6 @@
+import { Buffer } from "buffer";
+(window as unknown as { Buffer: typeof Buffer }).Buffer = Buffer;
+
 import React from "react";
 import { createRoot } from "react-dom/client";
 import "./styles/index.scss";

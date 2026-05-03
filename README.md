@@ -35,6 +35,10 @@ This portfolio has been hardened with multiple security measures:
 - `npm run lint` - Lint code
 - `npm run type-check` - TypeScript checking
 
+### 🚢 Deployment
+
+Deployed automatically by Vercel on push to `main`. Custom domain configured via Vercel dashboard.
+
 ### 🔒 Security Documentation
 
 See [SECURITY.md](./SECURITY.md) for detailed security information and best practices.
