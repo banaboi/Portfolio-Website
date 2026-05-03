@@ -1,42 +1,21 @@
-import { Box } from "@mui/material";
 import React from "react";
-
-import Socials from "../components/Socials";
 
 const Footer = () => {
     return (
-        <>
-            <footer id="footer" className="footer-container">
-                <Box sx={{ ml: 1 }}>
-                    <Box className="footer">
-                        <p>
-                            {" "}
-                            Crafted with the Force ⚡ by Jedi Master Luke Banicevic, holographic designs by{" "}                            <a
-                                target="_blank"
-                                href="https://www.instagram.com/re_entry.design/" 
-                                rel="noopener noreferrer"
-                            >
-                                {" "}
-                                Re-Entry Design
-                            </a>
-                        </p>
-                    </Box>
-                    <p
-                        style={{
-                            fontSize: 11,
-                            marginTop: 0,
-                            color: "var(--text-secondary)",
-                            textShadow: "0 0 5px var(--shadow-color)",
-                        }}
-                    >
-                        May the Force be with you. All rights reserved across the galaxy. © {new Date().getFullYear()}
-                    </p>
-                    <Box className="footer-socials">
-                        <Socials />
-                    </Box>
-                </Box>
-            </footer>
-        </>
+        <footer id="footer" className="footer-container">
+            <p>
+                © {new Date().getFullYear()} Luke Banicevic. Designed by{" "}
+                <a
+                    href="https://www.instagram.com/re_entry.design/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Re-Entry Design
+                </a>
+                . Built with React &amp; Vite.
+            </p>
+            <p className="footer-tagline">// may the source be with you</p>
+        </footer>
     );
 };
 

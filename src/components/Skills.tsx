@@ -1,60 +1,38 @@
-import { Grid2 as Grid, Container } from '@mui/material'
-import React, { useEffect, useState, memo, useMemo } from 'react'
-import FadeInSection from './FadeInSectionOptimized'
-import DeathStarLoader from './DeathStarLoader'
-import skillsElements from '../constants/skillsElements'
-import Skill from './Skill'
-import { useMediaQuery } from '../hooks/useMediaQuery'
-
-// Import the type
-interface SkillsElement {
-    svg: React.SVGProps<SVGSVGElement>;
-    title: string;
-    popoverMsg: string;
-}
+import React, { memo } from "react";
+import skillGroups, { skillIcons } from "../constants/skillsElements";
 
 const Skills = memo(() => {
-    const { isMobile, isTablet } = useMediaQuery();
-    const [isLoading, setIsLoading] = useState<boolean>(true);    // Memoize skills grid to prevent unnecessary re-renders
-    const skillsGrid = useMemo(() => {
-        return skillsElements.map((skillElement: SkillsElement, index: number) => (
-            <Skill data={skillElement} key={index} index={index} />
-        ));
-    }, []);
-
-    // Brief loading to allow lazy chunk to settle
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 300);
-
-        return () => clearTimeout(timer);
-    }, []);
-
-    return (        <>
-            <Container
-                id="skills"
-                className={isMobile || isTablet ? 'section-mobile' : 'section'}
-            >
-                <FadeInSection delay={300}> {/* Reduced from 500ms to 300ms */}
-                    <span className="sub-heading">Force Powers & Abilities </span>
-
-                    {isLoading ? (
-                        <DeathStarLoader
-                            size={70}
-                            message="Channeling the Force..."
-                        />
-                    ) : (
-                        <Grid className="skillsGrid" container spacing={1}>
-                            {skillsGrid}
-                        </Grid>
-                    )}
-                </FadeInSection>
-            </Container>
-        </>
-    )
+    return (
+        <section id="skills" className="section">
+            <h2 className="sub-heading">Skills</h2>
+            <div className="skills-groups">
+                {skillGroups.map((group) => (
+                    <div key={group.category} className="skill-group">
+                        <h3 className="skill-group-title">{group.category}</h3>
+                        <ul className="skill-list">
+                            {group.items.map((item) => (
+                                <li key={item.name} className="skill-chip">
+                                    {item.icon && skillIcons[item.icon] && (
+                                        <svg
+                                            className="skill-icon"
+                                            viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            aria-hidden="true"
+                                        >
+                                            <path d={skillIcons[item.icon]} />
+                                        </svg>
+                                    )}
+                                    <span>{item.name}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
+        </section>
+    );
 });
 
-Skills.displayName = 'Skills';
+Skills.displayName = "Skills";
 
 export default Skills;
