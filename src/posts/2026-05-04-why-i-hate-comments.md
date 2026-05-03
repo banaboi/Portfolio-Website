@@ -41,15 +41,17 @@ push the meaning down into the code:
 ```cpp
 constexpr auto kActiveWindow = std::chrono::minutes{5};
 
-const auto active = std::count_if(
-    patients.begin(), patients.end(),
-    [](const Patient& p) { return p.is_active_within(kActiveWindow); }
-);
+int active = 0;
+for (const Patient& p : patients) {
+    if (p.is_active_within(kActiveWindow)) {
+        ++active;
+    }
+}
 ```
 
-`is_active_within` is a contract you read once and trust. `kActiveWindow`
-tells you the threshold and the unit in one line. Nothing left for a comment
-to add.
+Same loop, no comment needed. `is_active_within` is a contract you read once
+and trust. `kActiveWindow` tells you the threshold and the unit in one line.
+Nothing left for a comment to add.
 
 These days, when I feel a comment coming on, I make myself try a rename or an
 extract first. Usually that's all it needed.
