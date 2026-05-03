@@ -1,297 +1,135 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import luke from "../assets/profile.png";
-import lukeLightMode from "../assets/profile_lightmode.png";
-import { createTheme, ThemeProvider, useScrollTrigger } from "@mui/material";
+// src/components/Nav.tsx
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
+import lukeDark from "../assets/profile.png";
+import lukeLight from "../assets/profile_lightmode.png";
 
-// ElevationScroll must be defined outside Nav to avoid remounting on every render
-interface ElevationScrollProps {
-  window?: () => Window;
-  children: React.ReactElement;
+interface PageLink {
+    name: string;
+    to: string;
+    sectionId?: string;
+    matchPrefix?: string;
 }
 
-function ElevationScroll(props: ElevationScrollProps) {
-  const { children, window } = props;
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 0,
-    target: window ? window() : undefined,
-  });
-  return React.cloneElement(children, {
-    elevation: trigger ? 4 : 0,
-  });
-}
-
-const theme = createTheme({
-  components: {
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          background: "var(--bg-secondary)",
-          backdropFilter: "blur(10px)",
-          border: "1px solid var(--border-color)",
-          transition: "background 0.3s ease, border-color 0.3s ease",
-        },
-      },
-    },
-
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          fontSize: "1rem",
-          fontFamily: "Orbitron, Space Mono, JetBrains Mono",
-          color: "var(--accent-primary)",
-          textShadow: "0 0 10px var(--shadow-color)",
-          transition: "all 0.3s ease",
-          "&:hover": {
-            color: "var(--accent-secondary)",
-            textShadow: "0 0 15px var(--shadow-color)",
-            transform: "scale(1.05)",
-          },
-        },
-      },
-    },
-  },
-});
-
-const pages = [
-  { name: "About me", link: "#aboutMe" },
-  { name: "Projects", link: "#projectsSection" },
-  { name: "Skills", link: "#skills" },
-  { name: "Contact me", link: "#contact" },
+const pages: PageLink[] = [
+    { name: "About", to: "/#aboutMe", sectionId: "aboutMe" },
+    { name: "Skills", to: "/#skills", sectionId: "skills" },
+    { name: "Projects", to: "/#projectsSection", sectionId: "projectsSection" },
+    { name: "Blog", to: "/blog", matchPrefix: "/blog" },
+    { name: "Contact", to: "/#contact", sectionId: "contact" },
 ];
 
-const handleSmoothScroll = (e: React.MouseEvent, link: string) => {
-  e.preventDefault();
-  const target = document.querySelector(link);
-  if (target) {
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-};
-
 const Nav = () => {
-  const { theme: currentTheme, toggleTheme } = useTheme();
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
+    const { theme, toggleTheme } = useTheme();
+    const { pathname } = useLocation();
+    const [activeSectionId, setActiveSectionId] = useState<string>("");
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };  const handleLukeClick = (_event: React.MouseEvent<HTMLElement>) => {
-    window.scrollTo(0, 0);
-  };
+    useEffect(() => {
+        if (pathname !== "/") {
+            setActiveSectionId("");
+            return;
+        }
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const visible = entries
+                    .filter((e) => e.isIntersecting)
+                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+                if (visible[0]) setActiveSectionId(visible[0].target.id);
+            },
+            { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 1] }
+        );
+        for (const p of pages) {
+            if (!p.sectionId) continue;
+            const el = document.getElementById(p.sectionId);
+            if (el) observer.observe(el);
+        }
+        return () => observer.disconnect();
+    }, [pathname]);
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+    useEffect(() => {
+        document.body.style.overflow = menuOpen ? "hidden" : "";
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [menuOpen]);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <React.Fragment>
-        <ElevationScroll>
-          <AppBar
-            position="fixed"
-            style={{
-              color: "var(--text-primary)",
-              background: "var(--bg-secondary)",
-              backdropFilter: "blur(15px)",
-              border: "1px solid var(--border-color)",
-              boxShadow: "0 0 20px var(--shadow-color)",
-              transition: "all 0.3s ease",
-            }}
-          >
-            <Container id="nav" maxWidth="xl">
-              <Toolbar disableGutters>
-                {/* Logo - Left side */}
-                <Box sx={{ flexGrow: 0 }}>
-                  <Tooltip title="Luke Banicevic - Software Engineer">
-                    <IconButton
-                      onClick={handleLukeClick}
-                      sx={{
-                        pl: 2,
-                      }}
-                    >
-                      <Avatar
-                        alt="Luke"
-                        src={currentTheme === 'light' ? lukeLightMode : luke}
-                        sx={{
-                          border: 'none',
-                          boxShadow: 'none',
-                          backgroundColor: 'transparent',
-                          transition: 'all 0.3s ease',
-                          '&:hover': {
-                            transform: 'scale(1.05)',
-                          }
-                        }}
-                      />
-                    </IconButton>
-                  </Tooltip>
-                </Box>
+    const isActive = (page: PageLink): boolean => {
+        if (page.matchPrefix) return pathname.startsWith(page.matchPrefix);
+        if (pathname !== "/") return false;
+        return page.sectionId === activeSectionId;
+    };
 
-                {/* Spacer to push items to the right */}
-                <Box sx={{ flexGrow: 1 }} />
+    const scrollToHashIfHome = (e: React.MouseEvent, to: string) => {
+        if (!to.startsWith("/#") || pathname !== "/") return;
+        e.preventDefault();
+        const hashOnly = to.slice(1);
+        const target = document.querySelector(hashOnly);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        setMenuOpen(false);
+    };
 
-                {/* Desktop Navigation - Right side */}
-                <Box
-                  sx={{
-                    flexGrow: 0,
-                    display: { xs: "none", md: "flex" },
-                    alignItems: "center",
-                    gap: 1,
-                  }}
-                >
-                  {pages.map((page, index) => (
-                    <Button
-                      key={index}
-                      onClick={(e) => { handleCloseNavMenu(); handleSmoothScroll(e, page.link); }}
-                      href={page.link}
-                      sx={{
-                        my: 2,
-                        color: "white",
-                        display: "block",
-                      }}
-                    >
-                      {page.name}
-                    </Button>
-                  ))}
+    return (
+        <nav className="site-nav" aria-label="Primary">
+            <Link
+                to="/"
+                className="site-nav-brand"
+                aria-label="Home"
+                onClick={() => setMenuOpen(false)}
+            >
+                <img
+                    src={theme === "light" ? lukeLight : lukeDark}
+                    alt="Luke pixel sprite"
+                    className="brand-sprite"
+                />
+            </Link>
 
-                  {/* Theme Toggle for Desktop */}
-                  <Tooltip
-                    title={currentTheme === 'light' ? 'Switch to Dark Side' : 'Join the Light Side'}
-                    arrow
-                  >
-                    <IconButton
-                      onClick={toggleTheme}
-                      aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
-                      sx={{
-                        ml: 1,
-                        width: '48px',
-                        height: '48px',
-                        background: 'transparent',
-                        border: 'none',
-                        boxShadow: 'none',
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                          transform: 'scale(1.1)',
-                          background: 'transparent',
+            <ul className={`site-nav-links ${menuOpen ? "is-open" : ""}`}>
+                {pages.map((page) => (
+                    <li key={page.to}>
+                        <Link
+                            to={page.to}
+                            onClick={(e) => {
+                                scrollToHashIfHome(e, page.to);
+                                setMenuOpen(false);
+                            }}
+                            aria-current={isActive(page) ? "true" : undefined}
+                        >
+                            {page.name}
+                        </Link>
+                    </li>
+                ))}
+                <li>
+                    <button
+                        type="button"
+                        className="theme-toggle"
+                        onClick={toggleTheme}
+                        title={
+                            theme === "light"
+                                ? "Switch to Return of the Jedi"
+                                : "Switch to A New Hope"
                         }
-                      }}
+                        aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
                     >
-                      <div
-                        style={{
-                          fontSize: '20px',
-                          transition: 'all 0.3s ease',
-                        }}
-                      >
-                        {currentTheme === 'light' ? '🌙' : '☀️'}
-                      </div>
-                    </IconButton>
-                  </Tooltip>
-                </Box>
+                        {theme === "light" ? "Jedi" : "Hope"}
+                    </button>
+                </li>
+            </ul>
 
-                {/* Mobile Navigation - Right side */}
-                <Box
-                  sx={{
-                    flexGrow: 0,
-                    display: { xs: "flex", md: "none" },
-                    alignItems: "center",
-                    gap: 1,
-                  }}
-                >
-                  {/* Theme Toggle for Mobile */}
-                  <Tooltip
-                    title={currentTheme === 'light' ? 'Switch to Dark Side' : 'Join the Light Side'}
-                    arrow
-                  >
-                    <IconButton
-                      onClick={toggleTheme}
-                      aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
-                      sx={{
-                        width: '40px',
-                        height: '40px',
-                        background: 'transparent',
-                        border: 'none',
-                        boxShadow: 'none',
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                          transform: 'scale(1.1)',
-                          background: 'transparent',
-                        }
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: '16px',
-                          transition: 'all 0.3s ease',
-                        }}
-                      >
-                        {currentTheme === 'light' ? '🌙' : '☀️'}
-                      </div>
-                    </IconButton>
-                  </Tooltip>
-
-                  {/* Hamburger Menu */}
-                  <IconButton
-                    size="large"
-                    aria-label="Open navigation menu"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleOpenNavMenu}
-                    color="inherit"
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                  <Menu
-                    id="menu-appbar"
-                    className="submenu-nav"
-                    anchorEl={anchorElNav}
-                    keepMounted
-                    open={Boolean(anchorElNav)}
-                    onClose={handleCloseNavMenu}
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                  >
-                    <Box className="sub-menu-nav">
-                      {pages.map((page, index) => (
-                        <MenuItem key={index} onClick={handleCloseNavMenu}>
-                          <Button onClick={(e) => handleSmoothScroll(e, page.link)} href={page.link}>
-                            <p
-                              style={{
-                                margin: 0,
-                                padding: 0,
-                              }}
-                            >
-                              {page.name}
-                            </p>
-                          </Button>
-                        </MenuItem>
-                      ))}
-                    </Box>
-                  </Menu>
-                </Box>
-              </Toolbar>
-            </Container>
-          </AppBar>
-        </ElevationScroll>
-      </React.Fragment>
-    </ThemeProvider>
-  );
+            <button
+                type="button"
+                className="nav-hamburger"
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={menuOpen}
+                onClick={() => setMenuOpen((o) => !o)}
+            >
+                <span className={`bar ${menuOpen ? "open" : ""}`} />
+                <span className={`bar ${menuOpen ? "open" : ""}`} />
+                <span className={`bar ${menuOpen ? "open" : ""}`} />
+            </button>
+        </nav>
+    );
 };
+
 export default Nav;
