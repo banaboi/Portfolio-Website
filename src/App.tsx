@@ -1,41 +1,42 @@
-import React, { useEffect } from "react";
+// src/App.tsx
+import React, { lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/App.scss";
-import Container from "@mui/material/Container";
-import Introduction from "./components/Introduction";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { 
-    LazyAboutMe, 
-    LazySkills, 
-    LazyProjectsSection, 
-    LazyContactMe 
-} from "./components/LazyComponents";
-import PerformanceMonitor from "./components/PerformanceMonitor";
 
-const App = () => {
-    // Start at the top of the page
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+const BlogIndex = lazy(() => import("./pages/BlogIndex"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+const TagPage = lazy(() => import("./pages/TagPage"));
 
-    return (
-        <ThemeProvider>
+const Fallback = () => <div className="lazy-fallback" aria-hidden="true" />;
+
+const App = () => (
+    <ThemeProvider>
+        <BrowserRouter>
             <div className="App">
-                <a href="#intro" className="skip-to-content">Skip to main content</a>
-                <Container component="main" className="contactContainer">
-                    <Nav />
-                    <Introduction />
-                    <LazyAboutMe />
-                    <LazySkills />
-                    <LazyProjectsSection />
-                    <LazyContactMe />
-                </Container>
+                <a href="#intro" className="skip-to-content">
+                    Skip to main content
+                </a>
+                <Nav />
+                <main className="page">
+                    <Suspense fallback={<Fallback />}>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/blog" element={<BlogIndex />} />
+                            <Route path="/blog/:slug" element={<BlogPost />} />
+                            <Route path="/blog/tags/:tag" element={<TagPage />} />
+                            <Route path="*" element={<NotFound />} />
+                        </Routes>
+                    </Suspense>
+                </main>
                 <Footer />
-                <PerformanceMonitor />
             </div>
-        </ThemeProvider>
-    );
-};
+        </BrowserRouter>
+    </ThemeProvider>
+);
 
 export default App;
