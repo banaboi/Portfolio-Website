@@ -84,3 +84,17 @@ describe("filterDrafts", () => {
         expect(filterDrafts([a, b], false)).toHaveLength(2);
     });
 });
+
+describe("parsePost image rewriting", () => {
+    it("leaves unmatched relative paths untouched", () => {
+        const raw = `---
+title: T
+date: 2026-05-10
+summary: S
+---
+![alt](./missing.png)
+`;
+        const post = parsePost("2026-05-10-x.md", raw);
+        expect(post.body).toContain("./missing.png");
+    });
+});

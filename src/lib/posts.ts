@@ -3,6 +3,24 @@ import matter from "gray-matter";
 import type { Post } from "./types";
 import { readingTime } from "./readingTime";
 
+const assetModules = import.meta.glob<string>(
+    "../posts/**/*.{png,jpg,jpeg,svg,webp,gif}",
+    { eager: true, query: "?url", import: "default" }
+);
+
+const assetUrlByRelativeKey: Record<string, string> = {};
+for (const [absPath, url] of Object.entries(assetModules)) {
+    const stripped = absPath.replace(/^\.\.\/posts\//, "");
+    assetUrlByRelativeKey[stripped] = url as string;
+}
+
+const rewriteImagePaths = (slug: string, body: string): string =>
+    body.replace(/(!\[[^\]]*\]\()\.\/([^)]+)\)/g, (_match, prefix: string, file: string) => {
+        const key = `${slug}/${file}`;
+        const url = assetUrlByRelativeKey[key];
+        return url ? `${prefix}${url})` : `${prefix}./${file})`;
+    });
+
 const REQUIRED = ["title", "date", "summary"] as const;
 
 const slugFromFilename = (filename: string): string => {
@@ -26,7 +44,7 @@ export const parsePost = (filename: string, raw: string): Post => {
         tags: Array.isArray(data.tags) ? data.tags : [],
         draft: data.draft === true,
         cover: data.cover,
-        body: content,
+        body: rewriteImagePaths(slug, content),
         readingTime: readingTime(content),
     };
 };
