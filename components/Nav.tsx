@@ -8,6 +8,11 @@ import { useTheme } from "./ThemeProvider";
 import lukeDark from "../public/assets/profile.png";
 import lukeLight from "../public/assets/profile_lightmode.png";
 
+// Nav renders both sprite + both toggle labels; CSS hides the wrong one based
+// on `data-theme` on <html>. This keeps the rendered HTML theme-independent so
+// the server can render a fixed shape and the client can hydrate without
+// mismatches even though `theme` JS value differs on first paint.
+
 interface PageLink {
     name: string;
     href: string;
@@ -81,9 +86,17 @@ const Nav = () => {
                 onClick={() => setMenuOpen(false)}
             >
                 <Image
-                    src={theme === "light" ? lukeLight : lukeDark}
-                    alt="Luke pixel sprite"
-                    className="brand-sprite"
+                    src={lukeDark}
+                    alt=""
+                    className="brand-sprite brand-sprite-dark"
+                    width={36}
+                    height={36}
+                    priority
+                />
+                <Image
+                    src={lukeLight}
+                    alt=""
+                    className="brand-sprite brand-sprite-light"
                     width={36}
                     height={36}
                     priority
@@ -110,6 +123,7 @@ const Nav = () => {
                         type="button"
                         className="theme-toggle"
                         onClick={toggleTheme}
+                        suppressHydrationWarning
                         title={
                             theme === "light"
                                 ? "Switch to Return of the Jedi"
@@ -117,7 +131,8 @@ const Nav = () => {
                         }
                         aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
                     >
-                        {theme === "light" ? "Jedi" : "Hope"}
+                        <span className="toggle-label-when-light">Jedi</span>
+                        <span className="toggle-label-when-dark">Hope</span>
                     </button>
                 </li>
             </ul>

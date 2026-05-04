@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
@@ -37,10 +38,10 @@ const parsePost = (filename: string, raw: string): Post => {
     };
 };
 
-let cache: Post[] | null = null;
-
-const loadAll = async (): Promise<Post[]> => {
-    if (cache) return cache;
+// React `cache()` dedupes per-request in RSC; in build (SSG) it is essentially
+// per-build. No manual module-level cache, so dev edits are picked up on each
+// reload and prod/dev draft visibility is always derived fresh.
+const loadAll = cache(async (): Promise<Post[]> => {
     const files = await fs.readdir(POSTS_DIR);
     const md = files.filter((f) => f.endsWith(".md"));
     const posts = await Promise.all(
@@ -53,9 +54,8 @@ const loadAll = async (): Promise<Post[]> => {
         (p) => process.env.NODE_ENV !== "production" || !p.draft
     );
     visible.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
-    cache = visible;
     return visible;
-};
+});
 
 export const getAllPosts = async (): Promise<Post[]> => loadAll();
 

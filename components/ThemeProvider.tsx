@@ -20,23 +20,19 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 const STORAGE_KEY = "portfolio-theme";
 
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [theme, setTheme] = useState<Theme>("dark");
+// SSR has no way to know the user's saved theme, so the server always emits
+// "dark". On the client, /theme-init.js (loaded beforeInteractive) sets the
+// resolved theme on <html data-theme="..."> before paint. We read that here so
+// the first client render matches reality, avoiding a hydration mismatch on
+// the sprite + toggle label for users whose actual theme is "light".
+const readResolvedTheme = (): Theme => {
+    if (typeof document === "undefined") return "dark";
+    const attr = document.documentElement.getAttribute("data-theme");
+    return attr === "light" ? "light" : "dark";
+};
 
-    useEffect(() => {
-        const stored = (typeof window !== "undefined" &&
-            (localStorage.getItem(STORAGE_KEY) as Theme | null)) || null;
-        if (stored === "light" || stored === "dark") {
-            setTheme(stored);
-            return;
-        }
-        if (
-            typeof window !== "undefined" &&
-            window.matchMedia("(prefers-color-scheme: light)").matches
-        ) {
-            setTheme("light");
-        }
-    }, []);
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+    const [theme, setTheme] = useState<Theme>(readResolvedTheme);
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme);

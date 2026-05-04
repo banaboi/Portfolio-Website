@@ -75,6 +75,17 @@ a:hover { text-decoration: underline; }
 }
 
 .App { min-height: 100vh; background: var(--bg); }
+
+// Theme-driven dual rendering — keeps HTML identical between SSR and client,
+// CSS swaps which copy is visible based on <html data-theme="...">.
+[data-theme="light"] .brand-sprite-dark,
+[data-theme="dark"] .brand-sprite-light {
+    display: none !important;
+}
+[data-theme="light"] .toggle-label-when-light,
+[data-theme="dark"] .toggle-label-when-dark {
+    display: inline;
+}
 .page { max-width: 720px; margin: 0 auto; padding: 0 var(--space-5); }
 .lazy-fallback { min-height: 200px; }
 
@@ -104,6 +115,11 @@ a:hover { text-decoration: underline; }
         image-rendering: pixelated;
         image-rendering: crisp-edges;
         display: block;
+    }
+
+    .toggle-label-when-light,
+    .toggle-label-when-dark {
+        display: none;
     }
 
     .site-nav-links {

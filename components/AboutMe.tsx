@@ -61,7 +61,8 @@ const AboutMe = () => (
                 <Image
                     src={profilePicture}
                     alt="Luke Banicevic"
-                    placeholder="blur"
+                    width={220}
+                    height={220}
                     sizes="(max-width: 600px) 100vw, 220px"
                 />
             </div>
