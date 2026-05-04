@@ -10,6 +10,15 @@ interface ProjectData {
 
 const projectData: ProjectData[] = [
     {
+        title: "FirmwareScan",
+        tech: ["Python", "NVD API", "IEC 62443"],
+        desc: "CLI that finds CVEs in vendored embedded C/C++ dependencies by extracting library versions from source and binaries, mapping to NVD CPEs, and generating PDF vulnerability reports.",
+        src: "https://github.com/banaboi/firmwarescan",
+        demo: "",
+        year: "2026",
+        role: "Solo",
+    },
+    {
         title: "House Search",
         tech: ["Python", "Playwright", "Google Maps API"],
         desc: "Scrapes Domain.com.au listings, enriches them with transit times to key locations, and outputs a mobile-friendly HTML report.",
@@ -44,15 +53,6 @@ const projectData: ProjectData[] = [
         demo: "",
         year: "2022",
         role: "Co-builder",
-    },
-    {
-        title: "Chess Clone",
-        tech: ["JavaScript", "HTML", "CSS"],
-        desc: "Browser chess game built in vanilla JavaScript.",
-        src: "https://github.com/banaboi/Chess",
-        demo: "https://banaboi.github.io/Chess/",
-        year: "2021",
-        role: "Solo",
     },
     {
         title: "Invoice Automator",
