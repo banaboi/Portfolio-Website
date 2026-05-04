@@ -133,18 +133,19 @@ const Nav = () => {
                         }
                         aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
                     >
-                        {/* Render both icons; CSS shows the one for the
-                            current theme. Avoids any hydration divergence. */}
-                        <FontAwesomeIcon
-                            icon={faMoon}
-                            className="toggle-icon toggle-label-when-light"
-                            aria-hidden="true"
-                        />
-                        <FontAwesomeIcon
-                            icon={faSun}
-                            className="toggle-icon toggle-label-when-dark"
-                            aria-hidden="true"
-                        />
+                        {/* Both icons rendered, stacked. CSS crossfades +
+                            rotates between them based on data-theme. Keeps
+                            HTML identical for SSR/client hydration. */}
+                        <span className="theme-toggle-stack" aria-hidden="true">
+                            <FontAwesomeIcon
+                                icon={faMoon}
+                                className="toggle-icon toggle-icon-moon"
+                            />
+                            <FontAwesomeIcon
+                                icon={faSun}
+                                className="toggle-icon toggle-icon-sun"
+                            />
+                        </span>
                     </button>
                 </li>
             </ul>

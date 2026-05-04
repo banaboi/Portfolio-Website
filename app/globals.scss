@@ -88,14 +88,24 @@ a:hover { text-decoration: underline; }
     display: none !important;
 }
 
-// Toggle icons: default both hidden, then show the one matching current theme.
-.toggle-label-when-light,
-.toggle-label-when-dark {
-    display: none;
+// Toggle icons: dark theme shows sun (you can switch to light), light theme
+// shows moon (you can switch to dark). Both rendered, opacity + rotate animate
+// the swap.
+[data-theme="dark"] .toggle-icon-moon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.4);
 }
-[data-theme="light"] .toggle-label-when-light,
-[data-theme="dark"] .toggle-label-when-dark {
-    display: inline-block;
+[data-theme="dark"] .toggle-icon-sun {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+}
+[data-theme="light"] .toggle-icon-sun {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.4);
+}
+[data-theme="light"] .toggle-icon-moon {
+    opacity: 1;
+    transform: rotate(0) scale(1);
 }
 .page { max-width: 720px; margin: 0 auto; padding: 0 var(--space-5); }
 .lazy-fallback { min-height: 200px; }
@@ -151,20 +161,32 @@ a:hover { text-decoration: underline; }
         align-items: center;
         justify-content: center;
         background: transparent;
-        border: 1px solid var(--border);
+        border: none;
         color: var(--text-muted);
-        padding: var(--space-2) var(--space-3);
+        padding: var(--space-2);
         font-family: inherit;
-        font-size: 0.85rem;
+        font-size: 1rem;
         line-height: 1;
         cursor: pointer;
-        transition: color 0.15s ease, border-color 0.15s ease;
-        &:hover { color: var(--accent); border-color: var(--border-strong); }
+        transition: color 0.15s ease;
+        &:hover { color: var(--accent); }
+    }
+
+    .theme-toggle-stack {
+        position: relative;
+        display: inline-block;
+        width: 1em;
+        height: 1em;
     }
 
     .toggle-icon {
-        width: 0.95em;
-        height: 0.95em;
+        position: absolute;
+        inset: 0;
+        width: 1em !important;
+        height: 1em !important;
+        transition:
+            opacity 0.25s ease,
+            transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .nav-hamburger {
