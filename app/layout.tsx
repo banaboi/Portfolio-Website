@@ -1,10 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
+import { config as faConfig } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./globals.scss";
 import { ThemeProvider } from "../components/ThemeProvider";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+
+// FA's runtime CSS injection doesn't work with SSR (icons render 0x0 until
+// hydrate). We import the stylesheet manually and tell FA not to inject it.
+faConfig.autoAddCss = false;
 
 const jetbrainsMono = JetBrains_Mono({
     subsets: ["latin"],
