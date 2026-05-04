@@ -87,9 +87,15 @@ a:hover { text-decoration: underline; }
 [data-theme="dark"] .brand-sprite-light {
     display: none !important;
 }
+
+// Toggle icons: default both hidden, then show the one matching current theme.
+.toggle-label-when-light,
+.toggle-label-when-dark {
+    display: none;
+}
 [data-theme="light"] .toggle-label-when-light,
 [data-theme="dark"] .toggle-label-when-dark {
-    display: inline;
+    display: inline-block;
 }
 .page { max-width: 720px; margin: 0 auto; padding: 0 var(--space-5); }
 .lazy-fallback { min-height: 200px; }
@@ -122,10 +128,6 @@ a:hover { text-decoration: underline; }
         display: block;
     }
 
-    .toggle-label-when-light,
-    .toggle-label-when-dark {
-        display: none;
-    }
 
     .site-nav-links {
         list-style: none;
