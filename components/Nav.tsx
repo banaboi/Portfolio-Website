@@ -26,8 +26,8 @@ const pages: PageLink[] = [
     { name: "About", href: "/#aboutMe", sectionId: "aboutMe" },
     { name: "Skills", href: "/#skills", sectionId: "skills" },
     { name: "Projects", href: "/#projectsSection", sectionId: "projectsSection" },
-    { name: "Blog", href: "/blog", matchPrefix: "/blog" },
     { name: "Contact", href: "/#contact", sectionId: "contact" },
+    { name: "Blog", href: "/blog", matchPrefix: "/blog" },
 ];
 
 const Nav = () => {
@@ -41,6 +41,11 @@ const Nav = () => {
             setActiveSectionId("");
             return;
         }
+        const sectionIds = pages
+            .filter((p): p is PageLink & { sectionId: string } => !!p.sectionId)
+            .map((p) => p.sectionId);
+        const lastSectionId = sectionIds[sectionIds.length - 1];
+
         const observer = new IntersectionObserver(
             (entries) => {
                 const visible = entries
@@ -50,12 +55,27 @@ const Nav = () => {
             },
             { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 1] }
         );
-        for (const p of pages) {
-            if (!p.sectionId) continue;
-            const el = document.getElementById(p.sectionId);
+        for (const id of sectionIds) {
+            const el = document.getElementById(id);
             if (el) observer.observe(el);
         }
-        return () => observer.disconnect();
+
+        // Short final sections never enter the centred IO band when scrolled
+        // to page bottom. Force-activate the last section once we're within
+        // 4px of the bottom.
+        const onScroll = () => {
+            const atBottom =
+                window.innerHeight + window.scrollY >=
+                document.documentElement.scrollHeight - 4;
+            if (atBottom && lastSectionId) setActiveSectionId(lastSectionId);
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("scroll", onScroll);
+        };
     }, [pathname]);
 
     useEffect(() => {
@@ -106,20 +126,29 @@ const Nav = () => {
             </Link>
 
             <ul className={`site-nav-links ${menuOpen ? "is-open" : ""}`}>
-                {pages.map((page) => (
-                    <li key={page.href}>
-                        <Link
-                            href={page.href}
-                            onClick={(e) => {
-                                handleHashClick(e, page.href);
-                                setMenuOpen(false);
-                            }}
-                            aria-current={isActive(page) ? "true" : undefined}
-                        >
-                            {page.name}
-                        </Link>
-                    </li>
-                ))}
+                {pages.map((page, i) => {
+                    const prev = pages[i - 1];
+                    const showDivider = !!prev && !prev.matchPrefix && !!page.matchPrefix;
+                    return (
+                        <React.Fragment key={page.href}>
+                            {showDivider && (
+                                <li className="nav-divider" aria-hidden="true" />
+                            )}
+                            <li>
+                                <Link
+                                    href={page.href}
+                                    onClick={(e) => {
+                                        handleHashClick(e, page.href);
+                                        setMenuOpen(false);
+                                    }}
+                                    aria-current={isActive(page) ? "true" : undefined}
+                                >
+                                    {page.name}
+                                </Link>
+                            </li>
+                        </React.Fragment>
+                    );
+                })}
                 <li>
                     <button
                         type="button"
