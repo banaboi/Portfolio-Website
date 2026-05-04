@@ -36,24 +36,6 @@ const projectData: ProjectData[] = [
         year: "2022",
         role: "Contributor",
     },
-    {
-        title: "Hyope Web",
-        tech: ["TypeScript", "React", "Next.js", "Sass"],
-        desc: "Marketing site for the Hyope game studio venture.",
-        src: "",
-        demo: "",
-        year: "2022",
-        role: "Co-builder",
-    },
-    {
-        title: "Bliv",
-        tech: ["TypeScript", "React Native", "Redux"],
-        desc: "Medieval pixel-art battle game built under Hyope.",
-        src: "",
-        demo: "",
-        year: "2022",
-        role: "Co-builder",
-    },
 ];
 
 export default projectData;
