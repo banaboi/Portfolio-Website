@@ -12,7 +12,7 @@ const projectData: ProjectData[] = [
     {
         title: "FirmwareScan",
         tech: ["Python", "NVD API", "IEC 62443"],
-        desc: "CLI that finds CVEs in vendored embedded C/C++ dependencies by extracting library versions from source and binaries, mapping to NVD CPEs, and generating PDF vulnerability reports.",
+        desc: "CVE scanner for vendored embedded C/C++ libraries.",
         src: "https://github.com/banaboi/firmwarescan",
         demo: "",
         year: "2026",
@@ -21,7 +21,7 @@ const projectData: ProjectData[] = [
     {
         title: "House Search",
         tech: ["Python", "Playwright", "Google Maps API"],
-        desc: "Scrapes Domain.com.au listings, enriches them with transit times to key locations, and outputs a mobile-friendly HTML report.",
+        desc: "Scrapes Domain.com.au listings and ranks them by transit time.",
         src: "https://github.com/banaboi/house_search",
         demo: "https://banaboi.github.io/house_search/",
         year: "2026",
@@ -57,7 +57,7 @@ const projectData: ProjectData[] = [
     {
         title: "Invoice Automator",
         tech: ["Python"],
-        desc: "Python utility using the Google API to auto-generate invoices.",
+        desc: "Auto-generates client invoices via the Google APIs.",
         src: "https://github.com/banaboi/InvoiceAutomator",
         demo: "",
         year: "2021",
