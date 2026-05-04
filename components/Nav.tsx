@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "./ThemeProvider";
 import lukeDark from "../public/assets/profile.png";
 import lukeLight from "../public/assets/profile_lightmode.png";
@@ -131,8 +133,18 @@ const Nav = () => {
                         }
                         aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
                     >
-                        <span className="toggle-label-when-light">Jedi</span>
-                        <span className="toggle-label-when-dark">Hope</span>
+                        {/* Render both icons; CSS shows the one for the
+                            current theme. Avoids any hydration divergence. */}
+                        <FontAwesomeIcon
+                            icon={faMoon}
+                            className="toggle-icon toggle-label-when-light"
+                            aria-hidden="true"
+                        />
+                        <FontAwesomeIcon
+                            icon={faSun}
+                            className="toggle-icon toggle-label-when-dark"
+                            aria-hidden="true"
+                        />
                     </button>
                 </li>
             </ul>
