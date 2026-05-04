@@ -10,6 +10,15 @@ interface ProjectData {
 
 const projectData: ProjectData[] = [
     {
+        title: "House Search",
+        tech: ["Python", "Playwright", "Google Maps API"],
+        desc: "Scrapes Domain.com.au listings, enriches them with transit times to key locations, and outputs a mobile-friendly HTML report.",
+        src: "https://github.com/banaboi/house_search",
+        demo: "https://banaboi.github.io/house_search/",
+        year: "2026",
+        role: "Solo",
+    },
+    {
         title: "Circles",
         tech: ["React", "Python", "FastAPI"],
         desc: "University degree planner used by thousands of UNSW students.",
@@ -52,15 +61,6 @@ const projectData: ProjectData[] = [
         src: "https://github.com/banaboi/InvoiceAutomator",
         demo: "",
         year: "2021",
-        role: "Solo",
-    },
-    {
-        title: "Minesweeper Clone",
-        tech: ["JavaScript", "HTML", "CSS"],
-        desc: "Minesweeper rebuilt as a web application.",
-        src: "https://github.com/banaboi/Minesweeper",
-        demo: "https://banaboi.github.io/Minesweeper/",
-        year: "2020",
         role: "Solo",
     },
 ];
