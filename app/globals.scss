@@ -81,10 +81,16 @@ a:hover { text-decoration: underline; }
 
 .App { min-height: 100vh; background: var(--bg); }
 
-// Theme-driven dual rendering — keeps HTML identical between SSR and client,
-// CSS swaps which copy is visible based on <html data-theme="...">.
-[data-theme="light"] .brand-sprite-dark,
-[data-theme="dark"] .brand-sprite-light {
+// Theme-driven dual rendering — keeps HTML identical between SSR and client.
+// Default-hide the light sprite so before /theme-init.js runs there is no
+// flash of two sprites. Once data-theme="light" applies, the rules flip.
+.brand-sprite-light {
+    display: none !important;
+}
+[data-theme="light"] .brand-sprite-light {
+    display: block !important;
+}
+[data-theme="light"] .brand-sprite-dark {
     display: none !important;
 }
 
