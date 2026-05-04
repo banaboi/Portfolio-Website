@@ -46,35 +46,33 @@ const Nav = () => {
             .map((p) => p.sectionId);
         const lastSectionId = sectionIds[sectionIds.length - 1];
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                const visible = entries
-                    .filter((e) => e.isIntersecting)
-                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-                if (visible[0]) setActiveSectionId(visible[0].target.id);
-            },
-            { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 1] }
-        );
-        for (const id of sectionIds) {
-            const el = document.getElementById(id);
-            if (el) observer.observe(el);
-        }
-
-        // Short final sections never enter the centred IO band when scrolled
-        // to page bottom. Force-activate the last section once we're within
-        // 4px of the bottom.
-        const onScroll = () => {
+        // Pick the section whose top has most recently crossed a line ~30%
+        // down the viewport. This is direction-agnostic (works when scrolling
+        // up or down) and tolerant of short sections that wouldn't reliably
+        // enter a narrow IntersectionObserver band.
+        const computeActive = () => {
+            const line = window.innerHeight * 0.3;
+            let current = sectionIds[0];
+            for (const id of sectionIds) {
+                const el = document.getElementById(id);
+                if (!el) continue;
+                const top = el.getBoundingClientRect().top;
+                if (top - line <= 0) current = id;
+            }
             const atBottom =
                 window.innerHeight + window.scrollY >=
                 document.documentElement.scrollHeight - 4;
-            if (atBottom && lastSectionId) setActiveSectionId(lastSectionId);
+            if (atBottom && lastSectionId) current = lastSectionId;
+            setActiveSectionId(current);
         };
-        window.addEventListener("scroll", onScroll, { passive: true });
-        onScroll();
+
+        window.addEventListener("scroll", computeActive, { passive: true });
+        window.addEventListener("resize", computeActive);
+        computeActive();
 
         return () => {
-            observer.disconnect();
-            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("scroll", computeActive);
+            window.removeEventListener("resize", computeActive);
         };
     }, [pathname]);
 
