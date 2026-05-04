@@ -1,48 +1,122 @@
-# Portfolio-Website
+# Portfolio + Blog
 
-A secure, modern portfolio website built with React, TypeScript, and Star Wars theming.
+Personal site at [lukebanicevic.com](https://lukebanicevic.com). Portfolio + a
+markdown blog. Built with Next.js 16 (App Router) on React 19, deployed to
+Vercel.
 
-## 🛡️ Security Features
+## Stack
 
-This portfolio has been hardened with multiple security measures:
+- **Next.js 16** — App Router, React Server Components by default
+- **React 19**
+- **TypeScript**, strict
+- **SCSS** — single global stylesheet, CSS custom properties for theming
+- **Markdown** — posts in `posts/`, parsed at build time with `gray-matter` and
+  rendered via `react-markdown` + `remark-gfm` + `rehype-highlight`
+- **Mermaid** — fenced ` ```mermaid ` code blocks render as diagrams (lazy-loaded)
+- **next/font** — JetBrains Mono, self-hosted
+- **next/image** — responsive sprite + profile pic, AVIF/WebP-negotiated
 
-### ✅ Implemented Security Controls
-- **Environment Variables**: EmailJS credentials moved to secure environment variables
-- **XSS Prevention**: HTML sanitization and Content Security Policy headers
-- **Modern React**: Updated to React 18 createRoot API
-- **Link Security**: All external links use `rel="noopener noreferrer"`
-- **Input Validation**: Form validation with length limits and email format checking
-- **Build Security**: Source maps disabled and console logs removed in production
-- **Development Headers**: Security headers configured for development server
+Vercel hobby tier, auto-deploys on push to `main`.
 
-### 🚀 Getting Started
+## Repo layout
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Create `.env.local` with your EmailJS credentials:
+```
+app/                # routes (Next App Router)
+  layout.tsx        # root layout, metadata, font, ThemeProvider
+  page.tsx          # /
+  not-found.tsx
+  blog/
+    page.tsx        # /blog (list)
+    [slug]/page.tsx # /blog/<slug>
+    tags/[tag]/page.tsx
+  sitemap.ts        # auto-generates /sitemap.xml
+  robots.ts         # /robots.txt
+  globals.scss
+  icon.png          # favicon (Next convention)
+  apple-icon.png
+components/         # shared UI (Server + Client components)
+  Nav.tsx, Footer.tsx, ThemeProvider.tsx, MarkdownRenderer.tsx, ...
+lib/
+  posts.ts          # fs-based markdown loader, server-only, React.cache()
+  readingTime.ts
+  types.ts
+constants/          # static data: skills, projects
+posts/              # markdown blog posts
+public/
+  assets/           # profile sprite, profile photo
+  documents/        # resume.pdf
+  theme-init.js     # FOUC-prevention, runs beforeInteractive
+docs/superpowers/   # design specs + implementation plans
+```
+
+## Local dev
+
+```
+npm install
+npm run dev
+```
+
+Site runs at <http://localhost:3000>.
+
+## Scripts
+
+| Command            | What it does                                     |
+| ------------------ | ------------------------------------------------ |
+| `npm run dev`      | Next dev server with Turbopack on :3000          |
+| `npm run build`    | Production build, prerenders all static routes   |
+| `npm run start`    | Serve the production build                       |
+| `npm run lint`     | ESLint via `next lint`                           |
+| `npm run type-check` | `tsc --noEmit`                                 |
+
+## Writing a post
+
+1. Create `posts/YYYY-MM-DD-<slug>.md`.
+2. Add YAML frontmatter:
+
+   ```yaml
+   ---
+   title: Post title
+   date: 2026-05-04
+   summary: One-line preview shown on the index and in meta tags.
+   tags: ["topic", "another-topic"]
+   draft: false   # optional; drafts hide in prod, show in dev
+   ---
    ```
-   VITE_EMAILJS_SERVICE_ID=your_service_id
-   VITE_EMAILJS_TEMPLATE_ID=your_template_id
-   VITE_EMAILJS_PUBLIC_KEY=your_public_key
-   ```
-4. Start development server: `npm start`
-5. Build for production: `npm run build`
 
-### 📋 Available Scripts
-- `npm start` - Start development server
-- `npm run build` - Build for production
-- `npm run test` - Run tests
-- `npm run lint` - Lint code
-- `npm run type-check` - TypeScript checking
+3. Write markdown. Code fences with a language tag get syntax highlighting.
+   Use ` ```mermaid ` for diagrams.
 
-### 🚢 Deployment
+4. Commit + push. Vercel auto-deploys.
 
-Deployed automatically by Vercel on push to `main`. Custom domain configured via Vercel dashboard.
+The slug is derived from the filename (date prefix stripped). To override,
+set `slug: custom-slug` in frontmatter.
 
-### 🔒 Security Documentation
+## SEO
 
-See [SECURITY.md](./SECURITY.md) for detailed security information and best practices.
+- Per-route `<title>` + `<meta description>` + canonical via the Next Metadata
+  API
+- OG + Twitter card meta on every page
+- JSON-LD: `Person` on `/`, `BlogPosting` on each post
+- `/sitemap.xml` and `/robots.txt` generated at build
+- All pages prerendered (no client-side rendering needed for crawlers)
 
----
+## Theming
 
-*May the Force be with you* ⚡
+Two themes via CSS custom properties on `<html data-theme="...">`:
+
+- **Dark** (Return of the Jedi) — green saber accent
+- **Light** (A New Hope) — blue saber accent
+
+Persisted in `localStorage` under `portfolio-theme`. `public/theme-init.js`
+runs before paint to apply the saved or system-preferred theme, avoiding FOUC.
+
+## Deployment
+
+Auto-deploys on push to `main` via the GitHub integration on Vercel. Custom
+domain configured in the Vercel dashboard.
+
+## Design + plan docs
+
+Spec and implementation plan for the blog feature live under
+`docs/superpowers/`. Useful as a reference for how the project is structured
+and why decisions were made.
