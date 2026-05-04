@@ -46,7 +46,12 @@ html, body {
     font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+}
+
+body {
+    // overflow-clip lets us clamp horizontal overflow without making body a
+    // scroll container (which would kill `position: sticky` on the nav).
+    overflow-x: clip;
 }
 
 a { color: var(--accent); text-decoration: none; }
