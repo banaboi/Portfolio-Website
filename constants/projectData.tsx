@@ -54,15 +54,6 @@ const projectData: ProjectData[] = [
         year: "2022",
         role: "Co-builder",
     },
-    {
-        title: "Invoice Automator",
-        tech: ["Python"],
-        desc: "Auto-generates client invoices via the Google APIs.",
-        src: "https://github.com/banaboi/InvoiceAutomator",
-        demo: "",
-        year: "2021",
-        role: "Solo",
-    },
 ];
 
 export default projectData;
