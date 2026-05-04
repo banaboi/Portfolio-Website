@@ -45,10 +45,6 @@ export const metadata: Metadata = {
         title: "Luke Banicevic — Software Engineer",
         description: DESCRIPTION,
     },
-    icons: {
-        icon: "/favicon.ico",
-        apple: "/logo192.png",
-    },
     alternates: {
         canonical: "/",
     },
