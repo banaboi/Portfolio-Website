@@ -28,7 +28,7 @@ This is the kind of thing I used to write:
 // if their device has reported in the last 5 minutes
 int active = 0;
 for (size_t i = 0; i < patients.size(); ++i) {
-    if (now() - patients[i].last_seen < 300) {
+    if (Now() - patients[i].m_lastSeen < 300) {
         active++;
     }
 }
@@ -39,18 +39,18 @@ carry. Take the comment away and the code goes silent. The honest fix is to
 push the meaning down into the code:
 
 ```cpp
-constexpr auto kActiveWindow = std::chrono::minutes{5};
+constexpr auto activeWindow = std::chrono::minutes{5};
 
 int active = 0;
 for (const Patient& p : patients) {
-    if (p.is_active_within(kActiveWindow)) {
+    if (p.IsActiveWithin(activeWindow)) {
         ++active;
     }
 }
 ```
 
-Same loop, no comment needed. `is_active_within` is a contract you read once
-and trust. `kActiveWindow` tells you the threshold and the unit in one line.
+Same loop, no comment needed. `IsActiveWithin` is a contract you read once
+and trust. `activeWindow` tells you the threshold and the unit in one line.
 Nothing left for a comment to add.
 
 These days, when I feel a comment coming on, I make myself try a rename or an
@@ -64,8 +64,8 @@ toolchain stops a comment from quietly going wrong.
 
 ```cpp
 // Returns the timeout in milliseconds
-int get_keepalive() {
-    return config.keepalive_seconds;
+int GetKeepalive() {
+    return m_config.m_keepaliveSeconds;
 }
 ```
 
@@ -85,7 +85,7 @@ thing they're describing isn't even on the same page.
 
 ```cpp
 // This must match the order of the columns in `patient_table` in db.sql
-constexpr std::array<const char*, 4> kColumns = {
+constexpr std::array<const char*, 4> columns = {
     "id", "name", "last_seen", "device_id"
 };
 ```
@@ -108,7 +108,7 @@ what I used to write. They explain things the code physically can't.
 // HACK: GCC 11.2 mis-optimises this loop with -O3 when the bound is
 // constexpr. Pinning to int silences it. Tracked in internal bug #4471.
 for (int i = 0; i < static_cast<int>(samples.size()); ++i) {
-    process(samples[i]);
+    Process(samples[i]);
 }
 ```
 
@@ -118,7 +118,7 @@ away, and where to go if you want the full story. Take it out and you've
 made the code worse.
 
 The other kinds I'll usually keep: a one-liner pinning down an invariant the
-type system isn't enforcing ("this vector stays sorted by `last_seen`"),
+type system isn't enforcing ("this vector stays sorted by `m_lastSeen`"),
 notes on a compiler bug or vendor quirk, and proper doc-comments on public
 APIs (those are describing a contract for callers, not a tour of the
 implementation, which is a different job entirely). Pretty much everything
