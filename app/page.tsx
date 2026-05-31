@@ -10,9 +10,18 @@ const personJsonLd = {
     "@type": "Person",
     name: "Luke Banicevic",
     url: "https://lukebanicevic.com",
+    image: "https://lukebanicevic.com/assets/profilePicture.png",
+    description:
+        "Software Engineer II at ResMed working on the device-to-cloud comms layer between medical devices and the cloud.",
     jobTitle: "Software Engineer II",
     worksFor: { "@type": "Organization", name: "ResMed" },
     alumniOf: { "@type": "CollegeOrUniversity", name: "UNSW" },
+    knowsAbout: [
+        "Embedded systems",
+        "Device-to-cloud communications",
+        "C++",
+        "IoT protocols",
+    ],
     sameAs: [
         "https://github.com/banaboi",
         "https://www.linkedin.com/in/luke-banicevic-30860115b/",

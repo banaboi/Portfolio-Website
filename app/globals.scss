@@ -608,6 +608,29 @@ a:hover { text-decoration: underline; }
     color: var(--text-muted);
 }
 
+.author-bio {
+    margin-top: var(--space-8);
+    padding: var(--space-5);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-elev);
+}
+
+.author-bio-name {
+    margin: 0 0 var(--space-2);
+    font-weight: 700;
+    color: var(--text);
+}
+
+.author-bio-text {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+
+    a { color: var(--accent); }
+}
+
 .prev-next {
     display: grid;
     grid-template-columns: 1fr 1fr;

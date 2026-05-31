@@ -6,6 +6,8 @@ export interface Frontmatter {
     tags?: string[];
     draft?: boolean;
     cover?: string;
+    updated?: string;
+    noindex?: boolean;
 }
 
 export interface Post {
@@ -16,6 +18,11 @@ export interface Post {
     tags: string[];
     draft: boolean;
     cover?: string;
+    // Last meaningful edit. Falls back to `date` when absent so freshness
+    // signals (JSON-LD dateModified, sitemap lastModified) stay honest.
+    updated: string;
+    // Keep the page crawlable but out of the index (thin/placeholder posts).
+    noindex: boolean;
     body: string;
     readingTime: number;
 }

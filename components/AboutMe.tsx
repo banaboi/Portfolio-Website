@@ -60,10 +60,11 @@ const AboutMe = () => (
             <div className="about-image">
                 <Image
                     src={profilePicture}
-                    alt="Luke Banicevic"
+                    alt="Luke Banicevic, Software Engineer at ResMed"
                     width={220}
                     height={220}
                     sizes="(max-width: 600px) 100vw, 220px"
+                    priority
                 />
             </div>
         </div>

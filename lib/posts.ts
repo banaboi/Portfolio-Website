@@ -22,17 +22,19 @@ const parsePost = (filename: string, raw: string): Post => {
         }
     }
     const slug = (data.slug as string | undefined) ?? slugFromFilename(filename);
+    const toIso = (v: unknown): string =>
+        typeof v === "string" ? v : new Date(v as string).toISOString().slice(0, 10);
+    const date = toIso(data.date);
     return {
         slug,
         title: data.title,
-        date:
-            typeof data.date === "string"
-                ? data.date
-                : new Date(data.date).toISOString().slice(0, 10),
+        date,
         summary: data.summary,
         tags: Array.isArray(data.tags) ? data.tags : [],
         draft: data.draft === true,
         cover: data.cover,
+        updated: data.updated ? toIso(data.updated) : date,
+        noindex: data.noindex === true,
         body: content,
         readingTime: readingTime(content),
     };

@@ -4,6 +4,10 @@ import Link from "next/link";
 import { getAllTags, getPostsByTag } from "../../../../lib/posts";
 import PostCard from "../../../../components/PostCard";
 
+// Below this post count a tag page is thin (mostly duplicating /blog) — keep
+// it crawlable but out of the index until it carries enough unique value.
+const TAG_INDEX_THRESHOLD = 5;
+
 interface Params {
     params: Promise<{ tag: string }>;
 }
@@ -15,10 +19,20 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
     const { tag } = await params;
+    const posts = await getPostsByTag(tag);
+    const description = `Posts tagged #${tag} on Luke Banicevic's blog.`;
     return {
         title: `#${tag}`,
-        description: `Posts tagged #${tag} on Luke Banicevic's blog.`,
+        description,
         alternates: { canonical: `/blog/tags/${tag}` },
+        ...(posts.length < TAG_INDEX_THRESHOLD
+            ? { robots: { index: false, follow: true } }
+            : {}),
+        openGraph: {
+            title: `#${tag} · Luke Banicevic`,
+            description,
+            url: `/blog/tags/${tag}`,
+        },
     };
 }
 
