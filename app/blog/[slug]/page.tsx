@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import {
-    getAllPosts,
-    getPostBySlug,
-    getNeighbors,
-} from "../../../lib/posts";
+import { getAllPosts, getPostBySlug, getNeighbors } from "../../../lib/posts";
 import MarkdownRenderer from "../../../components/MarkdownRenderer";
 import PrevNextLinks from "../../../components/PrevNextLinks";
 import AuthorBio from "../../../components/AuthorBio";

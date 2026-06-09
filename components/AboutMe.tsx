@@ -16,13 +16,14 @@ const AboutMe = () => (
                         ResMed
                     </a>
                     , working on the device-to-cloud communication stack that
-                    connects respiratory medical devices to our backend services.
-                    My focus is the protocols, transport, and edge logic that
-                    move telemetry reliably from patients&rsquo; devices to the
-                    systems clinicians depend on.
+                    connects respiratory medical devices to our backend
+                    services. My focus is the protocols, transport, and edge
+                    logic that move telemetry reliably from patients&rsquo;
+                    devices to the systems clinicians depend on.
                 </p>
                 <p>
-                    Before ResMed I wrote firmware for solar-powered race cars at{" "}
+                    Before ResMed I wrote firmware for solar-powered race cars
+                    at{" "}
                     <a
                         href="https://www.sunswift.com/"
                         target="_blank"

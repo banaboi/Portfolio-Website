@@ -17,13 +17,16 @@ const parsePost = (filename: string, raw: string): Post => {
     for (const field of REQUIRED) {
         if (!data[field]) {
             throw new Error(
-                `Post ${filename}: missing required frontmatter field "${field}"`
+                `Post ${filename}: missing required frontmatter field "${field}"`,
             );
         }
     }
-    const slug = (data.slug as string | undefined) ?? slugFromFilename(filename);
+    const slug =
+        (data.slug as string | undefined) ?? slugFromFilename(filename);
     const toIso = (v: unknown): string =>
-        typeof v === "string" ? v : new Date(v as string).toISOString().slice(0, 10);
+        typeof v === "string"
+            ? v
+            : new Date(v as string).toISOString().slice(0, 10);
     const date = toIso(data.date);
     return {
         slug,
@@ -50,10 +53,10 @@ const loadAll = cache(async (): Promise<Post[]> => {
         md.map(async (file) => {
             const raw = await fs.readFile(path.join(POSTS_DIR, file), "utf8");
             return parsePost(file, raw);
-        })
+        }),
     );
     const visible = posts.filter(
-        (p) => process.env.NODE_ENV !== "production" || !p.draft
+        (p) => process.env.NODE_ENV !== "production" || !p.draft,
     );
     visible.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
     return visible;
@@ -61,7 +64,9 @@ const loadAll = cache(async (): Promise<Post[]> => {
 
 export const getAllPosts = async (): Promise<Post[]> => loadAll();
 
-export const getPostBySlug = async (slug: string): Promise<Post | undefined> => {
+export const getPostBySlug = async (
+    slug: string,
+): Promise<Post | undefined> => {
     const posts = await loadAll();
     return posts.find((p) => p.slug === slug);
 };
@@ -79,7 +84,7 @@ export const getAllTags = async (): Promise<string[]> => {
 };
 
 export const getNeighbors = async (
-    slug: string
+    slug: string,
 ): Promise<{ prev?: Post; next?: Post }> => {
     const posts = await loadAll();
     const idx = posts.findIndex((p) => p.slug === slug);

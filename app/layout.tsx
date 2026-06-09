@@ -63,7 +63,11 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" className={jetbrainsMono.variable} suppressHydrationWarning>
+        <html
+            lang="en"
+            className={jetbrainsMono.variable}
+            suppressHydrationWarning
+        >
             <head>
                 <Script src="/theme-init.js" strategy="beforeInteractive" />
             </head>

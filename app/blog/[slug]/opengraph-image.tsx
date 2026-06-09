@@ -22,39 +22,37 @@ export default async function OpengraphImage({
     const title = post?.title ?? "Luke Banicevic";
 
     return new ImageResponse(
-        (
+        <div
+            style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                padding: "80px",
+                background: "#0b0d0c",
+                color: "#f7f7f5",
+                fontFamily: "monospace",
+            }}
+        >
+            <div style={{ fontSize: 26, color: "#6f7771" }}>
+                lukebanicevic.com / blog
+            </div>
             <div
                 style={{
-                    width: "100%",
-                    height: "100%",
+                    marginTop: "auto",
+                    fontSize: 64,
+                    fontWeight: 700,
+                    lineHeight: 1.15,
+                    letterSpacing: -1,
                     display: "flex",
-                    flexDirection: "column",
-                    padding: "80px",
-                    background: "#0b0d0c",
-                    color: "#f7f7f5",
-                    fontFamily: "monospace",
                 }}
             >
-                <div style={{ fontSize: 26, color: "#6f7771" }}>
-                    lukebanicevic.com / blog
-                </div>
-                <div
-                    style={{
-                        marginTop: "auto",
-                        fontSize: 64,
-                        fontWeight: 700,
-                        lineHeight: 1.15,
-                        letterSpacing: -1,
-                        display: "flex",
-                    }}
-                >
-                    {title}
-                </div>
-                <div style={{ marginTop: 32, fontSize: 28, color: "#8a928c" }}>
-                    Luke Banicevic — Software Engineer
-                </div>
+                {title}
             </div>
-        ),
-        { ...size }
+            <div style={{ marginTop: 32, fontSize: 28, color: "#8a928c" }}>
+                Luke Banicevic — Software Engineer
+            </div>
+        </div>,
+        { ...size },
     );
 }
