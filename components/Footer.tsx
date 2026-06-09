@@ -11,7 +11,7 @@ const Footer = () => (
             </a>
             . Built with Next.js.
         </p>
-        <p className="footer-tagline">// may the source be with you</p>
+        <p className="footer-tagline">{"// may the source be with you"}</p>
     </footer>
 );
 

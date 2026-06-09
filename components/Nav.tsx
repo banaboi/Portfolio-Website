@@ -25,7 +25,11 @@ interface PageLink {
 const pages: PageLink[] = [
     { name: "About", href: "/#aboutMe", sectionId: "aboutMe" },
     { name: "Skills", href: "/#skills", sectionId: "skills" },
-    { name: "Projects", href: "/#projectsSection", sectionId: "projectsSection" },
+    {
+        name: "Projects",
+        href: "/#projectsSection",
+        sectionId: "projectsSection",
+    },
     { name: "Contact", href: "/#contact", sectionId: "contact" },
     { name: "Blog", href: "/blog", matchPrefix: "/blog" },
 ];
@@ -37,10 +41,10 @@ const Nav = () => {
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
     useEffect(() => {
-        if (pathname !== "/") {
-            setActiveSectionId("");
-            return;
-        }
+        // Section tracking only applies on the home page. Off-home, isActive()
+        // already returns false (it guards on pathname), so there's no need to
+        // reset state here — avoiding a synchronous setState in the effect body.
+        if (pathname !== "/") return;
         const sectionIds = pages
             .filter((p): p is PageLink & { sectionId: string } => !!p.sectionId)
             .map((p) => p.sectionId);
@@ -93,7 +97,8 @@ const Nav = () => {
         if (!href.startsWith("/#") || pathname !== "/") return;
         e.preventDefault();
         const target = document.querySelector(href.slice(1));
-        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (target)
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
         setMenuOpen(false);
     };
 
@@ -126,11 +131,15 @@ const Nav = () => {
             <ul className={`site-nav-links ${menuOpen ? "is-open" : ""}`}>
                 {pages.map((page, i) => {
                     const prev = pages[i - 1];
-                    const showDivider = !!prev && !prev.matchPrefix && !!page.matchPrefix;
+                    const showDivider =
+                        !!prev && !prev.matchPrefix && !!page.matchPrefix;
                     return (
                         <React.Fragment key={page.href}>
                             {showDivider && (
-                                <li className="nav-divider" aria-hidden="true" />
+                                <li
+                                    className="nav-divider"
+                                    aria-hidden="true"
+                                />
                             )}
                             <li>
                                 <Link
@@ -139,7 +148,9 @@ const Nav = () => {
                                         handleHashClick(e, page.href);
                                         setMenuOpen(false);
                                     }}
-                                    aria-current={isActive(page) ? "true" : undefined}
+                                    aria-current={
+                                        isActive(page) ? "true" : undefined
+                                    }
                                 >
                                     {page.name}
                                 </Link>
