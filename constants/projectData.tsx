@@ -10,6 +10,15 @@ interface ProjectData {
 
 const projectData: ProjectData[] = [
     {
+        title: "QRLabs",
+        tech: ["Next.js", "Supabase", "TypeScript"],
+        desc: "Dynamic QR code platform — repoint codes anytime and track scans.",
+        src: "",
+        demo: "https://qrlabs.vercel.app",
+        year: "2026",
+        role: "Solo",
+    },
+    {
         title: "FirmwareScan",
         tech: ["Python", "NVD API", "IEC 62443"],
         desc: "CVE scanner for vendored embedded C/C++ libraries.",
